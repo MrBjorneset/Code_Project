@@ -1,0 +1,9 @@
+Package: threepp
+Version: 2023-02-21
+Depends: glad, glfw3, stb, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ecd848c84fd2afde2b0001a6211b01c0c047afea29bb3260e2c13b16ef634519
+Description: C++17 port of three.js
+Type: Port
+Status: install ok installed
