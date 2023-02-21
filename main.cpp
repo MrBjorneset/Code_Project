@@ -41,6 +41,7 @@ int main() {
     renderer.enableTextRendering();
     auto& textHandle = renderer.textHandle("Hello World");
     textHandle.setPosition(0, canvas.getSize().height-30);
+    textHandle.color = Color::green;
     textHandle.scale = 2;
 
 
