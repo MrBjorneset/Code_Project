@@ -5,7 +5,7 @@
 #ifndef CODE_PROJECT_HEADER1_HPP
 #define CODE_PROJECT_HEADER1_HPP
 #include "threepp/threepp.hpp"
-
+/*
 using namespace threepp;
 
 enum class Direction {
@@ -78,5 +78,5 @@ private:{
 
         }
     };
-
+*/
 #endif //CODE_PROJECT_HEADER1_HPP

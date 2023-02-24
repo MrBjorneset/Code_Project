@@ -11,6 +11,11 @@
 using namespace threepp;
 
 
+
+
+
+
+/*
 class PingPongScene : public Scene, public KeyListener {
 public:
     explicit PingPongScene(PingPongGame &game) : game_(game){
@@ -61,4 +66,6 @@ private:
     std::shared_ptr<MeshBasicMaterial> PaddleTwoMaterial_;
     std::vector<std::shared_ptr<Mesh>> PaddleTwo_;
 };
+ */
+
 #endif //THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
