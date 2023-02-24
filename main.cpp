@@ -1,74 +1,33 @@
 
 #include "threepp/threepp.hpp"
 #include "threepp/extras/imgui/imgui_context.hpp"
+#include "Include\PingPongScene.hpp"
 
 using namespace threepp;
 
 int main() {
 
+    PingPongGame game(30);
+
     Canvas canvas;
     GLRenderer renderer(canvas);
-    renderer.setClearColor(Color::aliceblue);
 
-    auto camera = PerspectiveCamera::create();
-    camera->position.z = 5;
+    auto scene = std::make_shared<PingPongScene>(game);
+    canvas.addKeyListener(scene.get());
 
-    OrbitControls controls{camera, canvas};
-
-    auto scene = Scene::create();
-
-    auto group = Group::create();
-    scene->add(group);
-
-    {
-        auto geometry = BoxGeometry::create();
-        auto material = MeshBasicMaterial::create();
-        material->color = Color::green;
-        auto mesh = Mesh::create(geometry, material);
-        mesh->position.x = -1;
-        group->add(mesh);
-    }
-
-    {
-        auto geometry = BoxGeometry::create();
-        auto material = MeshBasicMaterial::create();
-        material->color = Color::blue;
-        auto mesh = Mesh::create(geometry, material);
-        mesh->position.x = 1;
-        group->add(mesh);
-    }
-
-    renderer.enableTextRendering();
-    auto& textHandle = renderer.textHandle("Hello World");
-    textHandle.setPosition(0, canvas.getSize().height-30);
-    textHandle.color = Color::green;
-    textHandle.scale = 2;
-
-
-    std::array<float, 3> posBuf{};
-    imgui_functional_context ui(canvas.window_ptr(), [&] {
-        ImGui::SetNextWindowPos({0, 0}, 0, {0, 0});
-        ImGui::SetNextWindowSize({230, 0}, 0);
-        ImGui::Begin("Demo");
-        ImGui::SliderFloat3("position", posBuf.data(), -1.f, 1.f);
-        controls.enabled = !ImGui::IsWindowHovered();
-        ImGui::End();
-    });
-
-    canvas.onWindowResize([&](WindowSize size){
-        camera->aspect = size.getAspect();
-        camera->updateProjectionMatrix();
+    canvas.onWindowResize([&](WindowSize size) {
+        scene->camera().updateProjectionMatrix();
         renderer.setSize(size);
-        textHandle.setPosition(0, size.height-30);
     });
 
-    canvas.animate([&] {
+    canvas.animate([&](float dt) {
+        if (game.isRunning()) {
 
-        renderer.render(scene, camera);
+            game.update(dt);
+            scene->update();
 
-        ui.render();
-        group->position.fromArray(posBuf);
-
+        }
+        renderer.render(scene.get(), &scene->camera());
     });
 
 }
