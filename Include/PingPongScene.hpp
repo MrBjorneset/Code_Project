@@ -11,10 +11,6 @@
 using namespace threepp;
 
 
-
-
-
-
 /*
 class PingPongScene : public Scene, public KeyListener {
 public:

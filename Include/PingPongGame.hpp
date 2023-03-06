@@ -2,8 +2,8 @@
 // Created by EmilB on 21/02/2023.
 //
 
-#ifndef CODE_PROJECT_HEADER1_HPP
-#define CODE_PROJECT_HEADER1_HPP
+#ifndef CODE_PROJECT_PingPongGame_HPP
+#define CODE_PROJECT_PingPongGame_HPP
 #include "threepp/threepp.hpp"
 /*
 using namespace threepp;
