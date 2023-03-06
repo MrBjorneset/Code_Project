@@ -5,14 +5,15 @@
 #ifndef CODE_PROJECT_PingPongGame_HPP
 #define CODE_PROJECT_PingPongGame_HPP
 #include "threepp/threepp.hpp"
-/*
-using namespace threepp;
 
+
+using namespace threepp;
+/*
+ *
 enum class Direction {
     UP,
     DOWN
 };
-
 
 class PingPongGame {
 

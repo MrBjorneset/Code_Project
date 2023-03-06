@@ -1,7 +1,8 @@
 
 #include "threepp/threepp.hpp"
 #include "threepp/extras/imgui/imgui_context.hpp"
-#include "Include\PingPongScene.hpp"
+#include "Include/PingPongScene.hpp"
+#include "Include/PingPongGame.hpp"
 
 using namespace threepp;
 
@@ -9,6 +10,12 @@ int main() {
 
  Canvas canvas;
  GLRenderer renderer(canvas);
+
+ /*
+ auto gridSize = canvas.getSize();
+ auto& gridSize_ = gridSize;
+  */
+
  renderer.setClearColor(Color::black);
 
  auto camera = PerspectiveCamera::create();
