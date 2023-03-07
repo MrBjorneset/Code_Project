@@ -10,6 +10,18 @@
 
 using namespace threepp;
 
+class PingPongScene : public Scene, public KeyListener{
+
+public:
+    explicit PingPongScene(PingPongGame &game) : game_(game){
+
+
+    }
+
+
+private:
+    PingPongGame &game_;
+};
 
 
 

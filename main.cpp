@@ -1,62 +1,77 @@
 
 #include "threepp/threepp.hpp"
-#include "threepp/extras/imgui/imgui_context.hpp"
 #include "Include/PingPongScene.hpp"
-#include "Include/PingPongGame.hpp"
 
 using namespace threepp;
 
 int main() {
 
- Canvas canvas;
- GLRenderer renderer(canvas);
+    Canvas canvas(Canvas::Parameters().size({1280,720}).antialiasing(8));
+    GLRenderer renderer(canvas);
+    renderer.setClearColor(Color::black);
 
- renderer.setClearColor(Color::black);
+    auto camera = PerspectiveCamera::create();
+    camera->position.z = 5;
 
- auto camera = PerspectiveCamera::create();
- camera->position.z = 5;
+    auto scene = Scene::create();
+    renderer.enableTextRendering();
 
- OrbitControls controls{camera, canvas};
+    auto group = Group::create();
+    scene->add(group);
+    {
+        //Created the ball and set start position of x.0 and y.0
+        auto ballGeometry_ = SphereGeometry::create(0.1);
+        auto material = MeshBasicMaterial::create();
+        material->color = Color::white;
+        auto ball = Mesh::create(ballGeometry_,material);
+        ball->position.x = 0;
+        ball->position.y = 0;
+        group->add(ball);
 
- auto scene = Scene::create();
+        auto paddleMaterial_ = MeshBasicMaterial::create();
+        auto paddleGeometry_ = BoxGeometry::create(0.1,1,0.1);
+        auto paddleOne = Mesh::create(paddleGeometry_,material);
+        paddleOne->position.x = -2.5;
+        group->add(paddleOne);
 
- renderer.enableTextRendering();
+        auto paddleTwo = Mesh::create(paddleGeometry_,material);
+        paddleTwo->position.x = 2.5;
+        group->add(paddleTwo);
+    }
 
 //Creating the Scoreboard
-    auto& Scoreboard = renderer.textHandle("Score");
-    Scoreboard.setPosition(280, canvas.getSize().height-480);
+    auto score = "Score";
+    auto &Scoreboard = renderer.textHandle(score);
     Scoreboard.color = Color::green;
     Scoreboard.scale = 2;
 
-//Player one Score 100
+//Player one Score
     int P1Score = 0;
-    auto P1Score_  = std::to_string(P1Score);
-    auto& PlayerOne = renderer.textHandle(P1Score_);
-    PlayerOne.setPosition(100, canvas.getSize().height-480);
+    auto P1Score_ = std::to_string(P1Score);
+    auto &PlayerOne = renderer.textHandle(P1Score_);
     PlayerOne.color = Color::green;
     PlayerOne.scale = 2;
 
-//Player Two Score 460
+//Player Two Score
     int P2Score = 0;
-    auto P2Score_  = std::to_string(P2Score);
-    auto& PlayerTwo = renderer.textHandle(P2Score_);
-    PlayerTwo.setPosition(460, canvas.getSize().height-480);
+    auto P2Score_ = std::to_string(P2Score);
+    auto &PlayerTwo = renderer.textHandle(P2Score_);
     PlayerTwo.color = Color::green;
     PlayerTwo.scale = 2;
 
 
- canvas.onWindowResize([&](WindowSize size)->void{
-     camera->aspect = size.getAspect();
-     camera->updateProjectionMatrix();
-     renderer.setSize(size);
-     Scoreboard.setPosition(280, canvas.getSize().height-480);
- });
+    canvas.onWindowResize([&](WindowSize size) -> void {
+        renderer.setSize(size);
+    });
 
     canvas.animate([&] {
-
+        Scoreboard.setPosition(canvas.getSize().width *  1/2, canvas.getSize().height*(-1/2));
+        PlayerOne.setPosition(canvas.getSize().width  *  1/4, canvas.getSize().height*(-1/2));
+        PlayerTwo.setPosition(canvas.getSize().width  *  3/4, canvas.getSize().height*(-1/2));
         renderer.render(scene, camera);
 
 
     });
+
 
 }
