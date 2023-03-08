@@ -9,13 +9,12 @@ int main() {
     Canvas canvas(Canvas::Parameters().size({1280,720}).antialiasing(8));
     GLRenderer renderer(canvas);
     renderer.setClearColor(Color::black);
-
-    auto camera = PerspectiveCamera::create();
-    camera->position.z = 5;
-
-    auto scene = Scene::create();
     renderer.enableTextRendering();
 
+    //Create the Camera, Scene and the group of objects
+    auto camera = PerspectiveCamera::create();
+    camera->position.z = 5;
+    auto scene = Scene::create();
     auto group = Group::create();
     scene->add(group);
     {
@@ -28,12 +27,12 @@ int main() {
         ball->position.y = 0;
         group->add(ball);
 
+        //Create the two paddles
         auto paddleMaterial_ = MeshBasicMaterial::create();
         auto paddleGeometry_ = BoxGeometry::create(0.1,1,0.1);
         auto paddleOne = Mesh::create(paddleGeometry_,material);
         paddleOne->position.x = -2.5;
         group->add(paddleOne);
-
         auto paddleTwo = Mesh::create(paddleGeometry_,material);
         paddleTwo->position.x = 2.5;
         group->add(paddleTwo);
@@ -59,19 +58,40 @@ int main() {
     PlayerTwo.color = Color::green;
     PlayerTwo.scale = 2;
 
+    // Set the initial velocity of the ball
+    auto velocity = new Vector3(0.05, 0.05, 0);
+
+
+
+    // Get the ball mesh from the group
+    auto ballMesh = group->getObjectByName("ball");
+
+    // Add the velocity to the ball's position
+    ballMesh->position.x += velocity->x;
+    ballMesh->position.y += velocity->y;
+
+    // Check if the ball has hit a paddle and reverse its direction if it has
+    if (ballMesh->position.x > 2.4 || ballMesh->position.x < -2.4) {
+        velocity->x = -velocity->x;
+    }
+    if (ballMesh->position.y > 2.4 || ballMesh->position.y < -2.4) {
+        velocity->y = -velocity->y;
+    }
 
     canvas.onWindowResize([&](WindowSize size) -> void {
         renderer.setSize(size);
     });
 
+
+
     canvas.animate([&] {
-        Scoreboard.setPosition(canvas.getSize().width *  1/2, canvas.getSize().height*(-1/2));
-        PlayerOne.setPosition(canvas.getSize().width  *  1/4, canvas.getSize().height*(-1/2));
-        PlayerTwo.setPosition(canvas.getSize().width  *  3/4, canvas.getSize().height*(-1/2));
+        //render the scene
+        Scoreboard.setPosition(canvas.getSize().width * 1 / 2, canvas.getSize().height * (-1 / 2));
+        PlayerOne.setPosition(canvas.getSize().width * 1 / 4, canvas.getSize().height * (-1 / 2));
+        PlayerTwo.setPosition(canvas.getSize().width * 3 / 4, canvas.getSize().height * (-1 / 2));
+        std::chrono::milliseconds (16); // 60 fps
         renderer.render(scene, camera);
 
-
     });
-
 
 }
