@@ -60,32 +60,20 @@ int main() {
 
     // Set the initial velocity of the ball
     auto velocity = new Vector3(0.05, 0.05, 0);
+    // Get the ball Mesh from the group
+    auto ballMesh = group->children[0]->children[0];
 
-
-
-    // Get the ball mesh from the group
-    auto ballMesh = group->getObjectByName("ball");
-
-    // Add the velocity to the ball's position
-    ballMesh->position.x += velocity->x;
-    ballMesh->position.y += velocity->y;
-
-    // Check if the ball has hit a paddle and reverse its direction if it has
-    if (ballMesh->position.x > 2.4 || ballMesh->position.x < -2.4) {
-        velocity->x = -velocity->x;
-    }
-    if (ballMesh->position.y > 2.4 || ballMesh->position.y < -2.4) {
-        velocity->y = -velocity->y;
-    }
 
     canvas.onWindowResize([&](WindowSize size) -> void {
         renderer.setSize(size);
     });
 
 
-
     canvas.animate([&] {
         //render the scene
+        ballMesh.position.x += velocity.x;
+        ballMesh.position.y += velocity.y;
+
         Scoreboard.setPosition(canvas.getSize().width * 1 / 2, canvas.getSize().height * (-1 / 2));
         PlayerOne.setPosition(canvas.getSize().width * 1 / 4, canvas.getSize().height * (-1 / 2));
         PlayerTwo.setPosition(canvas.getSize().width * 3 / 4, canvas.getSize().height * (-1 / 2));
