@@ -23,9 +23,8 @@ public:
     GLRenderer renderer_;
     std::shared_ptr<PerspectiveCamera> camera_;
     std::shared_ptr<Scene> scene_;
-private:
     std::shared_ptr<Group> group_;
-
+private:
 };
 PingPongScene::PingPongScene() : group_(Group::create()), canvas_(Canvas::Parameters().size({1024,768}).antialiasing(8)), renderer_(canvas_) {
     renderer_.setClearColor(Color::black);
@@ -41,17 +40,20 @@ PingPongScene::PingPongScene() : group_(Group::create()), canvas_(Canvas::Parame
     ball->position.set(0,0,0);
     ball->name = "ball";
     group_->add(ball);
+    scene_->add(ball);
 
     //Creating the 3D-Objects paddles
-    auto paddleGeometry = BoxGeometry::create(0.1,1,0.1);
+    auto paddleGeometry = BoxGeometry::create(0.1,100,0.1);
     auto paddleOne = Mesh::create(paddleGeometry,material);
-    paddleOne->position.x = -2.5;
+    paddleOne->position.set(canvas_.getSize().width - 10,0,0);
     paddleOne->name = "paddleOne";
     group_->add(paddleOne);
+    scene_->add(paddleOne);
     auto paddleTwo = Mesh::create(paddleGeometry,material);
-    paddleTwo->position.x = 2.5;
+    paddleTwo->position.set(2.5,0,0);
     paddleTwo->name = "paddleTwo";
     group_->add(paddleTwo);
+    scene_->add(paddleTwo);
 
     //Creating the ScoreBoard
     auto &ScoreBoard = renderer_.textHandle("Score");
@@ -63,7 +65,6 @@ PingPongScene::PingPongScene() : group_(Group::create()), canvas_(Canvas::Parame
     auto &PlayerTwo = renderer_.textHandle(P2score);
     PlayerTwo.setPosition(paddleTwo->position.x, canvas_.getSize().height * (-1/2) );
 
-    scene_->add(group_);
 }
 std::shared_ptr<Group> PingPongScene::getGroup(){
     return group_;

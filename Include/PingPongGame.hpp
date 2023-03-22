@@ -17,6 +17,25 @@ private:
     std::shared_ptr<PingPongScene> PingPongScene_;
 };
 
+class MyKeylistner : public KeyListener {
+public:
+    MyKeylistner(const std::shared_ptr<Mesh>& mesh) {}
+    void onKeyPressed(KeyEvent evt) override{
+        float P1y = paddleOne->position.y;
+        float P2y = paddleTwo->position.y;
+
+        if( evt.key == 265){
+            paddleOne->position.y -= 0.3;
+        }
+        if(evt.key == 264){
+            paddleOne->position.y += 0.3;
+        }
+    };
+private:
+    std::shared_ptr<Mesh> paddleOne;
+    std::shared_ptr<Mesh> paddleTwo;
+};
+
 void Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
 
@@ -31,10 +50,12 @@ void Game::update() {
 
         if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
             PingPongScene_->P1Score++;
+            ball->position.set(0,0,0);
             velocity.x *= -1;
         }
         if (ball->position.distanceTo(paddleTwo->position) < 0.6 && velocity.x > 0) {
             PingPongScene_->P2Score++;
+            ball->position.set(0,0,0);
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
@@ -44,6 +65,7 @@ void Game::update() {
 
 }
 void Game::init() {
+    //PingPongScene_->scene_->add(PingPongScene_->group_);
     PingPongScene_->canvas_.animate([&]{
         Game::update();
         std::chrono::milliseconds (16);
