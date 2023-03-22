@@ -17,11 +17,11 @@ public:
     static std::shared_ptr<PingPongScene> create(){
         return std::make_shared<PingPongScene>();
     }
-    int P1Score;
-    int P2Score;
-private:
+    int P1Score = 0;
+    int P2Score = 0;
     Canvas canvas_;
     GLRenderer renderer_;
+private:
     std::shared_ptr<Scene> scene_;
     std::shared_ptr<PerspectiveCamera> camera_;
     std::shared_ptr<Group> group_;
