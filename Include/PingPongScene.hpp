@@ -4,30 +4,49 @@
 
 #ifndef THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
 #define THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
-
 #include "threepp/threepp.hpp"
-#include "PingPongGame.hpp"
+#include <chrono>
+#include <thread>
 
 using namespace threepp;
-/*
-class Scene_ {
+
+class PingPongScene {
 public:
-    Scene_();
-    ~Scene_();
-
-    void update(const std::shared_ptr<GLRenderer>& renderer, const std::shared_ptr<Camera>& camera);
-    void render();
-
+    PingPongScene();
+    static std::shared_ptr<PingPongScene> create(){
+        return std::make_shared<PingPongScene>();
+    }
+    int update();
 private:
-    std::shared_ptr<Scene> m_scene;
-    std::shared_ptr<Mesh> m_ball;
-    std::shared_ptr<Mesh> m_paddleOne;
-    std::shared_ptr<Mesh> m_paddleTwo;
-    std::shared_ptr<Vector2> m_velocity;
+    Vector3 velocity = Vector3(0.01,0.01,0);
+    std::shared_ptr<Group> group_;
 
-    void createBall();
-    void createPaddles();
 };
+PingPongScene::PingPongScene() : group_(Group::create()) {
+    auto material = MeshBasicMaterial::create();
+    material->color = Color::white;
 
-*/
+    //Creating the 3D-Object Ball
+    auto ballGeometry = SphereGeometry::create(0.1,32,32);
+    auto ball = Mesh::create(ballGeometry,material);
+    ball->position.set(0,0,0);
+    ball->name = "ball";
+    group_->add(ball);
+
+    //Creating the 3D-Objects paddles
+    auto paddleGeometry = BoxGeometry::create(0.1,1,0.1);
+    auto paddleOne = Mesh::create(paddleGeometry,material);
+    paddleOne->position.x = -2.5;
+    paddleOne->name = "paddleOne";
+    group_->add(paddleOne);
+    auto paddleTwo = Mesh::create(paddleGeometry,material);
+    paddleTwo->position.x = 2.5;
+    paddleTwo->name = "paddleTwo";
+    group_->add(paddleTwo);
+
+
+
+
+}
+
 #endif //THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
