@@ -36,25 +36,19 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     material->color = Color::white;
 
     //Creating the 3D-Object Ball
-    auto ballGeometry = SphereGeometry::create(1,32,32);
+    auto ballGeometry = SphereGeometry::create(0.1,32,32);
     auto ball = Mesh::create(ballGeometry,material);
-    ball->position.set(0,0,0);
-    ball->name = "ball";
-    scene_->add(ball);
+    ball->name = ("ball");
     group_->add(ball);
 
     //Creating the 3D-Objects paddles
     auto paddleGeometry = BoxGeometry::create(0.1,1,0.1);
     auto paddleOne = Mesh::create(paddleGeometry,material);
-    paddleOne->position.set(canvas_.getSize().width*(6/8),0,0);
-    paddleOne->name = "paddleOne";
-    scene_->add(paddleOne);
+    paddleOne->name = ("paddleOne");
     group_->add(paddleOne);
 
     auto paddleTwo = Mesh::create(paddleGeometry,material);
-    paddleTwo->position.set(canvas_.getSize().width*(2/8),0,0);
-    paddleTwo->name = "paddleTwo";
-    scene_->add(paddleTwo);
+    paddleTwo->name = ("paddleTwo");
     group_->add(paddleTwo);
 
     scene_->add(group_);

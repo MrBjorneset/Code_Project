@@ -1,7 +1,7 @@
 Detecting compiler hash for triplet x64-windows...
 All requested packages are currently installed.
-Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 443.2 us. Use --debug to see more details.
-Total install time: 2.785 ms
+Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 625.7 us. Use --debug to see more details.
+Total install time: 4.333 ms
 imgui provides CMake targets:
 
     # this is heuristically generated, and may not be correct

@@ -10,13 +10,13 @@ using namespace threepp;
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.01,0.01,0){};
-    void update();
+    int update();
     void init();
 private:
     Vector3 velocity;
     std::shared_ptr<PingPongScene> PingPongScene_;
 };
-
+/*
 class MyKeylistner : public KeyListener {
 public:
     MyKeylistner(const std::shared_ptr<Mesh>& mesh) {}
@@ -35,8 +35,9 @@ private:
     std::shared_ptr<Mesh> paddleOne;
     std::shared_ptr<Mesh> paddleTwo;
 };
+*/
 
-void Game::update() {
+int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
 
         //Update the ball position based on velocity
@@ -46,7 +47,7 @@ void Game::update() {
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
         paddleOne->position.x = -2.5;
-        paddleTwo->position.x = 2.5;
+        paddleTwo->position.x =  2.5;
 
         if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
             PingPongScene_->P1Score++;
@@ -62,10 +63,13 @@ void Game::update() {
         if (ball->position.y < -3.4 || ball->position.y > 3.4) {
             velocity.y *= -1;
         }
-
+    return 0;
 }
 void Game::init() {
-    //PingPongScene_->scene_->add(PingPongScene_->group_);
+    PingPongScene_->canvas_.onWindowResize([&](WindowSize){
+        auto size = PingPongScene_->renderer_.getSize();
+        PingPongScene_->renderer_.setSize(size);
+    });
     PingPongScene_->canvas_.animate([&]{
         Game::update();
         std::chrono::milliseconds (16);
