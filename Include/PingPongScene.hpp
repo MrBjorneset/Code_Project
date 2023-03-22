@@ -21,17 +21,17 @@ public:
     int P2Score = 0;
     Canvas canvas_;
     GLRenderer renderer_;
-private:
-    std::shared_ptr<Scene> scene_;
     std::shared_ptr<PerspectiveCamera> camera_;
+    std::shared_ptr<Scene> scene_;
+private:
     std::shared_ptr<Group> group_;
 
 };
 PingPongScene::PingPongScene() : group_(Group::create()), canvas_(Canvas::Parameters().size({1024,768}).antialiasing(8)), renderer_(canvas_) {
-   renderer_.setClearColor(Color::black);
-   renderer_.enableTextRendering();
-   camera_ = PerspectiveCamera::create();
-   scene_ = Scene::create();
+    renderer_.setClearColor(Color::black);
+    renderer_.enableTextRendering();
+    camera_ = PerspectiveCamera::create();
+    scene_ = Scene::create();
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
 
@@ -68,5 +68,6 @@ PingPongScene::PingPongScene() : group_(Group::create()), canvas_(Canvas::Parame
 std::shared_ptr<Group> PingPongScene::getGroup(){
     return group_;
 }
+
 
 #endif //THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
