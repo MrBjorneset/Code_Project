@@ -44,7 +44,7 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     group_->add(ball);
 
     //Creating the 3D-Objects paddles
-    auto paddleGeometry = BoxGeometry::create(0.1,1,0.1);
+    auto paddleGeometry = BoxGeometry::create(0.1,1.8,0.1);
     auto paddleOne = Mesh::create(paddleGeometry,material);
     paddleOne->name = ("paddleOne");
     group_->add(paddleOne);
@@ -56,14 +56,15 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     scene_->add(group_);
 
     //Creating the ScoreBoard
+
     auto &ScoreBoard = renderer_.textHandle("Score");
     ScoreBoard.setPosition(canvas_.getSize().width * 1 / 2, canvas_.getSize().height * (-1/2) );
     std::string P1score = std::to_string(P1Score);
     auto &PlayerOne = renderer_.textHandle(P1score);
-    PlayerOne.setPosition(paddleOne->position.x, canvas_.getSize().height * (-1/2) );
+    PlayerOne.setPosition(400, canvas_.getSize().height * (-1/2) );
     std::string P2score = std::to_string(P2Score);
     auto &PlayerTwo = renderer_.textHandle(P2score);
-    PlayerTwo.setPosition(paddleTwo->position.x, canvas_.getSize().height * (-1/2) );
+    PlayerTwo.setPosition(1400, canvas_.getSize().height * (-1/2) );
 
 }
 std::shared_ptr<Group> PingPongScene::getGroup(){

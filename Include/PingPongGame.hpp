@@ -50,20 +50,23 @@ int Game::update() {
         paddleTwo->position.x =  3.5;
 
         if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
-            PingPongScene_->P1Score++;
-            ball->position.set(0,0,0);
             velocity.x *= -1;
         }
         if (ball->position.distanceTo(paddleTwo->position) < 0.6 && velocity.x > 0) {
-            PingPongScene_->P2Score++;
-            ball->position.set(0,0,0);
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
         if (ball->position.y < -5.0f || ball->position.y > 5.0f) {
             velocity.y *= -1;
         }
-        if (ball->position.x < -5.0f || ball->position.x > 5.0f){
+        if (ball->position.x < -5.0f){
+            PingPongScene_->P1Score += 1;
+            ball->position.set(0,0,0);
+            velocity.x *= -1;
+        }
+        if (ball->position.x > 5.0f){
+            PingPongScene_->P2Score += 1;
+            ball->position.set(0,0,0);
             velocity.x *= -1;
         }
     return 0;
