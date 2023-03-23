@@ -17,8 +17,8 @@ public:
     static std::shared_ptr<PingPongScene> create(){
         return std::make_shared<PingPongScene>();
     }
-    int P1Score = 0;
-    int P2Score = 0;
+    int P1Score ;
+    int P2Score ;
     Canvas canvas_;
     GLRenderer renderer_;
     std::shared_ptr<PerspectiveCamera> camera_;
@@ -36,7 +36,8 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     scene_ = Scene::create();
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
-
+    P1Score = 0;
+    P2Score = 0;
     //Creating the 3D-Object Ball
     auto ballGeometry = SphereGeometry::create(0.1,32,32);
     auto ball = Mesh::create(ballGeometry,material);

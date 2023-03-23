@@ -16,30 +16,34 @@ private:
     Vector3 velocity;
     std::shared_ptr<PingPongScene> PingPongScene_;
 };
-/*
-class MyKeylistner : public KeyListener {
-public:
-    MyKeylistner(const std::shared_ptr<Mesh>& mesh) {}
-    void onKeyPressed(KeyEvent evt) override{
-        float P1y = paddleOne->position.y;
-        float P2y = paddleTwo->position.y;
 
+struct MyListener : KeyListener { ;
+
+    bool DirectionDown      = false;
+    bool DirectionUp        = false;
+    void onKeyPressed(KeyEvent evt) override{
         if( evt.key == 265){
-            paddleOne->position.y -= 0.3;
+            DirectionDown   = true;
         }
         if(evt.key == 264){
-            paddleOne->position.y += 0.3;
+            DirectionDown   = true;
         }
-    };
-private:
-    std::shared_ptr<Mesh> paddleOne;
-    std::shared_ptr<Mesh> paddleTwo;
+    }
+    void onKeyReleased(KeyEvent evt) override{
+        if( evt.key == 265){
+            DirectionDown   = false;
+        }
+        if(evt.key == 264){
+            DirectionDown   = false;
+        }
+    }
 };
-*/
+
 
 int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
-
+        MyListener l;
+        PingPongScene_->canvas_.addKeyListener(&l);
         //Update the ball position based on velocity
         ball->position.add(velocity);
 
@@ -68,6 +72,12 @@ int Game::update() {
             PingPongScene_->P2Score += 1;
             ball->position.set(0,0,0);
             velocity.x *= -1;
+        }
+        if (MyListener().DirectionDown){
+            paddleOne->position.y -= 0.2;
+        }
+        if (MyListener().DirectionUp){
+        paddleOne->position.y += 0.2;
         }
     return 0;
 }
