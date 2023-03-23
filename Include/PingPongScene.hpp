@@ -23,6 +23,7 @@ public:
     GLRenderer renderer_;
     std::shared_ptr<PerspectiveCamera> camera_;
     std::shared_ptr<Scene> scene_;
+
 private:
     std::shared_ptr<Group> group_;
 };
@@ -31,6 +32,7 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     renderer_.setClearColor(Color::black);
     renderer_.enableTextRendering();
     camera_ = PerspectiveCamera::create();
+    camera_->position.z = 10;
     scene_ = Scene::create();
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;

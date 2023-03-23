@@ -46,8 +46,8 @@ int Game::update() {
         //Check for collision with the paddles and reflect ball velocity accordingly
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
-        paddleOne->position.x = -2.5;
-        paddleTwo->position.x =  2.5;
+        paddleOne->position.x = -3.5;
+        paddleTwo->position.x =  3.5;
 
         if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
             PingPongScene_->P1Score++;
@@ -60,8 +60,11 @@ int Game::update() {
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
-        if (ball->position.y < -3.4 || ball->position.y > 3.4) {
+        if (ball->position.y < -5.0f || ball->position.y > 5.0f) {
             velocity.y *= -1;
+        }
+        if (ball->position.x < -5.0f || ball->position.x > 5.0f){
+            velocity.x *= -1;
         }
     return 0;
 }
