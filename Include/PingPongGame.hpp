@@ -14,6 +14,7 @@ public:
     void init();
 private:
     Vector3 velocity;
+    Vector3 paddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
 };
 
@@ -46,7 +47,7 @@ int Game::update() {
         PingPongScene_->canvas_.addKeyListener(&l);
         //Update the ball position based on velocity
         ball->position.add(velocity);
-
+        paddleSpeed = Vector3(0,0.2,0);
         //Check for collision with the paddles and reflect ball velocity accordingly
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
@@ -74,10 +75,10 @@ int Game::update() {
             velocity.x *= -1;
         }
         if (MyListener().DirectionDown){
-            paddleOne->position.y -= 0.2;
+            paddleOne->position.add(paddleSpeed*(-1));
         }
         if (MyListener().DirectionUp){
-        paddleOne->position.y += 0.2;
+            paddleOne->position.add(paddleSpeed*(-1));
         }
     return 0;
 }
