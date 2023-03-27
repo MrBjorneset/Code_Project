@@ -34,9 +34,11 @@ public:
 
 class Game{
 public:
-    Game() : PingPongScene_(PingPongScene::create()), velocity(0.01,0.01,0){};
+    Game() : PingPongScene_(PingPongScene::create()), velocity(0.03,0.03,0){};
     int update();
     void init();
+    int P1Score_;
+    int P2Score_;
 private:
     Vector3 velocity;
     Vector3 paddleSpeed;
@@ -48,16 +50,16 @@ int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
         //Update the ball position based on velocity
         ball->position.add(velocity);
+
         //Check for collision with the paddles and reflect ball velocity accordingly
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
-
-        if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
+        if (ball->position.distanceTo(paddleOne->position) < 0.2 && velocity.x < 0) {
             velocity.x *= -1;
         }
-        if (ball->position.distanceTo(paddleTwo->position) < 0.6 && velocity.x > 0) {
+        if (ball->position.distanceTo(paddleTwo->position) < 0.2 && velocity.x > 0) {
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
@@ -65,12 +67,16 @@ int Game::update() {
             velocity.y *= -1;
         }
         if (ball->position.x < -5.0f){
-            PingPongScene_->P1Score += 1;
+            P1Score_ ++;
+            std::string P1Score = std::to_string(P1Score_);
+            PingPongScene_->renderer_.textHandle(P1Score).setPosition(1400, PingPongScene_->canvas_.getSize().height -1000);
             ball->position.set(0,0,0);
             velocity.x *= -1;
         }
         if (ball->position.x > 5.0f){
-            PingPongScene_->P2Score += 1;
+            P2Score_ ++;
+            std::string  P2Score = std::to_string(P2Score_);
+            PingPongScene_->renderer_.textHandle(P2Score).setPosition(400,PingPongScene_->canvas_.getSize().height -1000);
             ball->position.set(0,0,0);
             velocity.x *= -1;
         }
@@ -96,6 +102,8 @@ int Game::update() {
 
 }
 void Game::init() {
+    P1Score_ = 0;
+    P2Score_ = 0;
     PingPongScene_->canvas_.addKeyListener(&listener);
     PingPongScene_->canvas_.onWindowResize([&](WindowSize){
         auto size = PingPongScene_->renderer_.getSize();
