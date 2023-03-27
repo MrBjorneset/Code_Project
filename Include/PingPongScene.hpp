@@ -57,7 +57,6 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     scene_->add(group_);
 
     //Creating the ScoreBoard
-
     auto &ScoreBoard = renderer_.textHandle("Score");
     ScoreBoard.setPosition(canvas_.getSize().width * 1 / 2, canvas_.getSize().height * (-1/2) );
     std::string P1score = std::to_string(P1Score);
