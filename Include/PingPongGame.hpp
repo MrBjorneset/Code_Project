@@ -8,11 +8,6 @@
 
 using namespace threepp;
 
-enum class Direction {
-    UP,
-    Down
-};
-
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.01,0.01,0){};
@@ -22,27 +17,26 @@ private:
     Vector3 velocity;
     Vector3 paddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
-    Direction direction;
 };
 
-struct MyListener : KeyListener { ;
-
+class MyListener : public KeyListener{
+public:
     bool DirectionDown = false;
     bool DirectionUp = false;
 
     void onKeyPressed(KeyEvent evt) override {
-        if (evt.key == 265) {
+        if (evt.key == 265) { //up arrow key
             DirectionDown = true;
         }
-        if (evt.key == 264) {
+        if (evt.key == 264) { //down arrow key
             DirectionDown = true;
         }
     }
     void onKeyReleased(KeyEvent evt) override{
-        if( evt.key == 265){
+        if( evt.key == 265){ //up arrow Key
             DirectionDown   = false;
         }
-        if(evt.key == 264){
+        if(evt.key == 264){ //down arrow key
             DirectionDown   = false;
         }
     }
@@ -51,26 +45,16 @@ struct MyListener : KeyListener { ;
 
 int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
-        MyListener l;
-        PingPongScene_->canvas_.addKeyListener(&l);
-        Vector2 nextMove;
-    switch (direction) {
-        case Direction::UP:
-            nextMove.y += 1;
-            break;
-        case Direction::Down:
-            nextMove.y -= 1;
-            break;
-    }
         //Update the ball position based on velocity
         ball->position.add(velocity);
-        paddleSpeed = Vector3(0,0.2,0);
+        paddleSpeed = Vector3(0,0.3,0);
         //Check for collision with the paddles and reflect ball velocity accordingly
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
-
+        MyListener listener;
+        PingPongScene_->canvas_.addKeyListener(&listener);
         if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
             velocity.x *= -1;
         }
@@ -91,10 +75,10 @@ int Game::update() {
             ball->position.set(0,0,0);
             velocity.x *= -1;
         }
-        if (MyListener().DirectionDown){
-            paddleOne->position.add(paddleSpeed*(-1));
+        if (listener.DirectionDown){
+            paddleOne->position.add(paddleSpeed);
         }
-        if (MyListener().DirectionUp){
+        if (listener.DirectionUp){
             paddleOne->position.add(paddleSpeed*(-1));
         }
     return 0;
@@ -104,6 +88,7 @@ void Game::init() {
         auto size = PingPongScene_->renderer_.getSize();
         PingPongScene_->renderer_.setSize(size);
     });
+
     PingPongScene_->canvas_.animate([&]{
         Game::update();
         std::chrono::milliseconds (16);
