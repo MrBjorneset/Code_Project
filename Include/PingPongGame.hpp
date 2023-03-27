@@ -74,21 +74,22 @@ int Game::update() {
             ball->position.set(0,0,0);
             velocity.x *= -1;
         }
-
+        //Move paddleTwo based on ball direction
+        if (ball->position.y > paddleTwo->position.y){
+            paddleTwo->position.y += 0.05f;
+        }
+        else if(ball->position.y < paddleTwo->position.y){
+            paddleTwo->position.y -= 0.05f;
+        }
         if (listener.DirectionUp){
-            std::cout << "UP" << std::endl;
-            paddleSpeed.y = 0.01f;
+            paddleSpeed.y = 0.1f;
         }
         if (listener.DirectionDown){
-            std::cout << "Down" << std::endl;
-            paddleSpeed.y -= 0.001f;
+            paddleSpeed.y = -0.1f;
         }
         if (!listener.DirectionUp && !listener.DirectionDown){
-            std::cout << "paddleSpeed" << paddleSpeed << std::endl;
-            std::cout << "paddleOnePosition" << paddleOne->position << std::endl;
             paddleSpeed.y = 0;
         }
-
         paddleOne->position.add(paddleSpeed);
 
     return 0;
