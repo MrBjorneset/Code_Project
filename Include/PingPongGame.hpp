@@ -54,10 +54,10 @@ int Game::update() {
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
 
-        if (ball->position.distanceTo(paddleOne->position) < 0.06 && velocity.x < 0) {
+        if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
             velocity.x *= -1;
         }
-        if (ball->position.distanceTo(paddleTwo->position) < 0.06 && velocity.x > 0) {
+        if (ball->position.distanceTo(paddleTwo->position) < 0.6 && velocity.x > 0) {
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
@@ -76,12 +76,16 @@ int Game::update() {
         }
 
         if (listener.DirectionUp){
-            listener.paddleSpeed = 0.05f;
+            std::cout << "UP" << std::endl;
+            paddleSpeed.y = 0.01f;
         }
         if (listener.DirectionDown){
-            listener.paddleSpeed -= 0.05f;
+            std::cout << "Down" << std::endl;
+            paddleSpeed.y -= 0.001f;
         }
         if (!listener.DirectionUp && !listener.DirectionDown){
+            std::cout << "paddleSpeed" << paddleSpeed << std::endl;
+            std::cout << "paddleOnePosition" << paddleOne->position << std::endl;
             paddleSpeed.y = 0;
         }
 
