@@ -7,6 +7,30 @@
 #include "PingPongScene.hpp"
 
 using namespace threepp;
+class MyListener : public KeyListener{
+public:
+    bool DirectionUp = false;
+    bool DirectionDown = false;
+    float paddleSpeed;
+
+    void onKeyPressed(KeyEvent evt) override {
+        if (evt.key == 265) { //up arrow key
+            DirectionUp = true;
+        }
+        if (evt.key == 264) { //down arrow key
+            DirectionDown = true;
+        }
+    }
+
+    void onKeyReleased(KeyEvent evt) override{
+        if (evt.key == 265){ //up arrow Key
+            DirectionUp = false;
+        }
+        if (evt.key == 264){ //down arrow key
+            DirectionDown = false;
+        }
+    }
+};
 
 class Game{
 public:
@@ -17,48 +41,23 @@ private:
     Vector3 velocity;
     Vector3 paddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
+    MyListener listener;
 };
-
-class MyListener : public KeyListener{
-public:
-    bool DirectionDown = false;
-    bool DirectionUp = false;
-
-    void onKeyPressed(KeyEvent evt) override {
-        if (evt.key == 265) { //up arrow key
-            DirectionDown = true;
-        }
-        if (evt.key == 264) { //down arrow key
-            DirectionDown = true;
-        }
-    }
-    void onKeyReleased(KeyEvent evt) override{
-        if( evt.key == 265){ //up arrow Key
-            DirectionDown   = false;
-        }
-        if(evt.key == 264){ //down arrow key
-            DirectionDown   = false;
-        }
-    }
-};
-
 
 int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
         //Update the ball position based on velocity
         ball->position.add(velocity);
-        paddleSpeed = Vector3(0,0.3,0);
         //Check for collision with the paddles and reflect ball velocity accordingly
         auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
-        MyListener listener;
-        PingPongScene_->canvas_.addKeyListener(&listener);
-        if (ball->position.distanceTo(paddleOne->position) < 0.6 && velocity.x < 0) {
+
+        if (ball->position.distanceTo(paddleOne->position) < 0.06 && velocity.x < 0) {
             velocity.x *= -1;
         }
-        if (ball->position.distanceTo(paddleTwo->position) < 0.6 && velocity.x > 0) {
+        if (ball->position.distanceTo(paddleTwo->position) < 0.06 && velocity.x > 0) {
             velocity *= -1;
         }
         //Check for collision with the walls and reflect the ball accordingly
@@ -75,15 +74,24 @@ int Game::update() {
             ball->position.set(0,0,0);
             velocity.x *= -1;
         }
-        if (listener.DirectionDown){
-            paddleOne->position.add(paddleSpeed);
-        }
+
         if (listener.DirectionUp){
-            paddleOne->position.add(paddleSpeed*(-1));
+            listener.paddleSpeed = 0.05f;
         }
+        if (listener.DirectionDown){
+            listener.paddleSpeed -= 0.05f;
+        }
+        if (!listener.DirectionUp && !listener.DirectionDown){
+            paddleSpeed.y = 0;
+        }
+
+        paddleOne->position.add(paddleSpeed);
+
     return 0;
+
 }
 void Game::init() {
+    PingPongScene_->canvas_.addKeyListener(&listener);
     PingPongScene_->canvas_.onWindowResize([&](WindowSize){
         auto size = PingPongScene_->renderer_.getSize();
         PingPongScene_->renderer_.setSize(size);
