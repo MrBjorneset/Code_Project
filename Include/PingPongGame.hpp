@@ -7,6 +7,12 @@
 #include "PingPongScene.hpp"
 
 using namespace threepp;
+
+enum class Direction {
+    UP,
+    Down
+};
+
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.01,0.01,0){};
@@ -16,18 +22,20 @@ private:
     Vector3 velocity;
     Vector3 paddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
+    Direction direction;
 };
 
 struct MyListener : KeyListener { ;
 
-    bool DirectionDown      = false;
-    bool DirectionUp        = false;
-    void onKeyPressed(KeyEvent evt) override{
-        if( evt.key == 265){
-            DirectionDown   = true;
+    bool DirectionDown = false;
+    bool DirectionUp = false;
+
+    void onKeyPressed(KeyEvent evt) override {
+        if (evt.key == 265) {
+            DirectionDown = true;
         }
-        if(evt.key == 264){
-            DirectionDown   = true;
+        if (evt.key == 264) {
+            DirectionDown = true;
         }
     }
     void onKeyReleased(KeyEvent evt) override{
@@ -45,6 +53,15 @@ int Game::update() {
         auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
         MyListener l;
         PingPongScene_->canvas_.addKeyListener(&l);
+        Vector2 nextMove;
+    switch (direction) {
+        case Direction::UP:
+            nextMove.y += 1;
+            break;
+        case Direction::Down:
+            nextMove.y -= 1;
+            break;
+    }
         //Update the ball position based on velocity
         ball->position.add(velocity);
         paddleSpeed = Vector3(0,0.2,0);
