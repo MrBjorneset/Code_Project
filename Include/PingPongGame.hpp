@@ -55,46 +55,30 @@ int Game::update() {
         auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
-/*
-        //Check for collision with the paddles and reflect the ball accordingly
-        if (ball->position.distanceTo(paddleOne->position) < 0.2 && velocity.x < 0) {
-            velocity.x *= -1;
-        }
-        if (ball->position.distanceTo(paddleTwo->position) < 0.2 && velocity.x > 0) {
-            velocity *= -1;
-        }
 
-*/
-// Check collision with paddle one
-    auto ballRadius = 0.1;
-    if (ball->position.x - ballRadius < paddleOne->position.x + PADDLE_WIDTH / 2 &&
-        ball->position.x + ballRadius > paddleOne->position.x - PADDLE_WIDTH / 2 &&
-        ball->position.y - ballRadius < paddleOne->position.y + PADDLE_HEIGHT / 2 &&
-        ball->position.y + ballRadius > paddleOne->position.y - PADDLE_HEIGHT / 2 &&
-        ball->position.z - ballRadius < paddleOne->position.z + PADDLE_DEPTH / 2 &&
-        ball->position.z + ballRadius > paddleOne->position.z - PADDLE_DEPTH / 2) {
+    // Check collision with paddle one
+    if (ball->position.x - PingPongScene_->ballRadius_ < paddleOne->position.x + PingPongScene_->paddleWidth_ / 2 &&
+        ball->position.x + PingPongScene_->ballRadius_ > paddleOne->position.x - PingPongScene_->paddleWidth_ / 2 &&
+        ball->position.y - PingPongScene_->ballRadius_ < paddleOne->position.y + PingPongScene_->paddleHeight_ / 2 &&
+        ball->position.y + PingPongScene_->ballRadius_ > paddleOne->position.y - PingPongScene_->paddleHeight_ / 2 &&
+        ball->position.z - PingPongScene_->ballRadius_ < paddleOne->position.z + PingPongScene_->paddleDepth_ / 2 &&
+        ball->position.z + PingPongScene_->ballRadius_ > paddleOne->position.z - PingPongScene_->paddleDepth_ / 2) {
 
-        ballVelocity_.x = -ballVelocity_.x;
-        ball_->position.x = paddleOne_->position.x + ballRadius + PADDLE_WIDTH / 2;
+        velocity.x = -velocity.x;
+        ball->position.x = paddleOne->position.x + PingPongScene_->ballRadius_ + PingPongScene_->paddleWidth_ / 2;
     }
 
     // Check collision with paddle two
-    if (ball_->position.x - ballRadius < paddleTwo_->position.x + PADDLE_WIDTH / 2 &&
-        ball_->position.x + ballRadius > paddleTwo_->position.x - PADDLE_WIDTH / 2 &&
-        ball_->position.y - ballRadius < paddleTwo_->position.y + PADDLE_HEIGHT / 2 &&
-        ball_->position.y + ballRadius > paddleTwo_->position.y - PADDLE_HEIGHT / 2 &&
-        ball_->position.z - ballRadius < paddleTwo_->position.z + PADDLE_DEPTH / 2 &&
-        ball_->position.z + ballRadius > paddleTwo_->position.z - PADDLE_DEPTH / 2) {
+    if (ball->position.x - PingPongScene_->ballRadius_ < paddleTwo->position.x + PingPongScene_->paddleWidth_ / 2 &&
+        ball->position.x + PingPongScene_->ballRadius_ > paddleTwo->position.x - PingPongScene_->paddleWidth_ / 2 &&
+        ball->position.y - PingPongScene_->ballRadius_ < paddleTwo->position.y + PingPongScene_->paddleHeight_ / 2 &&
+        ball->position.y + PingPongScene_->ballRadius_ > paddleTwo->position.y - PingPongScene_->paddleHeight_ / 2 &&
+        ball->position.z - PingPongScene_->ballRadius_ < paddleTwo->position.z + PingPongScene_->paddleDepth_ / 2 &&
+        ball->position.z + PingPongScene_->ballRadius_ > paddleTwo->position.z - PingPongScene_->paddleDepth_ / 2) {
 
-        ballVelocity_.x = -ballVelocity_.x;
-        ball_->position.x = paddleTwo_->position.x - ballRadius - PADDLE_WIDTH / 2;
+        velocity.x = -velocity.x;
+        ball->position.x = paddleTwo->position.x - PingPongScene_->ballRadius_ - PingPongScene_->paddleWidth_ / 2;
     }
-
-
-
-
-
-
 
         //Check for collision with the walls and reflect the ball accordingly
         if (ball->position.y < -5.0f || ball->position.y > 5.0f) {
