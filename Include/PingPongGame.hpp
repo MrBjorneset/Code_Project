@@ -56,29 +56,29 @@ int Game::update() {
         paddleOne->position.x = -3.5;
         paddleTwo->position.x =  3.5;
 
-    // Check collision with paddle one
-    if (ball->position.x - PingPongScene_->ballRadius_ < paddleOne->position.x + PingPongScene_->paddleWidth_ / 2 &&
-        ball->position.x + PingPongScene_->ballRadius_ > paddleOne->position.x - PingPongScene_->paddleWidth_ / 2 &&
-        ball->position.y - PingPongScene_->ballRadius_ < paddleOne->position.y + PingPongScene_->paddleHeight_ / 2 &&
-        ball->position.y + PingPongScene_->ballRadius_ > paddleOne->position.y - PingPongScene_->paddleHeight_ / 2 &&
-        ball->position.z - PingPongScene_->ballRadius_ < paddleOne->position.z + PingPongScene_->paddleDepth_ / 2 &&
-        ball->position.z + PingPongScene_->ballRadius_ > paddleOne->position.z - PingPongScene_->paddleDepth_ / 2) {
+        // Check collision with paddle one
+        if (ball->position.x - PingPongScene_->ballRadius_ < paddleOne->position.x + PingPongScene_->paddleWidth_ / 2 &&
+            ball->position.x + PingPongScene_->ballRadius_ > paddleOne->position.x - PingPongScene_->paddleWidth_ / 2 &&
+            ball->position.y - PingPongScene_->ballRadius_ < paddleOne->position.y + PingPongScene_->paddleHeight_ / 2 &&
+            ball->position.y + PingPongScene_->ballRadius_ > paddleOne->position.y - PingPongScene_->paddleHeight_ / 2 &&
+            ball->position.z - PingPongScene_->ballRadius_ < paddleOne->position.z + PingPongScene_->paddleDepth_ / 2 &&
+            ball->position.z + PingPongScene_->ballRadius_ > paddleOne->position.z - PingPongScene_->paddleDepth_ / 2) {
 
-        velocity.x = -velocity.x;
-        ball->position.x = paddleOne->position.x + PingPongScene_->ballRadius_ + PingPongScene_->paddleWidth_ / 2;
-    }
+            velocity.x = -velocity.x;
+            ball->position.x = paddleOne->position.x + PingPongScene_->ballRadius_ + PingPongScene_->paddleWidth_ / 2;
+        }
 
-    // Check collision with paddle two
-    if (ball->position.x - PingPongScene_->ballRadius_ < paddleTwo->position.x + PingPongScene_->paddleWidth_ / 2 &&
-        ball->position.x + PingPongScene_->ballRadius_ > paddleTwo->position.x - PingPongScene_->paddleWidth_ / 2 &&
-        ball->position.y - PingPongScene_->ballRadius_ < paddleTwo->position.y + PingPongScene_->paddleHeight_ / 2 &&
-        ball->position.y + PingPongScene_->ballRadius_ > paddleTwo->position.y - PingPongScene_->paddleHeight_ / 2 &&
-        ball->position.z - PingPongScene_->ballRadius_ < paddleTwo->position.z + PingPongScene_->paddleDepth_ / 2 &&
-        ball->position.z + PingPongScene_->ballRadius_ > paddleTwo->position.z - PingPongScene_->paddleDepth_ / 2) {
+        // Check collision with paddle two
+        if (ball->position.x - PingPongScene_->ballRadius_ < paddleTwo->position.x + PingPongScene_->paddleWidth_ / 2 &&
+            ball->position.x + PingPongScene_->ballRadius_ > paddleTwo->position.x - PingPongScene_->paddleWidth_ / 2 &&
+            ball->position.y - PingPongScene_->ballRadius_ < paddleTwo->position.y + PingPongScene_->paddleHeight_ / 2 &&
+            ball->position.y + PingPongScene_->ballRadius_ > paddleTwo->position.y - PingPongScene_->paddleHeight_ / 2 &&
+            ball->position.z - PingPongScene_->ballRadius_ < paddleTwo->position.z + PingPongScene_->paddleDepth_ / 2 &&
+            ball->position.z + PingPongScene_->ballRadius_ > paddleTwo->position.z - PingPongScene_->paddleDepth_ / 2) {
 
-        velocity.x = -velocity.x;
-        ball->position.x = paddleTwo->position.x - PingPongScene_->ballRadius_ - PingPongScene_->paddleWidth_ / 2;
-    }
+            velocity.x = -velocity.x;
+            ball->position.x = paddleTwo->position.x - PingPongScene_->ballRadius_ - PingPongScene_->paddleWidth_ / 2;
+        }
 
         //Check for collision with the walls and reflect the ball accordingly
         if (ball->position.y < -5.0f || ball->position.y > 5.0f) {
@@ -108,16 +108,15 @@ int Game::update() {
         }
         //Move paddleOne based on user input, arrow up and down keys
         if (listener.DirectionUp){
-            paddleSpeed.y = 0.1f;
+            paddleSpeed.y = 0.05f;
         }
         if (listener.DirectionDown){
-            paddleSpeed.y = -0.1f;
+            paddleSpeed.y = -0.05f;
         }
         if (!listener.DirectionUp && !listener.DirectionDown){
             paddleSpeed.y = 0;
         }
         paddleOne->position.add(paddleSpeed);
-
     return 0;
 
 }
