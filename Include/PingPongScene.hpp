@@ -21,10 +21,10 @@ public:
     GLRenderer renderer_;
     std::shared_ptr<PerspectiveCamera> camera_;
     std::shared_ptr<Scene> scene_;
-    float ballRadius_ = 0.1;
+    float ballRadius_ = 0.5;
     float paddleWidth_ = 0.1;
     float paddleDepth_= 0.1;
-    float paddleHeight_ = 1.8;
+    float paddleHeight_ = 10;
 
 private:
     std::shared_ptr<Group> group_;
@@ -35,7 +35,7 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     renderer_.setClearColor(Color::black);
     renderer_.enableTextRendering();
     camera_ = PerspectiveCamera::create();
-    camera_->position.z = 10;
+    camera_->position.z = 120;
     scene_ = Scene::create();
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
@@ -49,12 +49,12 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     auto paddleGeometry = BoxGeometry::create(paddleWidth_,paddleHeight_,paddleDepth_);
     auto paddleOne = Mesh::create(paddleGeometry,material);
     paddleOne->name = ("paddleOne");
-    paddleOne->position.x = -3.5;
+    paddleOne->position.x = -60;
     group_->add(paddleOne);
 
     auto paddleTwo = Mesh::create(paddleGeometry,material);
     paddleTwo->name = ("paddleTwo");
-    paddleTwo->position.x = 3.5;
+    paddleTwo->position.x = 60;
     group_->add(paddleTwo);
 
     scene_->add(group_);

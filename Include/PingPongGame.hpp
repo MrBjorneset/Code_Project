@@ -33,7 +33,7 @@ public:
 
 class Game{
 public:
-    Game() : PingPongScene_(PingPongScene::create()), velocity(0.03,0.03,0){
+    Game() : PingPongScene_(PingPongScene::create()), velocity(0.15,0.15,0){
     };
     int update();
     void init();
@@ -52,22 +52,19 @@ void Game::paddleMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
     auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
-    paddleOne->position.x = -3.5;
-    paddleTwo->position.x =  3.5;
-
     //Move paddleTwo based on ball direction
     if (ball->position.y > paddleTwo->position.y){
-        paddleTwo->position.y += 0.05f;
+        paddleTwo->position.y += 0.5f;
     }
     else if(ball->position.y < paddleTwo->position.y){
-        paddleTwo->position.y -= 0.05f;
+        paddleTwo->position.y -= 0.5f;
     }
     //Move paddleOne based on user input, arrow up and down keys
     if (listener.DirectionUp){
-        paddleSpeed.y = 0.05f;
+        paddleSpeed.y = 0.5f;
     }
     if (listener.DirectionDown){
-        paddleSpeed.y = -0.05f;
+        paddleSpeed.y = -0.5f;
     }
     if (!listener.DirectionUp && !listener.DirectionDown){
         paddleSpeed.y = 0;
@@ -76,12 +73,15 @@ void Game::paddleMovement(){
 }
 
 void Game::CheckCollision(){
+
+    //Retrieve the 3D-Objects
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
-    //Update the ball position based on velocity
-    ball->position.add(velocity);
-    //Check for collision with the paddles and reflect ball velocity accordingly
     auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
+
+    //Update the ball position based on velocity
+    ball->position.add(velocity);
+
     // Check collision with paddle one
     if (ball->position.x - PingPongScene_->ballRadius_ < paddleOne->position.x + PingPongScene_->paddleWidth_ / 2 &&
         ball->position.x + PingPongScene_->ballRadius_ > paddleOne->position.x - PingPongScene_->paddleWidth_ / 2 &&
@@ -107,24 +107,24 @@ void Game::CheckCollision(){
     }
 
     //Check for collision with the walls and reflect the ball accordingly
-    if (ball->position.y < -5.0f || ball->position.y > 5.0f) {
+    if (ball->position.y < -60.0f || ball->position.y > 60.0f) {
         velocity.y *= -1;
     }
     //Check if the ball hits the left and right walls, give point to correct team and reset the ball position to (x=0, y=0, z=0)
-    if (ball->position.x < -5.0f){
+    if (ball->position.x < -60.0f){
         P1Score_ ++;
         std::string P1Score = std::to_string(P1Score_);
         PingPongScene_->renderer_.textHandle(P1Score).setPosition(1400, PingPongScene_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
-        velocity = Vector3(0.03,0.03,0);
+        velocity = Vector3(0.15,0.15,0);
         velocity.x *= -1;
     }
-    if (ball->position.x > 5.0f){
+    if (ball->position.x > 60.0f){
         P2Score_ ++;
         std::string  P2Score = std::to_string(P2Score_);
         PingPongScene_->renderer_.textHandle(P2Score).setPosition(400,PingPongScene_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
-        velocity = Vector3(0.03,0.03,0);
+        velocity = Vector3(0.15,0.15,0);
         velocity.x *= -1;
     }
 }
