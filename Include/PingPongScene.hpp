@@ -25,8 +25,10 @@ public:
     float paddleWidth_ = 0.1;
     float paddleDepth_= 0.1;
     float paddleHeight_ = 1.8;
+
 private:
     std::shared_ptr<Group> group_;
+
 };
 PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000}).antialiasing(8)), renderer_(canvas_), group_(Group::create())
 {

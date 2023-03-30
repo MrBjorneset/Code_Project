@@ -33,7 +33,8 @@ public:
 
 class Game{
 public:
-    Game() : PingPongScene_(PingPongScene::create()), velocity(0.03,0.03,0){};
+    Game() : PingPongScene_(PingPongScene::create()), velocity(0.03,0.03,0){
+    };
     int update();
     void init();
     int P1Score_ = 0;
@@ -43,6 +44,7 @@ private:
     Vector3 paddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
     MyListener listener;
+
 };
 
 int Game::update() {
