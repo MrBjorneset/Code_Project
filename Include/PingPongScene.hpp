@@ -49,10 +49,12 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     auto paddleGeometry = BoxGeometry::create(paddleWidth_,paddleHeight_,paddleDepth_);
     auto paddleOne = Mesh::create(paddleGeometry,material);
     paddleOne->name = ("paddleOne");
+    paddleOne->position.x = -3.5;
     group_->add(paddleOne);
 
     auto paddleTwo = Mesh::create(paddleGeometry,material);
     paddleTwo->name = ("paddleTwo");
+    paddleTwo->position.x = 3.5;
     group_->add(paddleTwo);
 
     scene_->add(group_);
