@@ -11,22 +11,40 @@ class MyListener : public KeyListener{
 public:
     bool DirectionUp = false;
     bool DirectionDown = false;
+    bool singelPlayer = false;
+    bool multiPlayer = false;
+    bool started = false;
+    bool restart = false;
 
     void onKeyPressed(KeyEvent evt) override {
-        if (evt.key == 265) { //up arrow key
+        if (evt.key == 265) {           //up arrow key
             DirectionUp = true;
         }
-        if (evt.key == 264) { //down arrow key
+        if (evt.key == 264) {      //down arrow key
             DirectionDown = true;
+        }
+        if (evt.key == 49 ){       //"1" key
+            singelPlayer = true;
+        }
+        if (evt.key == 50 ){       //"2" key
+            multiPlayer = true;
+        }
+        if (evt.key == 82){        //"r" key
+            restart = true;
         }
     }
 
     void onKeyReleased(KeyEvent evt) override{
-        if (evt.key == 265){ //up arrow Key
+        if (evt.key == 265){            //up arrow Key
             DirectionUp = false;
         }
-        if (evt.key == 264){ //down arrow key
+        if (evt.key == 264){       //down arrow key
             DirectionDown = false;
+        }
+        if (evt.key == 82){        //"r" key
+            singelPlayer = false;
+            multiPlayer = false;
+            restart = false;
         }
     }
 };
@@ -35,7 +53,7 @@ class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.15,0.15,0){
     };
-    int update();
+    void update();
     void init();
     void CheckCollision();
     void paddleMovement();
@@ -48,6 +66,8 @@ private:
     MyListener listener;
 
 };
+
+//Function to move paddles
 void Game::paddleMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
     auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
@@ -72,6 +92,7 @@ void Game::paddleMovement(){
     paddleOne->position.add(paddleSpeed);
 }
 
+//Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(){
 
     //Retrieve the 3D-Objects
@@ -95,7 +116,7 @@ void Game::CheckCollision(){
     }
 
     // Check collision with paddle two
-    if (ball->position.x - PingPongScene_->ballRadius_ < paddleTwo->position.x + PingPongScene_->paddleWidth_ / 2 &&
+    else if (ball->position.x - PingPongScene_->ballRadius_ < paddleTwo->position.x + PingPongScene_->paddleWidth_ / 2 &&
         ball->position.x + PingPongScene_->ballRadius_ > paddleTwo->position.x - PingPongScene_->paddleWidth_ / 2 &&
         ball->position.y - PingPongScene_->ballRadius_ < paddleTwo->position.y + PingPongScene_->paddleHeight_ / 2 &&
         ball->position.y + PingPongScene_->ballRadius_ > paddleTwo->position.y - PingPongScene_->paddleHeight_ / 2 &&
@@ -107,11 +128,11 @@ void Game::CheckCollision(){
     }
 
     //Check for collision with the walls and reflect the ball accordingly
-    if (ball->position.y < -60.0f || ball->position.y > 60.0f) {
+    else if (ball->position.y < -60.0f || ball->position.y > 60.0f) {
         velocity.y *= -1;
     }
     //Check if the ball hits the left and right walls, give point to correct team and reset the ball position to (x=0, y=0, z=0)
-    if (ball->position.x < -60.0f){
+    else if (ball->position.x < -60.0f){
         P1Score_ ++;
         std::string P1Score = std::to_string(P1Score_);
         PingPongScene_->renderer_.textHandle(P1Score).setPosition(1400, PingPongScene_->canvas_.getSize().height -1000);
@@ -119,7 +140,7 @@ void Game::CheckCollision(){
         velocity = Vector3(0.15,0.15,0);
         velocity.x *= -1;
     }
-    if (ball->position.x > 60.0f){
+    else if (ball->position.x > 60.0f){
         P2Score_ ++;
         std::string  P2Score = std::to_string(P2Score_);
         PingPongScene_->renderer_.textHandle(P2Score).setPosition(400,PingPongScene_->canvas_.getSize().height -1000);
@@ -129,12 +150,13 @@ void Game::CheckCollision(){
     }
 }
 
-int Game::update() {
+//Function to update the game using previously create functions
+ void Game::update() {
     Game::CheckCollision();
     Game::paddleMovement();
-    return 0;
 
 }
+//Function for initializing the game using the update function
 void Game::init() {
     PingPongScene_->canvas_.addKeyListener(&listener);
     PingPongScene_->canvas_.onWindowResize([&](WindowSize){
@@ -144,7 +166,6 @@ void Game::init() {
 
     PingPongScene_->canvas_.animate([&]{
         Game::update();
-        std::chrono::milliseconds (16);
         PingPongScene_->renderer_.render(PingPongScene_->scene_,PingPongScene_->camera_);
     });
 }
