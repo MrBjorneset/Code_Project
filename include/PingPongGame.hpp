@@ -93,6 +93,7 @@ void Game::menu() {
     PingPongScene_->renderer_.textHandle("2 for Multiplayer");
 
 }
+
 //Function to move paddles in singelplayer mode
 void Game::singelPlayerMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
@@ -218,6 +219,7 @@ void Game::CheckCollision(){
     }
 
 }
+
 //Function for initializing the game using the update function
 void Game::init() {
     PingPongScene_->canvas_.addKeyListener(&listener);
