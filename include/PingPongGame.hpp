@@ -9,13 +9,13 @@
 using namespace threepp;
 class MyListener : public KeyListener{
 public:
-    bool p1DirectionUp;
-    bool p1DirectionDown;
-    bool p2DirectionUp;
-    bool p2DirectionDown;
-    bool singelPlayer;
-    bool multiPlayer;
-    bool restart;
+    bool p1DirectionUp = false;
+    bool p1DirectionDown = false;
+    bool p2DirectionUp = false;
+    bool p2DirectionDown = false;
+    bool singelPlayer = false;
+    bool multiPlayer = false;
+    bool restart = false;
 
     void onKeyPressed(KeyEvent evt) override {
         if (evt.key == 87) {        //"w" key
@@ -84,6 +84,8 @@ private:
 };
 //Function for opening and closing the startup menu
 void Game::menu() {
+    P1Score_ = 0;
+    P2Score_ = 0;
     PingPongScene_->renderer_.textHandle("");
 
 
@@ -100,7 +102,7 @@ void Game::singelPlayerMovement(){
     else if(ball->position.y < paddleTwo->position.y){
         paddleTwo->position.y -= 0.5f;
     }
-    //Move paddleOne based on user input, arrow up and down keys
+    //Move paddleOne based on user input, "w" and "s" keys
     else if (listener.p1DirectionUp){
         p1PaddleSpeed.y = 0.5f;
     }
@@ -115,10 +117,9 @@ void Game::singelPlayerMovement(){
 
 //Function to move paddles in multiplayer mode
 void Game::multiPlayerMovement() {
-    auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
     auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
-    //Move paddleOne based on user input, arrow up and down keys
+    //Move paddleOne based on user input, "w" and "s" keys
     if (listener.p1DirectionUp){
         p1PaddleSpeed.y = 0.5f;
     }
@@ -140,7 +141,7 @@ void Game::multiPlayerMovement() {
     else if (!listener.p2DirectionUp && !listener.p2DirectionDown){
         p2PaddleSpeed.y = 0;
     }
-    paddleOne->position.add(p2PaddleSpeed);
+    paddleTwo->position.add(p2PaddleSpeed);
 }
 
 //Function for checking collision between wall, paddle and ball.
@@ -203,13 +204,15 @@ void Game::CheckCollision(){
 
 //Function to update the game using previously create functions
  void Game::update() {
-    Game::CheckCollision();
-    if (!listener.singelPlayer) {
+    if (listener.singelPlayer) {
+        Game::CheckCollision();
         Game::singelPlayerMovement();
     }
     else if (listener.multiPlayer){
+        Game::CheckCollision();
         Game::multiPlayerMovement();
     }
+
 
 }
 //Function for initializing the game using the update function

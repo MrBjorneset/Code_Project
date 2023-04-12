@@ -1,5 +1,5 @@
 
-#include "Include/PingPongGame.hpp"
+#include "include/PingPongGame.hpp"
 
 
 using namespace threepp;

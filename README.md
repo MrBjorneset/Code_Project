@@ -1,13 +1,19 @@
 # PING PONG GAME
 This is a simple implementation of the classic PingPong Game using the THREEPP library
-# How to Play
-the game is a singel player game, The player controls the paddle on the left of the screen
-and a function controls the other paddle. The goal of the game is to score points by 
-getting past the other paddle 
 
-The player uses the ↑ and ↓ arrow keys to move the paddle up and down, respectively
- 
-# FILES
+## How to Play
+The game can be chosen to be either as a singel player game or a multiplayer game.
+
+In the singelplayer mode the player controls the paddle on the left of the screen and moves the paddle using 
+the "W" and "S" keys, and a function controls the other paddle. 
+
+In the multiplayer mode you have one player for each paddle. Where one player controls the left paddle using
+the "W" and "S" keys, and another player controls the right side paddle using ↑ and ↓ arrow keys.
+
+The goal of the game is to score points by getting past the other paddle 
+
+
+## FILES
 In this project we use two header files PingPongScene.hpp, PingPongGame.hpp and one 
 main.cpp. 
 
