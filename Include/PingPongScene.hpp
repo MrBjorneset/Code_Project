@@ -59,8 +59,8 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
 
     scene_->add(group_);
     //Creating the ScoreBoard
-    auto &ScoreBoard = renderer_.textHandle("Score");
-    ScoreBoard.setPosition(canvas_.getSize().width * 1 / 2, canvas_.getSize().height * (-1/2) );
+    auto &scoreBoard = renderer_.textHandle("Score");
+    scoreBoard.setPosition(canvas_.getSize().width * 1 / 2, canvas_.getSize().height * (-1/2) );
 
 }
 std::shared_ptr<Group> PingPongScene::getGroup(){

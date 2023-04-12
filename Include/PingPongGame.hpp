@@ -9,19 +9,26 @@
 using namespace threepp;
 class MyListener : public KeyListener{
 public:
-    bool DirectionUp = false;
-    bool DirectionDown = false;
-    bool singelPlayer = false;
-    bool multiPlayer = false;
-    bool started = false;
-    bool restart = false;
+    bool p1DirectionUp;
+    bool p1DirectionDown;
+    bool p2DirectionUp;
+    bool p2DirectionDown;
+    bool singelPlayer;
+    bool multiPlayer;
+    bool restart;
 
     void onKeyPressed(KeyEvent evt) override {
-        if (evt.key == 265) {           //up arrow key
-            DirectionUp = true;
+        if (evt.key == 87) {        //"w" key
+            p1DirectionUp = true;
+        }
+        if (evt.key == 83) {        //"s" key
+            p1DirectionDown = true;
+        }
+        if (evt.key == 265) {       //up arrow key
+            p2DirectionUp = true;
         }
         if (evt.key == 264) {      //down arrow key
-            DirectionDown = true;
+            p2DirectionDown = true;
         }
         if (evt.key == 49 ){       //"1" key
             singelPlayer = true;
@@ -35,11 +42,17 @@ public:
     }
 
     void onKeyReleased(KeyEvent evt) override{
-        if (evt.key == 265){            //up arrow Key
-            DirectionUp = false;
+        if (evt.key == 87) {        //"w" key
+            p1DirectionUp = false;
+        }
+        if (evt.key == 83) {        //"s" key
+            p1DirectionDown = false;
+        }
+        if (evt.key == 265){       //up arrow Key
+            p2DirectionUp = false;
         }
         if (evt.key == 264){       //down arrow key
-            DirectionDown = false;
+            p2DirectionDown = false;
         }
         if (evt.key == 82){        //"r" key
             singelPlayer = false;
@@ -56,19 +69,27 @@ public:
     void update();
     void init();
     void CheckCollision();
-    void paddleMovement();
+    void singelPlayerMovement();
+    void multiPlayerMovement();
+    void menu();
     int P1Score_ = 0;
     int P2Score_ = 0;
 private:
     Vector3 velocity;
-    Vector3 paddleSpeed;
+    Vector3 p1PaddleSpeed;
+    Vector3 p2PaddleSpeed;
     std::shared_ptr<PingPongScene> PingPongScene_;
     MyListener listener;
 
 };
+//Function for opening and closing the startup menu
+void Game::menu() {
+    PingPongScene_->renderer_.textHandle("");
 
-//Function to move paddles
-void Game::paddleMovement(){
+
+}
+//Function to move paddles in singelplayer mode
+void Game::singelPlayerMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
     auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
@@ -80,16 +101,46 @@ void Game::paddleMovement(){
         paddleTwo->position.y -= 0.5f;
     }
     //Move paddleOne based on user input, arrow up and down keys
-    if (listener.DirectionUp){
-        paddleSpeed.y = 0.5f;
+    else if (listener.p1DirectionUp){
+        p1PaddleSpeed.y = 0.5f;
     }
-    if (listener.DirectionDown){
-        paddleSpeed.y = -0.5f;
+    else if (listener.p1DirectionDown){
+        p1PaddleSpeed.y = -0.5f;
     }
-    if (!listener.DirectionUp && !listener.DirectionDown){
-        paddleSpeed.y = 0;
+    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
+        p1PaddleSpeed.y = 0;
     }
-    paddleOne->position.add(paddleSpeed);
+    paddleOne->position.add(p1PaddleSpeed);
+}
+
+//Function to move paddles in multiplayer mode
+void Game::multiPlayerMovement() {
+    auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
+    auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
+    auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
+    //Move paddleOne based on user input, arrow up and down keys
+    if (listener.p1DirectionUp){
+        p1PaddleSpeed.y = 0.5f;
+    }
+    else if (listener.p1DirectionDown){
+        p1PaddleSpeed.y = -0.5f;
+    }
+    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
+        p1PaddleSpeed.y = 0;
+    }
+    paddleOne->position.add(p1PaddleSpeed);
+
+    //Move paddleTwo based on user input, arrow up and down keys
+    if (listener.p2DirectionUp){
+        p2PaddleSpeed.y = 0.5f;
+    }
+    else if (listener.p2DirectionDown){
+        p2PaddleSpeed.y = -0.5f;
+    }
+    else if (!listener.p2DirectionUp && !listener.p2DirectionDown){
+        p2PaddleSpeed.y = 0;
+    }
+    paddleOne->position.add(p2PaddleSpeed);
 }
 
 //Function for checking collision between wall, paddle and ball.
@@ -153,7 +204,12 @@ void Game::CheckCollision(){
 //Function to update the game using previously create functions
  void Game::update() {
     Game::CheckCollision();
-    Game::paddleMovement();
+    if (!listener.singelPlayer) {
+        Game::singelPlayerMovement();
+    }
+    else if (listener.multiPlayer){
+        Game::multiPlayerMovement();
+    }
 
 }
 //Function for initializing the game using the update function
