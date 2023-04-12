@@ -103,7 +103,7 @@ void Game::singelPlayerMovement(){
         paddleTwo->position.y -= 0.5f;
     }
     //Move paddleOne based on user input, "w" and "s" keys
-    else if (listener.p1DirectionUp){
+    if (listener.p1DirectionUp){
         p1PaddleSpeed.y = 0.5f;
     }
     else if (listener.p1DirectionDown){
@@ -212,7 +212,6 @@ void Game::CheckCollision(){
         Game::CheckCollision();
         Game::multiPlayerMovement();
     }
-
 
 }
 //Function for initializing the game using the update function
