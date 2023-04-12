@@ -82,12 +82,15 @@ private:
     MyListener listener;
 
 };
+
 //Function for opening and closing the startup menu
 void Game::menu() {
     P1Score_ = 0;
     P2Score_ = 0;
-    PingPongScene_->renderer_.textHandle("");
-
+    PingPongScene_->renderer_.textHandle("Welcome to Ping Pong!");
+    PingPongScene_->renderer_.textHandle("Select a game mode:");
+    PingPongScene_->renderer_.textHandle("1 for Singelplayer");
+    PingPongScene_->renderer_.textHandle("2 for Multiplayer");
 
 }
 //Function to move paddles in singelplayer mode
@@ -204,6 +207,7 @@ void Game::CheckCollision(){
 
 //Function to update the game using previously create functions
  void Game::update() {
+    //Game::menu();
     if (listener.singelPlayer) {
         Game::CheckCollision();
         Game::singelPlayerMovement();
