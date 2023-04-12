@@ -1,9 +1,9 @@
-"C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:\Kode\vcpkg/scripts/buildsystems/vcpkg.cmake -DCPKG_MANIFEST_FEATURES=imgui -G Ninja -S C:\Kode\GitHub\C++\Code_Project -B C:\Kode\GitHub\C++\Code_Project\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:\Kode\vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S C:\Kode\GitHub\C++\Code_Project -B C:\Kode\GitHub\C++\Code_Project\cmake-build-debug
 -- Running vcpkg install
 Detecting compiler hash for triplet x64-windows...
 All requested packages are currently installed.
-Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 480.9 us. Use --debug to see more details.
-Total install time: 2.854 ms
+Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 172.8 us. Use --debug to see more details.
+Total install time: 196.3 us
 imgui provides CMake targets:
 
     # this is heuristically generated, and may not be correct

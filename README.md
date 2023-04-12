@@ -1,6 +1,6 @@
 # PING PONG GAME
 This is a simple implementation of the classic PingPong Game using the THREEPP library
-
+![img.png](img.png)
 ## How to Play
 The game can be chosen to be either as a singel player game or a multiplayer game.
 

@@ -50,16 +50,16 @@ The CXX compiler identification is MSVC, found in "C:/Kode/GitHub/C++/Code_Proje
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_c1540 && [1/2] Building C object CMakeFiles\cmTC_c1540.dir\CMakeCCompilerABI.c.obj
-[2/2] Linking C executable cmTC_c1540.exe
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_d0ffe && [1/2] Building C object CMakeFiles\cmTC_d0ffe.dir\CMakeCCompilerABI.c.obj
+[2/2] Linking C executable cmTC_d0ffe.exe
 
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_44a6e && [1/2] Building CXX object CMakeFiles\cmTC_44a6e.dir\CMakeCXXCompilerABI.cpp.obj
-[2/2] Linking CXX executable cmTC_44a6e.exe
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_68629 && [1/2] Building CXX object CMakeFiles\cmTC_68629.dir\CMakeCXXCompilerABI.cpp.obj
+[2/2] Linking CXX executable cmTC_68629.exe
 
 
 
