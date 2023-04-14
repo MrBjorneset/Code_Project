@@ -41,41 +41,41 @@ include CMakeFiles\rules.ninja
 
 cmake_ninja_workdir = C$:\Kode\GitHub\C++\Code_Project\cmake-build-debug\
 # =============================================================================
-# Object build statements for EXECUTABLE target test
+# Object build statements for EXECUTABLE target PingPong
 
 
 #############################################
-# Order-only phony target for test
+# Order-only phony target for PingPong
 
-build cmake_object_order_depends_target_test: phony || CMakeFiles\test.dir
+build cmake_object_order_depends_target_PingPong: phony || CMakeFiles\PingPong.dir
 
-build CMakeFiles\test.dir\main.cpp.obj: CXX_COMPILER__test_Debug C$:\Kode\GitHub\C++\Code_Project\main.cpp || cmake_object_order_depends_target_test
+build CMakeFiles\PingPong.dir\main.cpp.obj: CXX_COMPILER__PingPong_Debug C$:\Kode\GitHub\C++\Code_Project\main.cpp || cmake_object_order_depends_target_PingPong
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   INCLUDES = -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
-  OBJECT_DIR = CMakeFiles\test.dir
-  OBJECT_FILE_DIR = CMakeFiles\test.dir
-  TARGET_COMPILE_PDB = CMakeFiles\test.dir\
-  TARGET_PDB = test.pdb
+  OBJECT_DIR = CMakeFiles\PingPong.dir
+  OBJECT_FILE_DIR = CMakeFiles\PingPong.dir
+  TARGET_COMPILE_PDB = CMakeFiles\PingPong.dir\
+  TARGET_PDB = PingPong.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target test
+# Link build statements for EXECUTABLE target PingPong
 
 
 #############################################
-# Link the executable test.exe
+# Link the executable PingPong.exe
 
-build test.exe: CXX_EXECUTABLE_LINKER__test_Debug CMakeFiles\test.dir\main.cpp.obj | vcpkg_installed\x64-windows\debug\lib\threepp.lib
+build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.dir\main.cpp.obj | vcpkg_installed\x64-windows\debug\lib\threepp.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\threepp.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = CMakeFiles\test.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/test.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
+  OBJECT_DIR = CMakeFiles\PingPong.dir
+  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/PingPong.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\test.dir\
-  TARGET_FILE = test.exe
-  TARGET_IMPLIB = test.lib
-  TARGET_PDB = test.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\PingPong.dir\
+  TARGET_FILE = PingPong.exe
+  TARGET_IMPLIB = PingPong.lib
+  TARGET_PDB = PingPong.pdb
 
 
 #############################################
@@ -103,7 +103,7 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build test: phony test.exe
+build PingPong: phony PingPong.exe
 
 # =============================================================================
 # Folder targets.
@@ -113,7 +113,7 @@ build test: phony test.exe
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug
 
-build all: phony test.exe
+build all: phony PingPong.exe
 
 # =============================================================================
 # Built-in targets
