@@ -5,8 +5,7 @@
 #ifndef THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
 #define THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP
 #include "threepp/threepp.hpp"
-#include <chrono>
-#include <thread>
+
 
 using namespace threepp;
 
