@@ -3,7 +3,6 @@ project(Code_Project)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(threepp CONFIG REQUIRED)
 # Stuff for testing
 include(FetchContent)
 FETCHCONTENT_DECLARE(
@@ -13,7 +12,17 @@ FETCHCONTENT_DECLARE(
 )
 FETCHCONTENT_MAKEAVAILABLE(Catch2)
 enable_testing()
-add_subdirectory(tests)
 #
-add_executable(PingPong main.cpp)
+find_package(threepp CONFIG REQUIRED)
+add_executable(PingPong main.cpp tests/test.cpp)
 target_link_libraries(PingPong PRIVATE threepp::threepp)
+
+
+find_package(catch2 REQUIRED)
+add_executable(tests test.cpp)
+target_link_libraries(tests PRIVATE my_library Catch2::Catch2)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
+
