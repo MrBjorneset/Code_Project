@@ -82,7 +82,7 @@ private:
     Vector3 p2PaddleSpeed;
 
 };
-
+/*
 //Function for opening and closing the startup menu
 void Game::menu() {
     P1Score_ = 0;
@@ -93,7 +93,7 @@ void Game::menu() {
                                          "2 for Multiplayer");
     menu.setPosition(PingPongScene_->canvas_.getSize().width*1/2,500);
 }
-
+*/
 //Function to move paddles in singelplayer mode
 void Game::singelPlayerMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
@@ -191,7 +191,7 @@ void Game::CheckCollision(){
     else if (ball->position.x < -60.0f){
         P1Score_ ++;
         std::string P1Score = std::to_string(P1Score_);
-        PingPongScene_->renderer_.textHandle(P1Score).setPosition(1400, PingPongScene_->canvas_.getSize().height -1000);
+        //PingPongScene_->renderer_.textHandle(P1Score).setPosition(1400, PingPongScene_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
         velocity = Vector3(0.15,0.15,0);
         velocity.x *= -1;
@@ -199,7 +199,7 @@ void Game::CheckCollision(){
     else if (ball->position.x > 60.0f){
         P2Score_ ++;
         std::string  P2Score = std::to_string(P2Score_);
-        PingPongScene_->renderer_.textHandle(P2Score).setPosition(400,PingPongScene_->canvas_.getSize().height -1000);
+        //PingPongScene_->renderer_.textHandle(P2Score).setPosition(400,PingPongScene_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
         velocity = Vector3(0.15,0.15,0);
         velocity.x *= -1;
@@ -208,7 +208,7 @@ void Game::CheckCollision(){
 
 //Function to update the game using previously create functions
  void Game::update() {
-    Game::menu();
+    //Game::menu();
     if (listener.singelPlayer) {
         Game::CheckCollision();
         Game::singelPlayerMovement();
@@ -219,7 +219,7 @@ void Game::CheckCollision(){
     }
 
 }
-
+/*
 //Function for initializing the game using the update function
 void Game::init() {
     PingPongScene_->canvas_.addKeyListener(&listener);
@@ -233,5 +233,5 @@ void Game::init() {
         PingPongScene_->renderer_.render(PingPongScene_->scene_,PingPongScene_->camera_);
     });
 }
-
+*/
 #endif //CODE_PROJECT_HEADER1_HPP
