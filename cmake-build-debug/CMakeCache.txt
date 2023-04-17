@@ -214,6 +214,29 @@ Code_Project_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Code_Project_SOURCE_DIR:STATIC=C:/Kode/GitHub/C++/Code_Project
 
+//Directory under which to collect all populated content
+FETCHCONTENT_BASE_DIR:PATH=C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/_deps
+
+//Disables all attempts to download or update content and assumes
+// source dirs already exist
+FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
+
+//Enables QUIET option for all content population
+FETCHCONTENT_QUIET:BOOL=ON
+
+//When not empty, overrides where to find pre-populated content
+// for Catch2
+FETCHCONTENT_SOURCE_DIR_CATCH2:PATH=
+
+//Enables UPDATE_DISCONNECTED behavior for all content population
+FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of Catch2
+FETCHCONTENT_UPDATES_DISCONNECTED_CATCH2:BOOL=OFF
+
+//Git command line client
+GIT_EXECUTABLE:FILEPATH=C:/Program Files/Git/cmd/git.exe
+
 //Automatically copy dependencies into the output directory for
 // executables.
 VCPKG_APPLOCAL_DEPS:BOOL=ON
@@ -286,7 +309,7 @@ Z_VCPKG_PWSH_PATH:FILEPATH=Z_VCPKG_PWSH_PATH-NOTFOUND
 _VCPKG_INSTALLED_DIR:PATH=C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed
 
 //The directory containing a CMake configuration file for catch2.
-catch2_DIR:PATH=catch2_DIR-NOTFOUND
+catch2_DIR:PATH=C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/share/Catch2
 
 //The directory containing a CMake configuration file for glad.
 glad_DIR:PATH=C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/share/glad
@@ -436,6 +459,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_TOOLCHAIN_FILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GIT_EXECUTABLE
+GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: VCPKG_VERBOSE
 VCPKG_VERBOSE-ADVANCED:INTERNAL=1
 //Making sure VCPKG_MANIFEST_MODE doesn't change
