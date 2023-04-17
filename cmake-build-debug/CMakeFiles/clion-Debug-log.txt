@@ -1,9 +1,9 @@
-"C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:\Kode\vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S C:\Kode\GitHub\C++\Code_Project -B C:\Kode\GitHub\C++\Code_Project\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:/Kode/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S C:\Kode\GitHub\C++\Code_Project -B C:\Kode\GitHub\C++\Code_Project\cmake-build-debug
 -- Running vcpkg install
 Detecting compiler hash for triplet x64-windows...
 All requested packages are currently installed.
-Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 175.7 us. Use --debug to see more details.
-Total install time: 198.7 us
+Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 194 us. Use --debug to see more details.
+Total install time: 230.6 us
 imgui provides CMake targets:
 
     # this is heuristically generated, and may not be correct
@@ -17,11 +17,7 @@ threepp provides CMake targets:
     target_link_libraries(main PRIVATE glfw::glfw threepp::threepp)
 
 -- Running vcpkg install - done
-CMake Error at C:/Kode/vcpkg/scripts/buildsystems/vcpkg.cmake:843 (_find_package):
-  By not providing "Findcatch2.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "catch2", but
-  CMake did not find one.
-
+CMake Error at C:/Kode/vcpkg/scripts/buildsystems/vcpkg.cmake:852 (_find_package):
   Could not find a package configuration file provided by "catch2" with any
   of the following names:
 
@@ -33,7 +29,7 @@ CMake Error at C:/Kode/vcpkg/scripts/buildsystems/vcpkg.cmake:843 (_find_package
   provides a separate development package or SDK, be sure it has been
   installed.
 Call Stack (most recent call first):
-  CMakeLists.txt:21 (find_package)
+  CMakeLists.txt:11 (find_package)
 
 
 -- Configuring incomplete, errors occurred!

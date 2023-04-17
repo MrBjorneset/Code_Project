@@ -11,7 +11,7 @@ Package: vcpkg-cmake
 Version: 2022-12-22
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 1ed63e82472872ab151ed59e5c3f494fc3470962c64cefe2a97ce9a570e4f975
+Abi: bf26f84c8db05b896fbfdac06f8c2913c862cad435e248dfce594bd9e50682e6
 Type: Port
 Status: install ok installed
 
@@ -21,7 +21,7 @@ Port-Version: 2
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: c0febd09efcef911aa580bd20a839fcc21c2b4d23ceace6f1da65fccfecf0e24
+Abi: 2fbdc5ad89ee6dc1e02049bc57df43ca6131b9e8295f80f2ec2f63b55867fe68
 Description: GLFW is a free, Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan application development. It provides a simple, platform-independent API for creating windows, contexts and surfaces, reading input, handling events, etc.
 Type: Port
 Status: install ok installed
@@ -31,7 +31,7 @@ Version: 1.89.2
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: deb261c8292a245538f9a2539b1e1f893c91cb23da8b3409745bf7d4108d402f
+Abi: 22aaaa0ea577503b96b200f972c4c98fbcb7da42c49018b68dac10f802cc79d7
 Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
 Type: Port
 Status: install ok installed
@@ -86,7 +86,7 @@ Version: 0.1.36
 Depends: egl-registry, opengl-registry, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 299499409049b6b3a966716dfea89f7b74789420fed691495e48d399b603035f
+Abi: d05ac0fe3b7a5d30296513a6d3d4b99e1f171db90a3bfda7be39b29d9c7d12c3
 Description: Multi-Language Vulkan/GL/GLES/EGL/GLX/WGL Loader-Generator based on the official specs.
 Type: Port
 Default-Features: loader
@@ -105,7 +105,7 @@ Version: 2023-02-21
 Depends: glad, glfw3, stb, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: ecd848c84fd2afde2b0001a6211b01c0c047afea29bb3260e2c13b16ef634519
+Abi: 2a9f0d97aafd7c610956336e7cb9eecaa535c5eaf52270eefc4f15c48a5968f1
 Description: C++17 port of three.js
 Type: Port
 Status: install ok installed

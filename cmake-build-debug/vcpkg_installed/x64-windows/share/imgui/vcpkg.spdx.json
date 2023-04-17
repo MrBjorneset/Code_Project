@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-windows-1.89.2-9c12d4ef-037f-4fd5-902b-f3678728f170",
-  "name": "imgui:x64-windows@1.89.2 deb261c8292a245538f9a2539b1e1f893c91cb23da8b3409745bf7d4108d402f",
+  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-windows-1.89.2-d085349f-655f-44ee-acae-f37515232a3d",
+  "name": "imgui:x64-windows@1.89.2 22aaaa0ea577503b96b200f972c4c98fbcb7da42c49018b68dac10f802cc79d7",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-8a88d63f241d391772fbde69af9cab96c3c64c75"
     ],
-    "created": "2023-02-15T15:42:16Z"
+    "created": "2023-04-17T11:28:05Z"
   },
   "relationships": [
     {
@@ -73,7 +73,7 @@
       "name": "imgui",
       "SPDXID": "SPDXRef-port",
       "versionInfo": "1.89.2",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg@b1a7fdb074aed731c5c8ef09b369547e6371ac03",
       "homepage": "https://github.com/ocornut/imgui",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -84,7 +84,7 @@
     {
       "name": "imgui:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "deb261c8292a245538f9a2539b1e1f893c91cb23da8b3409745bf7d4108d402f",
+      "versionInfo": "22aaaa0ea577503b96b200f972c4c98fbcb7da42c49018b68dac10f802cc79d7",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
