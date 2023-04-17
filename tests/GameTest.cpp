@@ -6,7 +6,7 @@
 #include <catch.hpp>
 #include "PingPongScene.hpp"
 #include "PingPongGame.hpp"
-/*
+
 TEST_CASE("GameTest") {
     SECTION("SingelPlayerMovement") {
         Game game;
@@ -34,4 +34,3 @@ TEST_CASE("GameTest") {
         REQUIRE(game.P2Score_ == 0);
     }
 }
- */
