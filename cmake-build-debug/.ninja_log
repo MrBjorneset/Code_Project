@@ -1,9 +1,6 @@
 # ninja log v5
-1	3088	7030066299964089	CMakeFiles/test.dir/main.cpp.obj	2e8da86ba5ee9aff
-2	488	7034286469775792	CMakeFiles/PingPong.dir/tests/test.cpp.obj	c5e4ecd31cf187b2
 3089	3980	7030066302651531	test.exe	9a58f82ad72107e1
-1	2750	7034293576095119	build.ninja	43e391bd9c6a27e2
+1	2845	7034376305739977	build.ninja	43e391bd9c6a27e2
 0	453	7031929335079993	test/CMakeFiles/test.dir/main.cpp.obj	f79e99f8117dcff2
 2	2916	7031950602044927	CMakeFiles/PingPong.dir/main.cpp.obj	bb74c96f02de3476
 489	1738	7034286475414565	PingPong.exe	c5aea1d677f720ef
-1	2845	7034293576095119	build.ninja	43e391bd9c6a27e2
