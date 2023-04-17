@@ -62,7 +62,7 @@ PingPongScene::PingPongScene() :  canvas_(Canvas::Parameters().size({1820,1000})
     scoreBoard.setPosition(canvas_.getSize().width * 1 / 2, canvas_.getSize().height * (-1/2) );
 
 }
-std::shared_ptr<Group> PingPongScene::getGroup(){
+std::shared_ptr<Group> PingPongScene::getGroup() {
     return group_;
 }
 
