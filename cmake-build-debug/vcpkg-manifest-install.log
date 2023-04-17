@@ -1,12 +1,12 @@
 Detecting compiler hash for triplet x64-windows...
 All requested packages are currently installed.
-Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 194 us. Use --debug to see more details.
-Total install time: 230.6 us
-imgui provides CMake targets:
+Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 174.8 us. Use --debug to see more details.
+Total install time: 197.6 us
+catch2 provides CMake targets:
 
     # this is heuristically generated, and may not be correct
-    find_package(imgui CONFIG REQUIRED)
-    target_link_libraries(main PRIVATE imgui::imgui)
+    find_package(Catch2 CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
 
 threepp provides CMake targets:
 

@@ -34,7 +34,7 @@ Multi-Arch: same
 Abi: 22aaaa0ea577503b96b200f972c4c98fbcb7da42c49018b68dac10f802cc79d7
 Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
 Type: Port
-Status: install ok installed
+Status: purge ok not-installed
 
 Package: imgui
 Feature: glfw-binding
@@ -43,7 +43,7 @@ Architecture: x64-windows
 Multi-Arch: same
 Description: Make available GLFW binding
 Type: Port
-Status: install ok installed
+Status: purge ok not-installed
 
 Package: imgui
 Feature: opengl3-binding
@@ -51,7 +51,7 @@ Architecture: x64-windows
 Multi-Arch: same
 Description: Make available OpenGL3/ES/ES2 (modern) binding
 Type: Port
-Status: install ok installed
+Status: purge ok not-installed
 
 Package: stb
 Version: 2022-09-09
@@ -107,6 +107,16 @@ Architecture: x64-windows
 Multi-Arch: same
 Abi: 2a9f0d97aafd7c610956336e7cb9eecaa535c5eaf52270eefc4f15c48a5968f1
 Description: C++17 port of three.js
+Type: Port
+Status: install ok installed
+
+Package: catch2
+Version: 3.3.0
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: acf6f52f5393cd4033744ea243a996bf31c6d6ae72dd3881403959beb56415b2
+Description: A modern, header-only test framework for unit testing.
 Type: Port
 Status: install ok installed
 
