@@ -1,11 +1,10 @@
 # ninja log v5
 3089	3980	7030066302651531	test.exe	9a58f82ad72107e1
-1	2845	7035026731112587	build.ninja	43e391bd9c6a27e2
-12	3192	7034480797146993	tests/CMakeFiles/GameTest.dir/GameTest.cpp.obj	f3c4e1925dd69f43
+1	2845	7035045674438020	build.ninja	43e391bd9c6a27e2
+8	3670	7035034374673516	tests/CMakeFiles/GameTest.dir/GameTest.cpp.obj	f3c4e1925dd69f43
 0	453	7031929335079993	test/CMakeFiles/test.dir/main.cpp.obj	f79e99f8117dcff2
-1	3042	7034480795624316	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
-3042	4169	7034480798818516	PingPong.exe	8fc7444d8f805455
+2	3562	7035034373582526	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
+3563	4668	7035034377289781	PingPong.exe	8fc7444d8f805455
 5	3049	7034480795649082	tests/CMakeFiles/GroupTest.dir/GroupTest.cpp.obj	7334d3999462cb5f
-1	3297	7035028955574170	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
-6	3446	7035028957171650	tests/CMakeFiles/GameTest.dir/GameTest.cpp.obj	f3c4e1925dd69f43
-3298	4326	7035028959428066	PingPong.exe	8fc7444d8f805455
+1	3574	7035047195214257	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
+3574	4605	7035047198912459	PingPong.exe	8fc7444d8f805455

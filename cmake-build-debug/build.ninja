@@ -105,43 +105,6 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # C:/Kode/GitHub/C++/Code_Project/CMakeLists.txt
 # =============================================================================
 
-# =============================================================================
-# Object build statements for EXECUTABLE target GameTest
-
-
-#############################################
-# Order-only phony target for GameTest
-
-build cmake_object_order_depends_target_GameTest: phony || tests\CMakeFiles\GameTest.dir
-
-build tests\CMakeFiles\GameTest.dir\GameTest.cpp.obj: CXX_COMPILER__GameTest_Debug C$:\Kode\GitHub\C++\Code_Project\tests\GameTest.cpp || cmake_object_order_depends_target_GameTest
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
-  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
-  OBJECT_DIR = tests\CMakeFiles\GameTest.dir
-  OBJECT_FILE_DIR = tests\CMakeFiles\GameTest.dir
-  TARGET_COMPILE_PDB = tests\CMakeFiles\GameTest.dir\
-  TARGET_PDB = tests\GameTest.pdb
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target GameTest
-
-
-#############################################
-# Link the executable tests\GameTest.exe
-
-build tests\GameTest.exe: CXX_EXECUTABLE_LINKER__GameTest_Debug tests\CMakeFiles\GameTest.dir\GameTest.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
-  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = tests\CMakeFiles\GameTest.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/GameTest.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = tests\CMakeFiles\GameTest.dir\
-  TARGET_FILE = tests\GameTest.exe
-  TARGET_IMPLIB = tests\GameTest.lib
-  TARGET_PDB = tests\GameTest.pdb
-
 
 #############################################
 # Utility command for edit_cache
@@ -168,10 +131,6 @@ build tests\rebuild_cache: phony tests\CMakeFiles\rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build GameTest: phony tests\GameTest.exe
-
-build GameTest.exe: phony tests\GameTest.exe
-
 build PingPong: phony PingPong.exe
 
 # =============================================================================
@@ -189,7 +148,7 @@ build all: phony PingPong.exe tests\all
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests
 
-build tests\all: phony tests\GameTest.exe
+build tests\all: phony
 
 # =============================================================================
 # Built-in targets

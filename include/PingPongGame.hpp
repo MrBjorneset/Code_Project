@@ -62,6 +62,17 @@ public:
     }
 };
 
+class movement{
+public:
+    void singelPlayer();
+    void multiPlayer();
+    Vector3 p1PaddleSpeed;
+    Vector3 p2PaddleSpeed;
+private:
+    MyListener listener;
+
+};
+
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.15,0.15,0){
@@ -69,23 +80,24 @@ public:
     void update();
     void init();
     void CheckCollision();
-    void singelPlayerMovement();
-    void multiPlayerMovement();
+    //void singelPlayerMovement();
+    //void multiPlayerMovement();
+    void addMovement();
+    void trackBall();
     void menu();
     int P1Score_ = 0;
     int P2Score_ = 0;
     std::shared_ptr<PingPongScene> PingPongScene_;
+    std::shared_ptr<movement>   movement_;
     MyListener listener;
     Vector3 velocity;
-    Vector3 p1PaddleSpeed;
-    Vector3 p2PaddleSpeed;
 private:
-
 
 };
 
 //Function for opening and closing the startup menu
 void Game::menu() {
+
     P1Score_ = 0;
     P2Score_ = 0;
     auto &menu = PingPongScene_->renderer_.textHandle("Welcome to Ping Pong!"
@@ -96,34 +108,35 @@ void Game::menu() {
 }
 
 //Function to move paddles in singelplayer mode
-void Game::singelPlayerMovement(){
+void movement::singelPlayer(){
+    //Move paddleOne based on user input, "w" and "s" keys
+    if (listener.p1DirectionUp){
+        p1PaddleSpeed.y = 0.5f;
+    }
+    else if (listener.p1DirectionDown){
+        p1PaddleSpeed.y = -0.5f;
+    }
+    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
+        p1PaddleSpeed.y = 0;
+    }
+
+}
+
+//Function for tracking the ball for singelplayer mode
+void Game::trackBall() {
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
-    auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
     //Move paddleTwo based on ball direction
     if (ball->position.y > paddleTwo->position.y){
-        paddleTwo->position.y += 0.5f;
+        paddleTwo->position.y += 0.1f;
     }
     else if(ball->position.y < paddleTwo->position.y){
-        paddleTwo->position.y -= 0.5f;
+        paddleTwo->position.y -= 0.1f;
     }
-    //Move paddleOne based on user input, "w" and "s" keys
-    if (listener.p1DirectionUp){
-        p1PaddleSpeed.y = 0.5f;
-    }
-    else if (listener.p1DirectionDown){
-        p1PaddleSpeed.y = -0.5f;
-    }
-    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
-        p1PaddleSpeed.y = 0;
-    }
-    paddleOne->position.add(p1PaddleSpeed);
 }
 
 //Function to move paddles in multiplayer mode
-void Game::multiPlayerMovement() {
-    auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
-    auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
+void movement::multiPlayer() {
     //Move paddleOne based on user input, "w" and "s" keys
     if (listener.p1DirectionUp){
         p1PaddleSpeed.y = 0.5f;
@@ -134,7 +147,6 @@ void Game::multiPlayerMovement() {
     else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
         p1PaddleSpeed.y = 0;
     }
-    paddleOne->position.add(p1PaddleSpeed);
 
     //Move paddleTwo based on user input, arrow up and down keys
     if (listener.p2DirectionUp){
@@ -146,7 +158,15 @@ void Game::multiPlayerMovement() {
     else if (!listener.p2DirectionUp && !listener.p2DirectionDown){
         p2PaddleSpeed.y = 0;
     }
-    paddleTwo->position.add(p2PaddleSpeed);
+}
+
+//Function to add movement to the 3d-objects
+void Game::addMovement() {
+    auto paddleOne = PingPongScene_->getGroup()->getObjectByName("paddleOne");
+    auto paddleTwo = PingPongScene_->getGroup()->getObjectByName("paddleTwo");
+
+    paddleOne->position.add(movement_->p1PaddleSpeed);
+    paddleTwo->position.add(movement_->p2PaddleSpeed);
 }
 
 //Function for checking collision between wall, paddle and ball.
@@ -212,11 +232,14 @@ void Game::CheckCollision(){
     Game::menu();
     if (listener.singelPlayer) {
         Game::CheckCollision();
-        Game::singelPlayerMovement();
+        movement_->singelPlayer();
+        Game::trackBall();
+        Game::addMovement();
     }
     else if (listener.multiPlayer){
         Game::CheckCollision();
-        Game::multiPlayerMovement();
+        movement_->multiPlayer();
+        Game::addMovement();
     }
 
 }

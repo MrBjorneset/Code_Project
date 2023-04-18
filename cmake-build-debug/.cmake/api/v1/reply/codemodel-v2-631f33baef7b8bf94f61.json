@@ -19,7 +19,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						1
+						0
 					]
 				},
 				{
@@ -31,11 +31,7 @@
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 0,
-					"source" : "tests",
-					"targetIndexes" : 
-					[
-						0
-					]
+					"source" : "tests"
 				}
 			],
 			"name" : "Debug",
@@ -50,20 +46,12 @@
 					"name" : "Code_Project",
 					"targetIndexes" : 
 					[
-						0,
-						1
+						0
 					]
 				}
 			],
 			"targets" : 
 			[
-				{
-					"directoryIndex" : 1,
-					"id" : "GameTest::@a44f0ac069e85531cdee",
-					"jsonFile" : "target-GameTest-Debug-fd6a0fc60fd9b96bddcc.json",
-					"name" : "GameTest",
-					"projectIndex" : 0
-				},
 				{
 					"directoryIndex" : 0,
 					"id" : "PingPong::@6890427a1f51a3e7e1df",

@@ -9,17 +9,18 @@
 TEST_CASE("GameTest") {
     SECTION("SingelPlayerMovement") {
         Game game;
+        movement movement_;
         game.listener.p1DirectionUp = true;
-        game.singelPlayerMovement();
-        REQUIRE(game.p1PaddleSpeed.y == 0.05f);
+        REQUIRE(movement_.p1PaddleSpeed.y == 0.05f);
     }
     SECTION("MultiPlayerMovement"){
         Game game;
+        movement movement_;
         game.listener.p1DirectionUp = true;
         game.listener.p2DirectionUp = true;
         game.multiPlayerMovement();
-        REQUIRE(game.p1PaddleSpeed.y == 0.05f);
-        REQUIRE(game.p2PaddleSpeed.y == 0.05f);
+        REQUIRE(movement_.p1PaddleSpeed.y == 0.05f);
+        REQUIRE(movement_.p2PaddleSpeed.y == 0.05f);
     }
     SECTION("CheckScore"){
         Game game;
