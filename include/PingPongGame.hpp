@@ -60,16 +60,17 @@ public:
             restart = false;
         }
     }
+private:
 };
 
 class Game{
 public:
     Game() : Objects_(Objects::create()), velocity(0.15,0.8,0){
     };
-    void update();
+    void update(bool single, bool multi);
     void init();
     void CheckCollision();
-    void singelPlayerMovement();
+    void singlePlayerMovement();
     void multiPlayerMovement();
     void trackBall();
     void addMovement();
@@ -95,8 +96,8 @@ void Game::trackBall() {
     }
 }
 
-//Function to move paddles in singelplayer mode
-void Game::singelPlayerMovement(){
+//Function to move paddles in singleplayer mode
+void Game::singlePlayerMovement(){
     //Move paddleOne based on user input, "w" and "s" keys
     if (listener.p1DirectionUp){
         p1PaddleSpeed.y = 0.5f;
@@ -202,29 +203,28 @@ void Game::CheckCollision(){
 }
 
 //Function to update the game using previously create functions
- void Game::update() {
-    std::cout << "menu" << std::endl;
-    std::cout << velocity << std::endl;
-    std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
+ void Game::update(bool single, bool multi) {
+    //std::cout << "menu" << std::endl;
+    //std::cout << velocity << std::endl;
+    //std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
+    std::cout << listener.singelPlayer << "SinglePlayer Update" << std::endl;
 
-    if (listener.singelPlayer) {
+    if (single && !multi) {
         Game::CheckCollision();
-        Game::singelPlayerMovement();
+        Game::singlePlayerMovement();
         Game::trackBall();
         Game::addMovement();
-        std::cout << "SingelPlayer" << std::endl;
+        std::cout << "SinglePlayer" << std::endl;
     }
-    else if (listener.multiPlayer){
+    else if (!single && multi){
         Game::CheckCollision();
         Game::multiPlayerMovement();
         Game::addMovement();
         std::cout << "Multiplayer" << std::endl;
     }
 }
-
-//Function for initializing the game using the update function
-void Game::init() {
-    Game::update();
+void Game::init(){
+    Objects();
 }
 
 #endif //CODE_PROJECT_HEADER1_HPP

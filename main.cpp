@@ -34,10 +34,11 @@ int main() {
     });
 
     canvas.animate([&] {
-        std::cout << listener.singelPlayer << "singelPlayer" << std::endl;
-        std::cout << listener.multiPlayer << "multiPlayer" << std::endl;
+        game.init();
+
         if (listener.singelPlayer || listener.multiPlayer) {
-            game.update();
+
+            game.update(listener.singelPlayer, listener.multiPlayer);
         }
         renderer.render(scene, camera);
     });
