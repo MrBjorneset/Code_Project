@@ -8,7 +8,8 @@
 
 TEST_CASE("Test PingPongScene"){
     SECTION("Test group") {
-        auto group = PingPongScene().getGroup();
+        Objects objects;
+        auto group = objects.getGroup();
         REQUIRE(group->children.size() == 3);
         REQUIRE(group->getObjectByName("ball") != nullptr);
         REQUIRE(group->getObjectByName("paddleOne") != nullptr);
