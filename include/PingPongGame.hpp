@@ -76,10 +76,11 @@ public:
     int P2Score_ = 0;
     std::shared_ptr<PingPongScene> PingPongScene_;
     MyListener listener;
-private:
     Vector3 velocity;
     Vector3 p1PaddleSpeed;
     Vector3 p2PaddleSpeed;
+private:
+
 
 };
 
