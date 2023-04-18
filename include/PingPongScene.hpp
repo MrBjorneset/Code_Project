@@ -25,6 +25,19 @@ private:
     std::shared_ptr<Group> group_;
 
 };
+
+class Objects {
+public:
+    std::shared_ptr<Mesh> createMaterial();
+    std::shared_ptr<Mesh> createBall();
+    std::shared_ptr<Mesh> createPaddleOne();
+    std::shared_ptr<Mesh> createPaddleTwo();
+private:
+};
+
+
+
+
 PingPongScene::PingPongScene()
 {
     auto material = MeshBasicMaterial::create();
