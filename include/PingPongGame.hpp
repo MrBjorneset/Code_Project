@@ -76,17 +76,16 @@ public:
     int P1Score_ = 0;
     int P2Score_ = 0;
     MyListener listener;
+    Vector3 p1PaddleSpeed;
+    Vector3 p2PaddleSpeed;
 private:
     std::shared_ptr<Objects> Objects_;
     Vector3 velocity;
-    Vector3 p1PaddleSpeed;
-    Vector3 p2PaddleSpeed;
-
 };
 
 void Game::trackBall() {
-    auto ball = Objects_->createBall();
-    auto paddleTwo = Objects_->createPaddleTwo();
+    auto ball = Objects_->getGroup()->getObjectByName("ball");
+    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
     //Move paddleTwo based on ball direction
     if (ball->position.y > paddleTwo->position.y){
         paddleTwo->position.y += 0.5f;
@@ -95,6 +94,7 @@ void Game::trackBall() {
         paddleTwo->position.y -= 0.5f;
     }
 }
+
 //Function to move paddles in singelplayer mode
 void Game::singelPlayerMovement(){
     //Move paddleOne based on user input, "w" and "s" keys
@@ -135,8 +135,8 @@ void Game::multiPlayerMovement() {
 }
 
 void Game::addMovement() {
-    auto paddleOne = Objects_->createPaddleOne();
-    auto paddleTwo = Objects_->createPaddleTwo();
+    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
+    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
 
     paddleOne->position.add(p1PaddleSpeed);
     paddleTwo->position.add(p2PaddleSpeed);
@@ -145,9 +145,9 @@ void Game::addMovement() {
 //Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(){
     //Retrieve the 3D-Objects
-    auto ball = Objects_->createBall();
-    auto paddleOne = Objects_->createPaddleOne();
-    auto paddleTwo = Objects_->createPaddleTwo();
+    auto ball = Objects_->getGroup()->getObjectByName("ball");
+    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
+    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
 
     //Update the ball position based on velocity
     ball->position.add(velocity);

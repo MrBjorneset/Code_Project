@@ -17,7 +17,7 @@ int main() {
 
     auto scene = Scene::create();
 
-    //Grabbing Objects from PingPongScene.hpp, creating a lokal group and adding it to the scene
+    //Grabbing Objects from PingPongScene.hpp, creating a local group and adding it to the scene
     auto objects = Objects::create();
     auto group = objects->getGroup();
     scene->add(group);

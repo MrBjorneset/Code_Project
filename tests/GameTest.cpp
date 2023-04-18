@@ -10,23 +10,19 @@
 TEST_CASE("GameTest") {
     SECTION("SingelPlayerMovement") {
         Game game;
-
-
-        game.listener.p1DirectionUp = true;
+        MyListener listener;
+        listener.p1DirectionUp = true;
         game.singelPlayerMovement();
-        auto paddleOne = game.PingPongScene_->getGroup()->getObjectByName("paddleOne");
-        CHECK_NOFAIL(paddleOne->position.y + 1);
+        REQUIRE(game.p1PaddleSpeed.y == 0.5f);
     }
     SECTION("MultiPlayerMovement"){
         Game game;
-        game.listener.p1DirectionUp = true;
-        game.listener.p2DirectionUp = true;
+        MyListener listener;
+        listener.p1DirectionUp = true;
+        listener.p2DirectionUp = true;
         game.multiPlayerMovement();
-
-        auto paddleOne = game.PingPongScene_->getGroup()->getObjectByName("paddleOne");
-        auto paddleTwo = game.PingPongScene_->getGroup()->getObjectByName("paddleTwo");
-        CHECK_NOFAIL(paddleOne->position.y + 1);
-        CHECK_NOFAIL(paddleTwo->position.y + 1);
+        REQUIRE(game.p1PaddleSpeed.y == 0.5f);
+        REQUIRE(game.p2PaddleSpeed.y == 0.5f);
     }
     SECTION("CheckScore"){
         Game game;
