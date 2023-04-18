@@ -148,12 +148,13 @@ void Game::addMovement() {
 //Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(){
     //Retrieve the 3D-Objects
-    auto ball = Objects_->getGroup()->getObjectByName("ball");
-    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
-    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
+    auto ball = Objects_->ball_;
+    auto paddleOne = Objects_->paddleOne_;
+    auto paddleTwo = Objects_->paddleTwo_;
 
     //Update the ball position based on velocity
     ball->position.add(velocity);
+
 
     // Check collision with paddle one
     if (ball->position.x - Objects_->ballRadius_ < paddleOne->position.x + Objects_->paddleWidth_ / 2 &&
@@ -207,7 +208,6 @@ void Game::CheckCollision(){
     //std::cout << "menu" << std::endl;
     //std::cout << velocity << std::endl;
     //std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
-    std::cout << listener.singelPlayer << "SinglePlayer Update" << std::endl;
 
     if (single && !multi) {
         Game::CheckCollision();
@@ -224,7 +224,7 @@ void Game::CheckCollision(){
     }
 }
 void Game::init(){
-    Objects();
+
 }
 
 #endif //CODE_PROJECT_HEADER1_HPP

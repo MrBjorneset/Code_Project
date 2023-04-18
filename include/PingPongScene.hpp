@@ -16,62 +16,60 @@ public:
     static std::shared_ptr<Objects> create(){
         return std::make_shared<Objects>();
     }
-    std::shared_ptr<Mesh> createBall() const;
-    std::shared_ptr<Mesh> createPaddleOne() const;
-    std::shared_ptr<Mesh> createPaddleTwo() const;
+    void createBall();
+    void createPaddleOne();
+    void createPaddleTwo();
     float ballRadius_ = 0.5;
     float paddleWidth_ = 0.1;
     float paddleDepth_= 0.1;
     float paddleHeight_ = 10;
+    std::shared_ptr<Mesh> ball_;
+    std::shared_ptr<Mesh> paddleOne_;
+    std::shared_ptr<Mesh> paddleTwo_;
 private:
     std::shared_ptr<Group> group_;
+
 };
 
 
-std::shared_ptr<Mesh> Objects::createBall() const {
+void Objects::createBall() {
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
     auto ballGeometry = SphereGeometry::create(ballRadius_,32,32);
-    auto ball = Mesh::create(ballGeometry,material);
-    ball->name = ("ball");
-    ball->position = Vector3(0,0,0);
-    group_->add(ball);
-    return ball;
+    ball_ = Mesh::create(ballGeometry,material);
+    ball_->name = ("ball");
+    ball_->position.set(0,0,0);
+    group_->add(ball_);
+
 }
 
-std::shared_ptr<Mesh> Objects::createPaddleOne() const {
+void Objects::createPaddleOne(){
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
     auto paddleGeometry = BoxGeometry::create(paddleWidth_,paddleHeight_,paddleDepth_);
-    auto paddleOne = Mesh::create(paddleGeometry, material);
-    paddleOne->name = ("paddleOne");
-    paddleOne->position.x = -60;
-    group_->add(paddleOne);
-    return paddleOne;
+    paddleOne_ = Mesh::create(paddleGeometry, material);
+    paddleOne_->name = ("paddleOne");
+    paddleOne_->position.x = -60;
+    group_->add(paddleOne_);
 }
 
-std::shared_ptr<Mesh> Objects::createPaddleTwo() const {
+void Objects::createPaddleTwo() {
     auto material = MeshBasicMaterial::create();
     material->color = Color::white;
     auto paddleGeometry = BoxGeometry::create(paddleWidth_,paddleHeight_,paddleDepth_);
-    auto paddleTwo = Mesh::create(paddleGeometry, material);
-    paddleTwo->name = ("paddleTwo");
-    paddleTwo->position.x = 60;
-    group_->add(paddleTwo);
-    return paddleTwo;
+    paddleTwo_ = Mesh::create(paddleGeometry, material);
+    paddleTwo_->name = ("paddleTwo");
+    paddleTwo_->position.x = 60;
+    group_->add(paddleTwo_);
 }
 
 Objects::Objects() : group_(Group::create())  {
-    Objects::createBall();
-    Objects::createPaddleOne();
-    Objects::createPaddleTwo();
 }
 
 std::shared_ptr<Group> Objects::getGroup() {
     std::cout << group_->getObjectByName("ball")<< std::endl;
     std::cout << group_->getObjectByName("paddleOne") << std::endl;
     std::cout << group_->getObjectByName("paddleTwo") << std::endl;
-
     std::cout << group_ << std::endl;
     return group_;
 }
