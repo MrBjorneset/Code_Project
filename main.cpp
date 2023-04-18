@@ -10,7 +10,7 @@ int main() {
     Game game;
     Objects Objects;
 
-    Canvas canvas{Canvas::Parameters().size({1280,700}).antialiasing(8)};
+    Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(8)};
     GLRenderer renderer(canvas);
     renderer.setClearColor(Color::black);
     renderer.enableTextRendering();
@@ -28,13 +28,17 @@ int main() {
 
 
     canvas.addKeyListener(&listener);
-    canvas.onWindowResize([&](WindowSize size){
+    canvas.onWindowResize([&](WindowSize size) {
         camera->updateProjectionMatrix();
         renderer.setSize(size);
-        });
+    });
 
-    canvas.animate([&]{
-        game.init();
+    canvas.animate([&] {
+        std::cout << listener.singelPlayer << "singelPlayer" << std::endl;
+        std::cout << listener.multiPlayer << "multiPlayer" << std::endl;
+        if (listener.singelPlayer || listener.multiPlayer) {
+            game.update();
+        }
         renderer.render(scene, camera);
     });
-}
+    }

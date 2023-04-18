@@ -137,9 +137,11 @@ void Game::multiPlayerMovement() {
 void Game::addMovement() {
     auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
     auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
+    //auto ball = Objects_->getGroup()->getObjectByName("ball");
 
     paddleOne->position.add(p1PaddleSpeed);
     paddleTwo->position.add(p2PaddleSpeed);
+
 }
 
 //Function for checking collision between wall, paddle and ball.
@@ -186,7 +188,7 @@ void Game::CheckCollision(){
         std::string P1Score = std::to_string(P1Score_);
         //Objects_->renderer_.textHandle(P1Score).setPosition(1400, Objects_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
-        velocity = Vector3(0.15,0.15,0);
+        velocity = Vector3(0.15,0.8,0);
         velocity.x *= -1;
     }
     else if (ball->position.x > 60.0f){
@@ -194,25 +196,30 @@ void Game::CheckCollision(){
         std::string  P2Score = std::to_string(P2Score_);
         //Objects_->renderer_.textHandle(P2Score).setPosition(400,Objects_->canvas_.getSize().height -1000);
         ball->position.set(0,0,0);
-        velocity = Vector3(0.15,0.15,0);
+        velocity = Vector3(0.15,0.8,0);
         velocity.x *= -1;
     }
 }
 
 //Function to update the game using previously create functions
  void Game::update() {
+    std::cout << "menu" << std::endl;
+    std::cout << velocity << std::endl;
+    std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
+
     if (listener.singelPlayer) {
         Game::CheckCollision();
         Game::singelPlayerMovement();
         Game::trackBall();
         Game::addMovement();
+        std::cout << "SingelPlayer" << std::endl;
     }
     else if (listener.multiPlayer){
         Game::CheckCollision();
         Game::multiPlayerMovement();
         Game::addMovement();
+        std::cout << "Multiplayer" << std::endl;
     }
-
 }
 
 //Function for initializing the game using the update function
