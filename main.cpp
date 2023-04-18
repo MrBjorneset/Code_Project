@@ -11,7 +11,7 @@ int main() {
     Objects Objects;
 
     Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(8)};
-    GLRenderer renderer(canvas);
+    GLRenderer renderer{canvas};
     renderer.setClearColor(Color::black);
     renderer.enableTextRendering();
 
@@ -26,20 +26,18 @@ int main() {
     auto camera = PerspectiveCamera::create();
     camera->position.z = 120;
 
-
     canvas.addKeyListener(&listener);
     canvas.onWindowResize([&](WindowSize size) {
         camera->updateProjectionMatrix();
         renderer.setSize(size);
     });
 
+    game.init();
     canvas.animate([&] {
-        game.init();
-
         if (listener.singelPlayer || listener.multiPlayer) {
 
             game.update(listener.singelPlayer, listener.multiPlayer);
+            renderer.render(scene, camera);
         }
-        renderer.render(scene, camera);
-    });
-    }
+        renderer.render(scene, camera); });
+}
