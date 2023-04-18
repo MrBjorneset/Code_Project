@@ -16,10 +16,7 @@ public:
     static std::shared_ptr<PingPongScene> create(){
         return std::make_shared<PingPongScene>();
     }
-    float ballRadius_ = 0.5;
-    float paddleWidth_ = 0.1;
-    float paddleDepth_= 0.1;
-    float paddleHeight_ = 10;
+
 
 private:
     std::shared_ptr<Group> group_;
@@ -28,15 +25,38 @@ private:
 
 class Objects {
 public:
-    std::shared_ptr<Mesh> createMaterial();
+    std::shared_ptr<MeshBasicMaterial> createMaterial();
     std::shared_ptr<Mesh> createBall();
     std::shared_ptr<Mesh> createPaddleOne();
     std::shared_ptr<Mesh> createPaddleTwo();
+    float ballRadius_ = 0.5;
+    float paddleWidth_ = 0.1;
+    float paddleDepth_= 0.1;
+    float paddleHeight_ = 10;
 private:
+    std::shared_ptr<Group> group_;
+    std::shared_ptr<BoxGeometry> paddleGeometry_;
 };
 
+std::shared_ptr<MeshBasicMaterial> Objects::createMaterial() {
+    auto material = MeshBasicMaterial::create();
+    material->color = Color::white;
+    return material;
+}
 
+std::shared_ptr<Mesh> Objects::createBall() {
+    auto ballGeometry = SphereGeometry::create(ballRadius_,32,32);
+    auto ball = Mesh::create(ballGeometry,Objects::createMaterial());
+    ball->name = ("ball");
+    return ball;
+}
 
+std::shared_ptr<Mesh> Objects::createPaddleOne() {
+    auto paddleGeometry = BoxGeometry::create(paddleWidth_,paddleHeight_,paddleDepth_);
+    auto paddleOne = Mesh::create(paddleGeometry, Objects::createMaterial());
+    paddleOne->name = ("paddleOne");
+    return paddleOne;
+}
 
 PingPongScene::PingPongScene()
 {
