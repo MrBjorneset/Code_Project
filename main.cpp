@@ -1,5 +1,5 @@
 
-#include "include/PingPongGame.hpp"
+#include "PingPongGame.hpp"
 
 
 using namespace threepp;
@@ -14,7 +14,9 @@ int main() {
     renderer.enableTextRendering();
 
     auto scene = Scene::create();
-
+    auto objects = Objects::create();
+    auto group = objects->getObjects();
+    scene->add(group);
     auto camera = PerspectiveCamera::create(60,canvas.getAspect(), 0.01,100);
     camera->position.z = 120;
 

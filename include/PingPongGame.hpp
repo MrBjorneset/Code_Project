@@ -61,7 +61,7 @@ public:
         }
     }
 };
-
+/*
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.15,0.15,0){
@@ -82,7 +82,7 @@ private:
     Vector3 p2PaddleSpeed;
 
 };
-/*
+
 //Function for opening and closing the startup menu
 void Game::menu() {
     P1Score_ = 0;
@@ -93,7 +93,7 @@ void Game::menu() {
                                          "2 for Multiplayer");
     menu.setPosition(PingPongScene_->canvas_.getSize().width*1/2,500);
 }
-*/
+
 //Function to move paddles in singelplayer mode
 void Game::singelPlayerMovement(){
     auto ball = PingPongScene_->getGroup()->getObjectByName("ball");
@@ -219,7 +219,7 @@ void Game::CheckCollision(){
     }
 
 }
-/*
+
 //Function for initializing the game using the update function
 void Game::init() {
     PingPongScene_->canvas_.addKeyListener(&listener);
