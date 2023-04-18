@@ -62,17 +62,6 @@ public:
     }
 };
 
-class movement{
-public:
-    void singelPlayer();
-    void multiPlayer();
-    //Vector3 p1PaddleSpeed;
-    //Vector3 p2PaddleSpeed;
-private:
-    MyListener listener;
-
-};
-
 class Game{
 public:
     Game() : PingPongScene_(PingPongScene::create()), velocity(0.15,0.15,0){
@@ -87,14 +76,12 @@ public:
     void menu();
     int P1Score_ = 0;
     int P2Score_ = 0;
-    std::shared_ptr<PingPongScene> PingPongScene_;
-    std::shared_ptr<movement>   movement_;
     MyListener listener;
+private:
     Vector3 velocity;
     Vector3 p1PaddleSpeed;
     Vector3 p2PaddleSpeed;
-private:
-
+    std::shared_ptr<PingPongScene> PingPongScene_;
 };
 
 //Function for opening and closing the startup menu
