@@ -4,7 +4,6 @@
 
 #define  CATCH_CONFIG_MAIN
 #include <catch.hpp>
-#include "PingPongScene.hpp"
 #include "PingPongGame.hpp"
 
 TEST_CASE("GameTest") {
@@ -12,7 +11,7 @@ TEST_CASE("GameTest") {
         Game game;
         MyListener listener;
         listener.p1DirectionUp = true;
-        game.singelPlayerMovement();
+        game.singlePlayerMovement();
         REQUIRE(game.p1PaddleSpeed.y == 0.5f);
     }
     SECTION("MultiPlayerMovement"){

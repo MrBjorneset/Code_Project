@@ -17,13 +17,14 @@ int main() {
     renderer.enableTextRendering();
 
     //Creating the Objects from PingPongScene.hpp, making a local group and adding it to the scene
-    auto objects = Objects::create();
-    objects->createBall();
-    objects->createPaddleOne();
-    objects->createPaddleTwo();
+
+
+    Objects.createBall();
+    Objects.createPaddleOne();
+    Objects.createPaddleTwo();
 
     auto scene = Scene::create();
-    scene->add(objects->getGroup());
+    scene->add(Objects.getGroup());
 
     //Creating the Camera and setting the position
     auto camera = PerspectiveCamera::create();

@@ -65,7 +65,7 @@ private:
 
 class Game{
 public:
-    Game() : Objects_(Objects::create()), velocity(0.15,0.8,0){
+    Game() :  velocity(0.15,0.8,0){
     };
     void update(bool single, bool multi);
     void init();
@@ -148,13 +148,14 @@ void Game::addMovement() {
 //Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(){
     //Retrieve the 3D-Objects
-    auto ball = Objects_->ball_;
-    auto paddleOne = Objects_->paddleOne_;
-    auto paddleTwo = Objects_->paddleTwo_;
+    auto ball = Objects_->getGroup()->getObjectByName("ball");
+    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
+    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
 
     //Update the ball position based on velocity
-    ball->position.add(velocity);
-
+    if (ball) {
+        ball->position.add(this->velocity);
+    }
 
     // Check collision with paddle one
     if (ball->position.x - Objects_->ballRadius_ < paddleOne->position.x + Objects_->paddleWidth_ / 2 &&
@@ -205,23 +206,24 @@ void Game::CheckCollision(){
 
 //Function to update the game using previously create functions
  void Game::update(bool single, bool multi) {
+    auto ball = Objects_->getGroup()->getObjectByName("ball");
     //std::cout << "menu" << std::endl;
     //std::cout << velocity << std::endl;
     //std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
-
-    if (single && !multi) {
-        Game::CheckCollision();
-        Game::singlePlayerMovement();
-        Game::trackBall();
-        Game::addMovement();
-        std::cout << "SinglePlayer" << std::endl;
-    }
-    else if (!single && multi){
-        Game::CheckCollision();
-        Game::multiPlayerMovement();
-        Game::addMovement();
-        std::cout << "Multiplayer" << std::endl;
-    }
+    if (ball){
+        if (single && !multi) {
+            Game::CheckCollision();
+            Game::singlePlayerMovement();
+            Game::trackBall();
+            Game::addMovement();
+            std::cout << "SinglePlayer" << std::endl;
+        } else if (!single && multi) {
+            Game::CheckCollision();
+            Game::multiPlayerMovement();
+            Game::addMovement();
+            std::cout << "Multiplayer" << std::endl;
+     }
+}
 }
 void Game::init(){
 
