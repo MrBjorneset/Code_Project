@@ -2,6 +2,7 @@
 // Created by EmilB on 21/02/2023.
 //
 
+
 #ifndef CODE_PROJECT_PingPongGame_HPP
 #define CODE_PROJECT_PingPongGame_HPP
 #include "PingPongScene.hpp"
@@ -65,7 +66,8 @@ private:
 
 class Game{
 public:
-    Game(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo);
+    Game() : Objects_(Objects::create()), velocity(0.15,0.8,0){
+    };
     void update(bool single, bool multi);
     void init();
     void CheckCollision();
@@ -79,19 +81,9 @@ public:
     Vector3 p1PaddleSpeed;
     Vector3 p2PaddleSpeed;
 private:
-    void initBall();
-    void initPaddles();
-    Paddle paddles_;
-    Ball ball_;
+    std::shared_ptr<Objects> Objects_;
     Vector3 velocity;
 };
-
-void Game::initBall() {
-    ball_.create();
-}
-void Game::initPaddles() {
-    auto paddleOne = paddles_.create();
-}
 
 void Game::trackBall() {
     auto ball = Objects_->getGroup()->getObjectByName("ball");
@@ -157,14 +149,13 @@ void Game::addMovement() {
 //Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(){
     //Retrieve the 3D-Objects
-    auto ball = Objects_->getGroup()->getObjectByName("ball");
-    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
-    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
+    auto ball = Objects_->ball_;
+    auto paddleOne = Objects_->paddleOne_;
+    auto paddleTwo = Objects_->paddleTwo_;
 
     //Update the ball position based on velocity
-    if (ball) {
-        ball->position.add(this->velocity);
-    }
+    ball->position.add(velocity);
+
 
     // Check collision with paddle one
     if (ball->position.x - Objects_->ballRadius_ < paddleOne->position.x + Objects_->paddleWidth_ / 2 &&
@@ -178,23 +169,23 @@ void Game::CheckCollision(){
         ball->position.x = paddleOne->position.x + Objects_->ballRadius_ + Objects_->paddleWidth_ / 2;
     }
 
-    // Check collision with paddle two
+        // Check collision with paddle two
     else if (ball->position.x - Objects_->ballRadius_ < paddleTwo->position.x + Objects_->paddleWidth_ / 2 &&
-        ball->position.x + Objects_->ballRadius_ > paddleTwo->position.x - Objects_->paddleWidth_ / 2 &&
-        ball->position.y - Objects_->ballRadius_ < paddleTwo->position.y + Objects_->paddleHeight_ / 2 &&
-        ball->position.y + Objects_->ballRadius_ > paddleTwo->position.y - Objects_->paddleHeight_ / 2 &&
-        ball->position.z - Objects_->ballRadius_ < paddleTwo->position.z + Objects_->paddleDepth_ / 2 &&
-        ball->position.z + Objects_->ballRadius_ > paddleTwo->position.z - Objects_->paddleDepth_ / 2) {
+             ball->position.x + Objects_->ballRadius_ > paddleTwo->position.x - Objects_->paddleWidth_ / 2 &&
+             ball->position.y - Objects_->ballRadius_ < paddleTwo->position.y + Objects_->paddleHeight_ / 2 &&
+             ball->position.y + Objects_->ballRadius_ > paddleTwo->position.y - Objects_->paddleHeight_ / 2 &&
+             ball->position.z - Objects_->ballRadius_ < paddleTwo->position.z + Objects_->paddleDepth_ / 2 &&
+             ball->position.z + Objects_->ballRadius_ > paddleTwo->position.z - Objects_->paddleDepth_ / 2) {
 
         velocity.x = -velocity.x * 1.03f;
         ball->position.x = paddleTwo->position.x - Objects_->ballRadius_ - Objects_->paddleWidth_ / 2;
     }
 
-    //Check for collision with the walls and reflect the ball accordingly
+        //Check for collision with the walls and reflect the ball accordingly
     else if (ball->position.y < -60.0f || ball->position.y > 60.0f) {
         velocity.y *= -1;
     }
-    //Check if the ball hits the left and right walls, give point to correct team and reset the ball position to (x=0, y=0, z=0)
+        //Check if the ball hits the left and right walls, give point to correct team and reset the ball position to (x=0, y=0, z=0)
     else if (ball->position.x < -60.0f){
         P1Score_ ++;
         std::string P1Score = std::to_string(P1Score_);
@@ -214,30 +205,26 @@ void Game::CheckCollision(){
 }
 
 //Function to update the game using previously create functions
- void Game::update(bool single, bool multi) {
-    auto ball = Objects_->getGroup()->getObjectByName("ball");
+void Game::update(bool single, bool multi) {
     //std::cout << "menu" << std::endl;
     //std::cout << velocity << std::endl;
     //std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
-    if (ball){
-        if (single && !multi) {
-            Game::CheckCollision();
-            Game::singlePlayerMovement();
-            Game::trackBall();
-            Game::addMovement();
-            std::cout << "SinglePlayer" << std::endl;
-        } else if (!single && multi) {
-            Game::CheckCollision();
-            Game::multiPlayerMovement();
-            Game::addMovement();
-            std::cout << "Multiplayer" << std::endl;
-     }
-}
+
+    if (single && !multi) {
+        Game::CheckCollision();
+        Game::singlePlayerMovement();
+        Game::trackBall();
+        Game::addMovement();
+        std::cout << "SinglePlayer" << std::endl;
+    }
+    else if (!single && multi){
+        Game::CheckCollision();
+        Game::multiPlayerMovement();
+        Game::addMovement();
+        std::cout << "Multiplayer" << std::endl;
+    }
 }
 void Game::init(){
 
 }
-
-
-
 #endif //CODE_PROJECT_HEADER1_HPP
