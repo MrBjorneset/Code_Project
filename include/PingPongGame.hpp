@@ -65,8 +65,7 @@ private:
 
 class Game{
 public:
-    Game() :  velocity(0.15,0.8,0){
-    };
+    Game(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo);
     void update(bool single, bool multi);
     void init();
     void CheckCollision();
@@ -80,9 +79,19 @@ public:
     Vector3 p1PaddleSpeed;
     Vector3 p2PaddleSpeed;
 private:
-    std::shared_ptr<Objects> Objects_;
+    void initBall();
+    void initPaddles();
+    Paddle paddles_;
+    Ball ball_;
     Vector3 velocity;
 };
+
+void Game::initBall() {
+    ball_.create();
+}
+void Game::initPaddles() {
+    auto paddleOne = paddles_.create();
+}
 
 void Game::trackBall() {
     auto ball = Objects_->getGroup()->getObjectByName("ball");
@@ -228,5 +237,7 @@ void Game::CheckCollision(){
 void Game::init(){
 
 }
+
+
 
 #endif //CODE_PROJECT_HEADER1_HPP
