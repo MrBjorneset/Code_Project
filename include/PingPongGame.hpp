@@ -69,11 +69,11 @@ public:
     Game() : velocity(0.15,0.8,0){};
     void update(bool single, bool multi);
     void init();
-    void CheckCollision();
+    void CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Paddle1, std::shared_ptr<Mesh> &Paddle2);
     void singlePlayerMovement();
     void multiPlayerMovement();
     void trackBall();
-    void addMovement();
+    void addMovement(std::shared_ptr<Mesh> Paddle1, std::shared_ptr<Mesh> Paddle2);
 
     int P1Score_ = 0;
     int P2Score_ = 0;
@@ -139,10 +139,9 @@ void Game::multiPlayerMovement() {
     }
 }
 
-void Game::addMovement() {
-    auto paddleOne = Paddle
-    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
-    //auto ball = Objects_->getGroup()->getObjectByName("ball");
+void Game::addMovement(std::shared_ptr<Mesh> Paddle1, std::shared_ptr<Mesh> Paddle2) {
+    auto &paddleOne = Paddle1;
+    auto &paddleTwo = Paddle2;
 
     paddleOne->position.add(p1PaddleSpeed);
     paddleTwo->position.add(p2PaddleSpeed);
@@ -150,38 +149,41 @@ void Game::addMovement() {
 }
 
 //Function for checking collision between wall, paddle and ball.
-void Game::CheckCollision(){
+void Game::CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Paddle1, std::shared_ptr<Mesh> &Paddle2){
     //Retrieve the 3D-Objects
-    auto ball = Objects_->ball_;
-    auto paddleOne = Objects_->paddleOne_;
-    auto paddleTwo = Objects_->paddleTwo_;
-
+    auto &ball = Ball;
+    auto &paddleOne = Paddle1;
+    auto &paddleTwo = Paddle2;
+    float ballRadius = 0.8;
+    float paddleWidth = 0.5;
+    float paddleHeight = 15;
+    float paddleDepth = 0.2;
+    float dt = 0.16;
     //Update the ball position based on velocity
-    ball->position.add(velocity);
-
+   Ball_->update(dt);
 
     // Check collision with paddle one
-    if (ball->position.x - Objects_->ballRadius_ < paddleOne->position.x + Objects_->paddleWidth_ / 2 &&
-        ball->position.x + Objects_->ballRadius_ > paddleOne->position.x - Objects_->paddleWidth_ / 2 &&
-        ball->position.y - Objects_->ballRadius_ < paddleOne->position.y + Objects_->paddleHeight_ / 2 &&
-        ball->position.y + Objects_->ballRadius_ > paddleOne->position.y - Objects_->paddleHeight_ / 2 &&
-        ball->position.z - Objects_->ballRadius_ < paddleOne->position.z + Objects_->paddleDepth_ / 2 &&
-        ball->position.z + Objects_->ballRadius_ > paddleOne->position.z - Objects_->paddleDepth_ / 2) {
+    if (ball->position.x - ballRadius < paddleOne->position.x + paddleWidth / 2 &&
+        ball->position.x + ballRadius > paddleOne->position.x - paddleWidth / 2 &&
+        ball->position.y - ballRadius < paddleOne->position.y + paddleHeight / 2 &&
+        ball->position.y + ballRadius > paddleOne->position.y - paddleHeight / 2 &&
+        ball->position.z - ballRadius < paddleOne->position.z + paddleDepth / 2 &&
+        ball->position.z + ballRadius > paddleOne->position.z - paddleDepth / 2) {
 
-        velocity.x = -velocity.x * 1.03f;
-        ball->position.x = paddleOne->position.x + Objects_->ballRadius_ + Objects_->paddleWidth_ / 2;
+        Ball_->velocity.x = Ball_->velocity.x *-1 * 1.03f;
+        ball->position.x = paddleOne->position.x + ballRadius + paddleWidth / 2;
     }
 
         // Check collision with paddle two
-    else if (ball->position.x - Objects_->ballRadius_ < paddleTwo->position.x + Objects_->paddleWidth_ / 2 &&
-             ball->position.x + Objects_->ballRadius_ > paddleTwo->position.x - Objects_->paddleWidth_ / 2 &&
-             ball->position.y - Objects_->ballRadius_ < paddleTwo->position.y + Objects_->paddleHeight_ / 2 &&
-             ball->position.y + Objects_->ballRadius_ > paddleTwo->position.y - Objects_->paddleHeight_ / 2 &&
-             ball->position.z - Objects_->ballRadius_ < paddleTwo->position.z + Objects_->paddleDepth_ / 2 &&
-             ball->position.z + Objects_->ballRadius_ > paddleTwo->position.z - Objects_->paddleDepth_ / 2) {
+    else if (ball->position.x - ballRadius < paddleTwo->position.x + paddleWidth / 2 &&
+             ball->position.x + ballRadius > paddleTwo->position.x - paddleWidth / 2 &&
+             ball->position.y - ballRadius < paddleTwo->position.y + paddleHeight / 2 &&
+             ball->position.y + ballRadius > paddleTwo->position.y - paddleHeight / 2 &&
+             ball->position.z - ballRadius < paddleTwo->position.z + paddleDepth / 2 &&
+             ball->position.z + ballRadius > paddleTwo->position.z - paddleDepth / 2) {
 
         velocity.x = -velocity.x * 1.03f;
-        ball->position.x = paddleTwo->position.x - Objects_->ballRadius_ - Objects_->paddleWidth_ / 2;
+        ball->position.x = paddleTwo->position.x - ballRadius - paddleWidth / 2;
     }
 
         //Check for collision with the walls and reflect the ball accordingly

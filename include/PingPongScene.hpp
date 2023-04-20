@@ -52,9 +52,9 @@ public:
     [[nodiscard]] std::shared_ptr<Mesh> getMesh() const {
         return mesh_;
     }
+    Vector3 velocity;
 private:
     std::shared_ptr<Mesh> mesh_;
-    Vector3 velocity;
 };
 
 class Paddle {

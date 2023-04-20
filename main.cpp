@@ -40,7 +40,7 @@ int main() {
     canvas.animate([&] {
 
             if (listener.singelPlayer || listener.multiPlayer) {
-               // game.update(listener.singelPlayer, listener.multiPlayer);
+               game.addMovement(paddleOne.getMesh(),paddleTwo.getMesh());
             }
 
 
