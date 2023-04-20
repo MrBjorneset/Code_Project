@@ -66,8 +66,7 @@ private:
 
 class Game{
 public:
-    Game() : Objects_(Objects::create()), velocity(0.15,0.8,0){
-    };
+    Game() : velocity(0.15,0.8,0){};
     void update(bool single, bool multi);
     void init();
     void CheckCollision();
@@ -75,19 +74,23 @@ public:
     void multiPlayerMovement();
     void trackBall();
     void addMovement();
+
     int P1Score_ = 0;
     int P2Score_ = 0;
     MyListener listener;
     Vector3 p1PaddleSpeed;
     Vector3 p2PaddleSpeed;
+    std::shared_ptr<Group> group_;
 private:
-    std::shared_ptr<Objects> Objects_;
+    std::shared_ptr<Ball> Ball_;
+    std::shared_ptr<Paddle> Paddle_;
     Vector3 velocity;
+
 };
 
 void Game::trackBall() {
-    auto ball = Objects_->getGroup()->getObjectByName("ball");
-    auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
+    auto ball = Ball_->getMesh();
+    auto paddleTwo = Paddle_->getMesh();
     //Move paddleTwo based on ball direction
     if (ball->position.y > paddleTwo->position.y){
         paddleTwo->position.y += 0.5f;
@@ -137,7 +140,7 @@ void Game::multiPlayerMovement() {
 }
 
 void Game::addMovement() {
-    auto paddleOne = Objects_->getGroup()->getObjectByName("paddleOne");
+    auto paddleOne = Paddle
     auto paddleTwo = Objects_->getGroup()->getObjectByName("paddleTwo");
     //auto ball = Objects_->getGroup()->getObjectByName("ball");
 
@@ -204,6 +207,8 @@ void Game::CheckCollision(){
     }
 }
 
+
+
 //Function to update the game using previously create functions
 void Game::update(bool single, bool multi) {
     //std::cout << "menu" << std::endl;
@@ -224,7 +229,9 @@ void Game::update(bool single, bool multi) {
         std::cout << "Multiplayer" << std::endl;
     }
 }
-void Game::init(){
 
+void Game::init(){
 }
+
+
 #endif //CODE_PROJECT_HEADER1_HPP
