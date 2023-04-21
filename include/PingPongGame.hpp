@@ -72,9 +72,7 @@ public:
     void CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Paddle1, std::shared_ptr<Mesh> &Paddle2);
     void singlePlayerMovement();
     void multiPlayerMovement();
-    void trackBall();
-    void addMovement(std::shared_ptr<Mesh> Paddle1, std::shared_ptr<Mesh> Paddle2);
-
+    void trackBall(Vector3 ball, Vector3 paddleTwo);
     int P1Score_ = 0;
     int P2Score_ = 0;
     MyListener listener;
@@ -88,17 +86,26 @@ private:
 
 };
 
-void Game::trackBall() {
-    auto ball = Ball_->getMesh();
-    auto paddleTwo = Paddle_->getMesh();
-    //Move paddleTwo based on ball direction
-    if (ball->position.y > paddleTwo->position.y){
-        paddleTwo->position.y += 0.5f;
+void Game::trackBall(Vector3 ball, Vector3 paddleTwo) {
+    auto ballPosition = ball;
+    auto paddleTwoPosition = paddleTwo;
+
+    // Calculate the target y position of the paddle based on the ball's x position
+    float targetY = ballPosition.y;
+    if (ballPosition.x > 0) {
+        // Ball is moving towards paddleTwo, so move paddleTwo towards the ball's y position
+        targetY += (rand() % 5) - 2; // add some randomness to the target y position
+    } else {
+        // Ball is moving away from paddleTwo, so move paddleTwo towards the center
+        targetY = 0.0f;
     }
-    else if(ball->position.y < paddleTwo->position.y){
-        paddleTwo->position.y -= 0.5f;
-    }
+
+    // Move the paddle towards the target y position
+    float deltaY = targetY - paddleTwoPosition.y;
+    float speed = 2.0f; // adjust this value to change the paddle's movement speed
+    paddleTwo.set(0.0f, deltaY * speed, 0.0f);
 }
+
 
 //Function to move paddles in singleplayer mode
 void Game::singlePlayerMovement(){
@@ -139,14 +146,6 @@ void Game::multiPlayerMovement() {
     }
 }
 
-void Game::addMovement(std::shared_ptr<Mesh> Paddle1, std::shared_ptr<Mesh> Paddle2) {
-    auto &paddleOne = Paddle1;
-    auto &paddleTwo = Paddle2;
-
-    paddleOne->position.add(p1PaddleSpeed);
-    paddleTwo->position.add(p2PaddleSpeed);
-
-}
 
 //Function for checking collision between wall, paddle and ball.
 void Game::CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Paddle1, std::shared_ptr<Mesh> &Paddle2){
@@ -170,11 +169,11 @@ void Game::CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Pa
         ball->position.z - ballRadius < paddleOne->position.z + paddleDepth / 2 &&
         ball->position.z + ballRadius > paddleOne->position.z - paddleDepth / 2) {
 
-        Ball_->velocity.x = Ball_->velocity.x *-1 * 1.03f;
+        Ball_->velocity.x = Ball_->velocity.x * -1.03f;
         ball->position.x = paddleOne->position.x + ballRadius + paddleWidth / 2;
     }
 
-        // Check collision with paddle two
+    // Check collision with paddle two
     else if (ball->position.x - ballRadius < paddleTwo->position.x + paddleWidth / 2 &&
              ball->position.x + ballRadius > paddleTwo->position.x - paddleWidth / 2 &&
              ball->position.y - ballRadius < paddleTwo->position.y + paddleHeight / 2 &&
@@ -182,35 +181,31 @@ void Game::CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Pa
              ball->position.z - ballRadius < paddleTwo->position.z + paddleDepth / 2 &&
              ball->position.z + ballRadius > paddleTwo->position.z - paddleDepth / 2) {
 
-        velocity.x = -velocity.x * 1.03f;
+        Ball_->velocity.x = Ball_->velocity.x * -1.03f;
         ball->position.x = paddleTwo->position.x - ballRadius - paddleWidth / 2;
     }
 
-        //Check for collision with the walls and reflect the ball accordingly
+    //Check for collision with the walls and reflect the ball accordingly
     else if (ball->position.y < -60.0f || ball->position.y > 60.0f) {
-        velocity.y *= -1;
+        Ball_->velocity.y *= -1;
     }
         //Check if the ball hits the left and right walls, give point to correct team and reset the ball position to (x=0, y=0, z=0)
     else if (ball->position.x < -60.0f){
         P1Score_ ++;
         std::string P1Score = std::to_string(P1Score_);
-        //Objects_->renderer_.textHandle(P1Score).setPosition(1400, Objects_->canvas_.getSize().height -1000);
-        ball->position.set(0,0,0);
-        velocity = Vector3(0.15,0.8,0);
-        velocity.x *= -1;
+        Ball_->setPosition(0,0,0);
+        Ball_->velocity.x *= -1;
     }
     else if (ball->position.x > 60.0f){
         P2Score_ ++;
         std::string  P2Score = std::to_string(P2Score_);
-        //Objects_->renderer_.textHandle(P2Score).setPosition(400,Objects_->canvas_.getSize().height -1000);
-        ball->position.set(0,0,0);
-        velocity = Vector3(0.15,0.8,0);
-        velocity.x *= -1;
+        Ball_->setPosition(0,0,0);
+        Ball_->velocity.x *= -1;
     }
 }
 
 
-
+/*
 //Function to update the game using previously create functions
 void Game::update(bool single, bool multi) {
     //std::cout << "menu" << std::endl;
@@ -218,7 +213,7 @@ void Game::update(bool single, bool multi) {
     //std::cout << Objects_->getGroup()->getObjectByName("ball")->position << std::endl;
 
     if (single && !multi) {
-        Game::CheckCollision();
+        Game::CheckCollision(Ball_->getMesh(),Paddle_->getMesh());
         Game::singlePlayerMovement();
         Game::trackBall();
         Game::addMovement();
@@ -235,5 +230,5 @@ void Game::update(bool single, bool multi) {
 void Game::init(){
 }
 
-
+*/
 #endif //CODE_PROJECT_HEADER1_HPP
