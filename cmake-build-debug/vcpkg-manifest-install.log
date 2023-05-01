@@ -1,7 +1,7 @@
 Detecting compiler hash for triplet x64-windows...
 All requested packages are currently installed.
-Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 474.8 us. Use --debug to see more details.
-Total install time: 3.012 ms
+Restored 0 package(s) from C:\Users\EmilB\AppData\Local\vcpkg\archives in 181 us. Use --debug to see more details.
+Total install time: 239.2 us
 catch2 provides CMake targets:
 
     # this is heuristically generated, and may not be correct

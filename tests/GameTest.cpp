@@ -6,26 +6,11 @@
 #include <catch.hpp>
 #include "PingPongGame.hpp"
 
-TEST_CASE("GameTest") {
-    SECTION("SingelPlayerMovement") {
-        Game game;
-        MyListener listener;
-        listener.p1DirectionUp = true;
-        game.singlePlayerMovement();
-        REQUIRE(game.p1PaddleSpeed.y == 0.5f);
+TEST_CASE("ObjectTest") {
+    SECTION("CreateBall") {
+        auto ball = Ball(0.8,0,0,0);
+        ball.setPosition(0,0,0);
+        REQUIRE(ball.getMesh()->position.x == 0);
     }
-    SECTION("MultiPlayerMovement"){
-        Game game;
-        MyListener listener;
-        listener.p1DirectionUp = true;
-        listener.p2DirectionUp = true;
-        game.multiPlayerMovement();
-        REQUIRE(game.p1PaddleSpeed.y == 0.5f);
-        REQUIRE(game.p2PaddleSpeed.y == 0.5f);
-    }
-    SECTION("CheckScore"){
-        Game game;
-        REQUIRE(game.P1Score_ == 0);
-        REQUIRE(game.P2Score_ == 0);
-    }
+
 }

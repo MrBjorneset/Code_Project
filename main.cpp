@@ -4,6 +4,7 @@
 
 using namespace threepp;
 
+
 int main() {
     //Setting up the different classes from both headers
     MyListener listener;
@@ -45,12 +46,20 @@ int main() {
                 paddleTwo.move(game.p2PaddleSpeed.x,game.p2PaddleSpeed.y,game.p2PaddleSpeed.z);
                 game.trackBall(ball.getMesh()->position,paddleTwo.getMesh()->position);
                 std::cout << ball.getMesh()->position << std::endl;
+                std::cout << paddleOne.getMesh()->position << std::endl;
+                std::cout << game.p1PaddleSpeed.y << std::endl;
             }
             else if (listener.multiPlayer){
+                ball.update(1);
                 game.multiPlayerMovement();
                 paddleOne.move(game.p1PaddleSpeed.x,game.p1PaddleSpeed.y,game.p1PaddleSpeed.z);
                 paddleTwo.move(game.p2PaddleSpeed.x,game.p2PaddleSpeed.y,game.p2PaddleSpeed.z);
 
+            }
+            else if (listener.restart){
+                ball.setPosition(0,0,0);
+                paddleOne.setPosition(-60,0,0);
+                paddleTwo.setPosition(60,0,0);
             }
 
 

@@ -39,6 +39,8 @@ public:
         }
         if (evt.key == 82){        //"r" key
             restart = true;
+            singelPlayer = false;
+            multiPlayer = false;
         }
     }
 
@@ -56,8 +58,6 @@ public:
             p2DirectionDown = false;
         }
         if (evt.key == 82){        //"r" key
-            singelPlayer = false;
-            multiPlayer = false;
             restart = false;
         }
     }
