@@ -67,17 +67,15 @@ private:
 class Game{
 public:
     Game() : velocity(0.15,0.8,0){};
-    void update(bool single, bool multi);
-    void init();
     void CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Paddle1, std::shared_ptr<Mesh> &Paddle2);
-    void singlePlayerMovement();
-    void multiPlayerMovement();
-    void trackBall(Vector3 ball, Vector3 paddleTwo);
+    void singlePlayerMovement(bool up, bool down);
+    void multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down);
+    void trackBall(Vector3 ball);
     int P1Score_ = 0;
     int P2Score_ = 0;
+    float p1PaddleSpeedY;
+    float p2PaddleSpeedY;
     MyListener listener;
-    Vector3 p1PaddleSpeed;
-    Vector3 p2PaddleSpeed;
     std::shared_ptr<Group> group_;
 private:
     std::shared_ptr<Ball> Ball_;
@@ -86,9 +84,8 @@ private:
 
 };
 
-void Game::trackBall(Vector3 ball, Vector3 paddleTwo) {
+void Game::trackBall(Vector3 ball) {
     auto ballPosition = ball;
-    auto paddleTwoPosition = paddleTwo;
 
     // Calculate the target y position of the paddle based on the ball's x position
     float targetY = ballPosition.y;
@@ -101,48 +98,47 @@ void Game::trackBall(Vector3 ball, Vector3 paddleTwo) {
     }
 
     // Move the paddle towards the target y position
-    float deltaY = targetY - paddleTwoPosition.y;
-    float speed = 2.0f; // adjust this value to change the paddle's movement speed
-    paddleTwo.set(0.0f, deltaY * speed, 0.0f);
+    float speed = 0.5f; // adjust this value to change the paddle's movement speed
+    p2PaddleSpeedY = targetY * speed;
 }
 
 
 //Function to move paddles in singleplayer mode
-void Game::singlePlayerMovement(){
+void Game::singlePlayerMovement(bool up, bool down){
     //Move paddleOne based on user input, "w" and "s" keys
-    if (listener.p1DirectionUp){
-        p1PaddleSpeed.y = 0.5f;
+    if (up){
+        p1PaddleSpeedY = 0.5f;
     }
-    else if (listener.p1DirectionDown){
-        p1PaddleSpeed.y = -0.5f;
+    else if (down){
+        p1PaddleSpeedY = -0.5f;
     }
-    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
-        p1PaddleSpeed.y = 0;
+    else if (!up && !down){
+        p1PaddleSpeedY = 0;
     }
 }
 
 //Function to move paddles in multiplayer mode
-void Game::multiPlayerMovement() {
+void Game::multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down) {
     //Move paddleOne based on user input, "w" and "s" keys
-    if (listener.p1DirectionUp){
-        p1PaddleSpeed.y = 0.5f;
+    if (p1Up){
+        p1PaddleSpeedY = 0.5f;
     }
-    else if (listener.p1DirectionDown){
-        p1PaddleSpeed.y = -0.5f;
+    else if (p1Down){
+        p1PaddleSpeedY = -0.5f;
     }
-    else if (!listener.p1DirectionUp && !listener.p1DirectionDown){
-        p1PaddleSpeed.y = 0;
+    else if (!p1Up && !p1Down){
+        p1PaddleSpeedY = 0;
     }
 
     //Move paddleTwo based on user input, arrow up and down keys
-    if (listener.p2DirectionUp){
-        p2PaddleSpeed.y = 0.5f;
+    if (p2Up){
+        p2PaddleSpeedY = 0.5f;
     }
-    else if (listener.p2DirectionDown){
-        p2PaddleSpeed.y = -0.5f;
+    else if (p2Down){
+        p2PaddleSpeedY = -0.5f;
     }
-    else if (!listener.p2DirectionUp && !listener.p2DirectionDown){
-        p2PaddleSpeed.y = 0;
+    else if (!p2Up && !p2Down){
+        p2PaddleSpeedY = 0;
     }
 }
 
@@ -158,8 +154,6 @@ void Game::CheckCollision(std::shared_ptr<Mesh> &Ball, std::shared_ptr<Mesh> &Pa
     float paddleHeight = 15;
     float paddleDepth = 0.2;
     float dt = 0.16;
-    //Update the ball position based on velocity
-   Ball_->update(dt);
 
     // Check collision with paddle one
     if (ball->position.x - ballRadius < paddleOne->position.x + paddleWidth / 2 &&

@@ -10,7 +10,7 @@ int main() {
     MyListener listener;
     Game game;
 
-    Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(8)};
+    Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(16)};
     GLRenderer renderer{canvas};
     renderer.setClearColor(Color::black);
     renderer.enableTextRendering();
@@ -41,19 +41,19 @@ int main() {
     canvas.animate([&] {
             if (listener.singelPlayer) {
                 ball.update(1);
-                game.singlePlayerMovement();
-                paddleOne.move(game.p1PaddleSpeed.x,game.p1PaddleSpeed.y,game.p1PaddleSpeed.z);
-                paddleTwo.move(game.p2PaddleSpeed.x,game.p2PaddleSpeed.y,game.p2PaddleSpeed.z);
-                game.trackBall(ball.getMesh()->position,paddleTwo.getMesh()->position);
+                game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+                paddleOne.move(0,game.p1PaddleSpeedY,0);
+                game.trackBall(ball.getMesh()->position);
+                paddleTwo.move(0,game.p2PaddleSpeedY,0);
+                std::cout << ball.getMesh()->position << std::endl;
                 std::cout << ball.getMesh()->position << std::endl;
                 std::cout << paddleOne.getMesh()->position << std::endl;
-                std::cout << game.p1PaddleSpeed.y << std::endl;
             }
             else if (listener.multiPlayer){
                 ball.update(1);
-                game.multiPlayerMovement();
-                paddleOne.move(game.p1PaddleSpeed.x,game.p1PaddleSpeed.y,game.p1PaddleSpeed.z);
-                paddleTwo.move(game.p2PaddleSpeed.x,game.p2PaddleSpeed.y,game.p2PaddleSpeed.z);
+                game.multiPlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown,listener.p2DirectionUp,listener.p2DirectionDown);
+                paddleOne.move(0,game.p1PaddleSpeedY,0);
+                paddleTwo.move(0,game.p2PaddleSpeedY,0);
 
             }
             else if (listener.restart){
