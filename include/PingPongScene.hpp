@@ -18,7 +18,7 @@ public:
         material->color = Color::white;
 
         mesh_ = Mesh::create(geometry,material);
-        mesh_->position.set(0,0,0);
+        mesh_->position.set(x, y, z);
         velocity.set(0.5,0.3,0);
     }
 
