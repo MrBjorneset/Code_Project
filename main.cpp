@@ -10,6 +10,7 @@ int main() {
     MyListener listener;
     Game game;
 
+
     Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(16)};
     GLRenderer renderer{canvas};
     renderer.setClearColor(Color::black);
@@ -52,6 +53,7 @@ int main() {
             }
             else if (listener.multiPlayer){
                 ball.update(1);
+                game.checkWallCollision(ball,-70,70,70,-70,p1Score,p2Score);
                 game.multiPlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown,listener.p2DirectionUp,listener.p2DirectionDown);
                 paddleOne.move(0,game.p1PaddleSpeedY,0);
                 paddleTwo.move(0,game.p2PaddleSpeedY,0);
