@@ -70,6 +70,7 @@ public:
     void singlePlayerMovement(bool up, bool down);
     void multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor, int p1Score, int p2Score);
+    void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius);
     float p1PaddleSpeedY;
     float p2PaddleSpeedY;
 private:
@@ -140,6 +141,24 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     //check collision with the floor
     if (ballPos.y - ball.velocity.y < floor){
         ball.velocity.y = std::abs(ball.velocity.y);
+    }
+}
+
+void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo, float paddleHeight, float ballRadius) {
+    auto ballPos = ball.getMesh()->position;
+    auto paddleOnePos = paddleOne.getMesh()->position;
+    auto paddleTwoPos = paddleTwo.getMesh()->position;
+
+
+    if (ballPos.x - ballRadius < paddleOnePos.x &&
+        ballPos.x + ballRadius > paddleOnePos.x &&
+        ballPos.y - ballRadius < paddleOnePos.y + paddleHeight / 2 &&
+        ballPos.y + ballRadius > paddleOnePos.y - paddleHeight / 2 ) {
+        ball.velocity = ball.velocity * (-1);
+    }
+
+    if ((ballPos.x > paddleTwoPos.x) && (ballPos.y > paddleTwoPos.y)){
+        ball.velocity = ball.velocity * (-1);
     }
 }
 
