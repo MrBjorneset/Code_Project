@@ -7,5 +7,5 @@ function(create_test name)
 endfunction()
 
 
-#create_test(GameTest)
+create_test(GameTest)
 

@@ -71,6 +71,7 @@ public:
     void multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor, int p1Score, int p2Score);
     void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius);
+    void trackBall(Ball &ball, Paddle &paddleTwo);
     float p1PaddleSpeedY;
     float p2PaddleSpeedY;
 private:
@@ -118,6 +119,19 @@ void Game::multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down) {
     }
 }
 
+void Game::trackBall(Ball &ball, Paddle &paddleTwo){
+    auto ballPos = ball.getMesh()->position;
+    auto paddlePos = paddleTwo.getMesh()->position;
+    p2PaddleSpeedY = 0;
+
+    //Move paddleTwo based on ball direction
+    if ((ballPos.y > paddlePos.y) && (ballPos.x > 0)){
+        p2PaddleSpeedY += 0.4f;
+    }
+    else if((ballPos.y < paddlePos.y) && (ballPos.x > 0)){
+        p2PaddleSpeedY -= 0.4f;
+    }
+}
 void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor, int p1Score, int p2Score) {
     auto ballPos = ball.getMesh()->position;
 
@@ -149,17 +163,19 @@ void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo
     auto paddleOnePos = paddleOne.getMesh()->position;
     auto paddleTwoPos = paddleTwo.getMesh()->position;
 
-
     if (ballPos.x - ballRadius < paddleOnePos.x &&
         ballPos.x + ballRadius > paddleOnePos.x &&
         ballPos.y - ballRadius < paddleOnePos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleOnePos.y - paddleHeight / 2 ) {
-        ball.velocity = ball.velocity * (-1);
+        ball.velocity = ball.velocity * (-1.03);
     }
 
-    if ((ballPos.x > paddleTwoPos.x) && (ballPos.y > paddleTwoPos.y)){
-        ball.velocity = ball.velocity * (-1);
+    else if (ballPos.x - ballRadius < paddleTwoPos.x &&
+        ballPos.x + ballRadius > paddleTwoPos.x &&
+        ballPos.y - ballRadius < paddleTwoPos.y + paddleHeight / 2 &&
+        ballPos.y + ballRadius > paddleTwoPos.y - paddleHeight / 2 ) {
+        ball.velocity = ball.velocity * (-1.03);
     }
 }
 
-#endif //CODE_PROJECT_HEADER1_HPP
+#endif //CODE_PROJECT_PingPongGame_HPP
