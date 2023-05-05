@@ -5,12 +5,11 @@
 
 #include <utility>
 
-#include "threepp/core/Shader.hpp"
 #include "threepp/objects/Mesh.hpp"
 
 namespace threepp {
 
-    class Water : public Mesh {
+    class Water: public Mesh {
 
     public:
         struct Options {
@@ -22,18 +21,17 @@ namespace threepp {
             std::optional<float> time;
             std::shared_ptr<Texture> waterNormals;
             std::optional<Vector3> sunDirection;
-            std::optional<unsigned int> sunColor;
-            std::optional<unsigned int> waterColor;
+            std::optional<Color> sunColor;
+            std::optional<Color> waterColor;
             std::optional<Vector3> eye;
-            std::optional<float> distortionScale ;
+            std::optional<float> distortionScale;
             std::optional<int> side;
             std::optional<bool> fog;
         };
 
-        static std::shared_ptr<Water> create(const std::shared_ptr<BufferGeometry> &geometry, Options options = Options()) {
+        [[nodiscard]] std::string type() const override;
 
-            return std::shared_ptr<Water>(new Water(geometry, std::move(options)));
-        }
+        static std::shared_ptr<Water> create(const std::shared_ptr<BufferGeometry>& geometry, Options options = Options());
 
         ~Water() override;
 
@@ -41,7 +39,7 @@ namespace threepp {
         struct Impl;
         std::unique_ptr<Impl> pimpl_;
 
-        Water(const std::shared_ptr<BufferGeometry> &geometry, Options options);
+        Water(const std::shared_ptr<BufferGeometry>& geometry, Options options);
     };
 
 }// namespace threepp

@@ -4,6 +4,7 @@
 #define THREEPP_BUFFER_ATTRIBUTE_HPP
 
 #include "threepp/math/Box3.hpp"
+#include "threepp/math/Color.hpp"
 #include "threepp/math/Vector2.hpp"
 #include "threepp/math/Vector3.hpp"
 #include "threepp/math/Vector4.hpp"
@@ -11,7 +12,7 @@
 #include "threepp/constants.hpp"
 #include "threepp/core/misc.hpp"
 
-#include <iostream>
+#include <memory>
 #include <vector>
 
 namespace threepp {
@@ -22,7 +23,6 @@ namespace threepp {
     class BufferAttribute {
 
     public:
-
         UpdateRange updateRange{0, -1};
 
         unsigned int version = 0;
@@ -75,7 +75,7 @@ namespace threepp {
 
         void copy(const BufferAttribute& source) {
 
-//            this->name = source.name;
+            //            this->name = source.name;
             this->itemSize_ = source.itemSize_;
             this->normalized_ = source.normalized_;
 
@@ -87,21 +87,20 @@ namespace threepp {
     };
 
     template<class T>
-    class TypedBufferAttribute : public BufferAttribute {
+    class TypedBufferAttribute: public BufferAttribute {
 
     public:
-
         [[nodiscard]] int count() const override {
 
             return count_;
         }
 
-        virtual const std::vector<T> &array() const {
+        virtual std::vector<T>& array() {
 
             return array_;
         }
 
-        TypedBufferAttribute<T> &copyAt(unsigned int index1, const TypedBufferAttribute<T> &attribute, unsigned int index2) {
+        TypedBufferAttribute<T>& copyAt(unsigned int index1, const TypedBufferAttribute<T>& attribute, unsigned int index2) {
 
             index1 *= this->itemSize_;
             index2 *= attribute.itemSize_;
@@ -114,18 +113,18 @@ namespace threepp {
             return &this;
         }
 
-        TypedBufferAttribute<T> &copyArray(const std::vector<T> &array) {
+        TypedBufferAttribute<T>& copyArray(const std::vector<T>& array) {
 
             this->array_ = array;
 
             return *this;
         }
 
-        TypedBufferAttribute<T> &copyColorsArray(const std::vector<Color> &colors) {
+        TypedBufferAttribute<T>& copyColorsArray(const std::vector<Color>& colors) {
 
             int offset = 0;
 
-            for (const auto &color : colors) {
+            for (const auto& color : colors) {
 
                 array_[offset++] = color.r;
                 array_[offset++] = color.g;
@@ -135,11 +134,11 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &copyVector2sArray(const std::vector<Vector2> &vectors) {
+        TypedBufferAttribute<T>& copyVector2sArray(const std::vector<Vector2>& vectors) {
 
             int offset = 0;
 
-            for (const auto &vector : vectors) {
+            for (const auto& vector : vectors) {
 
                 array_[offset++] = vector.x;
                 array_[offset++] = vector.y;
@@ -148,11 +147,11 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &copyVector3sArray(const std::vector<Vector3> &vectors) {
+        TypedBufferAttribute<T>& copyVector3sArray(const std::vector<Vector3>& vectors) {
 
             int offset = 0;
 
-            for (const auto &vector : vectors) {
+            for (const auto& vector : vectors) {
 
                 array_[offset++] = vector.x;
                 array_[offset++] = vector.y;
@@ -162,11 +161,11 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &copyVector4sArray(std::vector<Vector4> &vectors) {
+        TypedBufferAttribute<T>& copyVector4sArray(std::vector<Vector4>& vectors) {
 
             int offset = 0;
 
-            for (const auto &vector : vectors) {
+            for (const auto& vector : vectors) {
 
                 array_[offset++] = vector.x;
                 array_[offset++] = vector.y;
@@ -177,7 +176,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &applyMatrix3(const Matrix3 &m) {
+        TypedBufferAttribute<T>& applyMatrix3(const Matrix3& m) {
 
             if (this->itemSize_ == 2) {
 
@@ -203,7 +202,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &applyMatrix4(const Matrix4 &m) {
+        TypedBufferAttribute<T>& applyMatrix4(const Matrix4& m) {
 
             for (int i = 0, l = this->count_; i < l; i++) {
 
@@ -219,7 +218,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &applyNormalMatrix(const Matrix3 &m) {
+        TypedBufferAttribute<T>& applyNormalMatrix(const Matrix3& m) {
 
             for (int i = 0, l = this->count_; i < l; i++) {
 
@@ -235,7 +234,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &transformDirection(const Matrix4 &m) {
+        TypedBufferAttribute<T>& transformDirection(const Matrix4& m) {
 
             for (int i = 0, l = this->count_; i < l; i++) {
 
@@ -251,55 +250,55 @@ namespace threepp {
             return *this;
         }
 
-        [[nodiscard]] T getX(int index) const {
+        [[nodiscard]] T getX(size_t index) const {
 
             return this->array_[index * this->itemSize_];
         }
 
-        TypedBufferAttribute<T> &setX(int index, T x) {
+        TypedBufferAttribute<T>& setX(size_t index, T x) {
 
             this->array_[index * this->itemSize_] = x;
 
             return *this;
         }
 
-        [[nodiscard]] T getY(int index) const {
+        [[nodiscard]] T getY(size_t index) const {
 
             return this->array_[index * this->itemSize_ + 1];
         }
 
-        TypedBufferAttribute<T> &setY(int index, T y) {
+        TypedBufferAttribute<T>& setY(size_t index, T y) {
 
             this->array_[index * this->itemSize_ + 1] = y;
 
             return *this;
         }
 
-        [[nodiscard]] T getZ(int index) const {
+        [[nodiscard]] T getZ(size_t index) const {
 
             return this->array_[index * this->itemSize_ + 2];
         }
 
-        TypedBufferAttribute<T> &setZ(int index, T z) {
+        TypedBufferAttribute<T>& setZ(size_t index, T z) {
 
             this->array_[index * this->itemSize_ + 2] = z;
 
             return *this;
         }
 
-        [[nodiscard]] T getW(int index) const {
+        [[nodiscard]] T getW(size_t index) const {
 
             return this->array_[index * this->itemSize_ + 3];
         }
 
-        TypedBufferAttribute<T> &setW(int index, T w) {
+        TypedBufferAttribute<T>& setW(size_t index, T w) {
 
             this->array_[index * this->itemSize_ + 3] = w;
 
             return *this;
         }
 
-        TypedBufferAttribute<T> &setXY(int index, T x, T y) {
+        TypedBufferAttribute<T>& setXY(size_t index, T x, T y) {
 
             index *= this->itemSize_;
 
@@ -309,7 +308,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &setXYZ(int index, T x, T y, T z) {
+        TypedBufferAttribute<T>& setXYZ(size_t index, T x, T y, T z) {
 
             index *= this->itemSize_;
 
@@ -320,7 +319,7 @@ namespace threepp {
             return *this;
         }
 
-        TypedBufferAttribute<T> &setXYZW(int index, T x, T y, T z, T w) {
+        TypedBufferAttribute<T>& setXYZW(size_t index, T x, T y, T z, T w) {
 
             index *= this->itemSize_;
 
@@ -332,20 +331,20 @@ namespace threepp {
             return *this;
         }
 
-        void setFromBufferAttribute(Vector2 &target, int index) const {
+        void setFromBufferAttribute(Vector2& target, size_t index) const {
 
             target.x = getX(index);
             target.y = getY(index);
         }
 
-        void setFromBufferAttribute(Vector3 &target, int index) const {
+        void setFromBufferAttribute(Vector3& target, size_t index) const {
 
             target.x = getX(index);
             target.y = getY(index);
             target.z = getZ(index);
         }
 
-        void setFromBufferAttribute(Vector4 &target, int index) const {
+        void setFromBufferAttribute(Vector4& target, size_t index) const {
 
             target.x = getX(index);
             target.y = getY(index);
@@ -353,7 +352,7 @@ namespace threepp {
             target.w = getW(index);
         }
 
-        void setFromBufferAttribute(Box3 &target) const {
+        void setFromBufferAttribute(Box3& target) const {
 
             auto minX = +Infinity<float>;
             auto minY = +Infinity<float>;
@@ -381,7 +380,7 @@ namespace threepp {
             target.set(minX, minY, minZ, maxX, maxY, maxZ);
         }
 
-        void copy(const TypedBufferAttribute<T> &source) {
+        void copy(const TypedBufferAttribute<T>& source) {
             BufferAttribute::copy(source);
 
             this->count_ = source.count_;
@@ -395,9 +394,16 @@ namespace threepp {
             return clone;
         }
 
-        static std::unique_ptr<TypedBufferAttribute<T>> create(std::vector<T> array, int itemSize, bool normalized = false) {
+        template<class ArrayLike>
+        static std::unique_ptr<TypedBufferAttribute<T>> create(const ArrayLike& array, int itemSize, bool normalized = false) {
 
-            return std::unique_ptr<TypedBufferAttribute<T>>(new TypedBufferAttribute<T>(array, itemSize, normalized));
+            return create(array.begin(), array.end(), itemSize, normalized);
+        }
+
+        template<class It>
+        static std::unique_ptr<TypedBufferAttribute<T>> create(It begin, It end, int itemSize, bool normalized = false) {
+
+            return std::unique_ptr<TypedBufferAttribute<T>>(new TypedBufferAttribute<T>({begin, end}, itemSize, normalized));
         }
 
     protected:
@@ -411,10 +417,9 @@ namespace threepp {
     private:
         std::vector<T> array_;
         int count_{};
-
     };
 
-    typedef TypedBufferAttribute<int> IntBufferAttribute;
+    typedef TypedBufferAttribute<unsigned int> IntBufferAttribute;
     typedef TypedBufferAttribute<float> FloatBufferAttribute;
 
 

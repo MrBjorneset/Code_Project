@@ -9,18 +9,18 @@
 #include <vector>
 
 #include "threepp/math/Color.hpp"
+#include "threepp/math/Matrix3.hpp"
+#include "threepp/math/Matrix4.hpp"
 #include "threepp/math/Vector2.hpp"
 #include "threepp/math/Vector3.hpp"
 #include "threepp/math/Vector4.hpp"
-#include "threepp/math/Matrix3.hpp"
-#include "threepp/math/Matrix4.hpp"
 
 #include "threepp/textures/Texture.hpp"
 
 namespace threepp {
 
     typedef std::variant<int, float, Color, Vector2, Vector3> NestedUniformValue;
-    typedef std::variant<bool, int, float, Color, Vector2, Vector3, Vector4, Matrix3, Matrix4, Matrix4*, std::shared_ptr<Texture>, std::vector<float>, std::vector<Vector2>, std::vector<Vector3>, std::vector<Matrix3>, std::vector<Matrix4>, std::vector<std::shared_ptr<Texture>>, std::unordered_map<std::string, NestedUniformValue>, std::vector<std::unordered_map<std::string, NestedUniformValue>*>> UniformValue;
+    typedef std::variant<bool, int, float, Color, Vector2, Vector3, Vector3*, Vector4, Matrix3, Matrix4, Matrix4*, Texture*, std::vector<float>, std::vector<Vector2>, std::vector<Vector3>, std::vector<Matrix3>, std::vector<Matrix4>, std::vector<Matrix4*>, std::vector<Texture*>, std::unordered_map<std::string, NestedUniformValue>, std::vector<std::unordered_map<std::string, NestedUniformValue>*>> UniformValue;
 
     class Uniform {
 
@@ -34,12 +34,12 @@ namespace threepp {
             return value_.has_value();
         }
 
-        UniformValue &value() {
+        UniformValue& value() {
             return *value_;
         }
 
         template<class T>
-        [[nodiscard]] T &value() {
+        [[nodiscard]] T& value() {
             if (!value_.has_value()) value_ = T();
             return std::get<T>(*value_);
         }

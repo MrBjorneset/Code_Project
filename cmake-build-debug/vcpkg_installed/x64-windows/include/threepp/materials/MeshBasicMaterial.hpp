@@ -27,19 +27,17 @@ namespace threepp {
           public MaterialWithCombine {
 
     public:
-
         [[nodiscard]] std::string type() const override {
 
             return "MeshBasicMaterial";
         }
 
-        [[nodiscard]] std::shared_ptr<MeshBasicMaterial> clone() const {
-
-            auto m =  std::shared_ptr<MeshBasicMaterial>(new MeshBasicMaterial());
+        std::shared_ptr<Material> clone() const override {
+            auto m = create();
             copyInto(m.get());
-            
-            m->color.copy( color );
-            
+
+            m->color.copy(color);
+
             m->map = map;
 
             m->lightMap = lightMap;

@@ -9,8 +9,10 @@ find_package(threepp CONFIG REQUIRED)
 add_executable(PingPong main.cpp)
 target_link_libraries(PingPong PRIVATE threepp::threepp)
 
-find_package(catch2 CONFIG REQUIRED)
-target_link_libraries(PingPong PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_include_directories(PingPong PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+find_package(Catch2 CONFIG REQUIRED)
+add_executable(tests tests/test_1.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2)
 add_subdirectory(tests)

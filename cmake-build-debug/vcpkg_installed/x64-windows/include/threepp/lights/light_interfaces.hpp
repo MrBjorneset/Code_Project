@@ -2,34 +2,31 @@
 #ifndef THREEPP_LIGHT_INTERFACES_HPP
 #define THREEPP_LIGHT_INTERFACES_HPP
 
-#include "LightShadow.hpp"
+
 
 namespace threepp {
 
-    template <class LightShadowType>
+    class LightShadow;
+
     class LightWithShadow {
 
     public:
-
-        std::shared_ptr<LightShadowType> shadow;
+        std::shared_ptr<LightShadow> shadow;
 
         virtual ~LightWithShadow() = default;
 
     protected:
-        explicit LightWithShadow(const std::shared_ptr<LightShadowType> &shadow) : shadow(shadow) {}
-
+        explicit LightWithShadow(const std::shared_ptr<LightShadow>& shadow): shadow(shadow) {}
     };
 
     class LightWithTarget {
 
     public:
-
         std::shared_ptr<Object3D> target{Object3D::create()};
 
         virtual ~LightWithTarget() = default;
-
     };
 
-}
+}// namespace threepp
 
 #endif//THREEPP_LIGHT_INTERFACES_HPP

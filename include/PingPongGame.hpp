@@ -68,12 +68,12 @@ class Game{
 public:
     Game() : velocity(0.15,0.8,0){};
     void singlePlayerMovement(bool up, bool down);
-    void multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down);
+    void multiPlayerMovement(bool up, bool down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor, int p1Score, int p2Score);
     void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius);
     void trackBall(Ball &ball, Paddle &paddleTwo);
-    float p1PaddleSpeedY;
-    float p2PaddleSpeedY;
+    float p1PaddleSpeedY{};
+    float p2PaddleSpeedY{};
 private:
     std::shared_ptr<Ball> Ball_;
     std::shared_ptr<Paddle> Paddle_;
@@ -89,32 +89,22 @@ void Game::singlePlayerMovement(bool up, bool down){
     else if (down){
         p1PaddleSpeedY = -0.5f;
     }
-    else if (!up && !down){
+    else {
         p1PaddleSpeedY = 0;
     }
 }
 
 //Function to move paddles in multiplayer mode
-void Game::multiPlayerMovement(bool p1Up, bool p1Down, bool p2Up, bool p2Down) {
-    //Move paddleOne based on user input, "w" and "s" keys
-    if (p1Up){
-        p1PaddleSpeedY = 0.5f;
-    }
-    else if (p1Down){
-        p1PaddleSpeedY = -0.5f;
-    }
-    else if (!p1Up && !p1Down){
-        p1PaddleSpeedY = 0;
-    }
+void Game::multiPlayerMovement(bool up, bool down) {
 
     //Move paddleTwo based on user input, arrow up and down keys
-    if (p2Up){
+    if (up){
         p2PaddleSpeedY = 0.5f;
     }
-    else if (p2Down){
+    else if (down){
         p2PaddleSpeedY = -0.5f;
     }
-    else if (!p2Up && !p2Down){
+    else {
         p2PaddleSpeedY = 0;
     }
 }
@@ -125,11 +115,11 @@ void Game::trackBall(Ball &ball, Paddle &paddleTwo){
     p2PaddleSpeedY = 0;
 
     //Move paddleTwo based on ball direction
-    if ((ballPos.y > paddlePos.y) && (ballPos.x > 0)){
-        p2PaddleSpeedY += 0.4f;
+    if ((ballPos.y > paddlePos.y) && (ballPos.x > -20)){
+        p2PaddleSpeedY += 0.5f;
     }
-    else if((ballPos.y < paddlePos.y) && (ballPos.x > 0)){
-        p2PaddleSpeedY -= 0.4f;
+    else if((ballPos.y < paddlePos.y) && (ballPos.x > -20)){
+        p2PaddleSpeedY -= 0.5f;
     }
 }
 void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor, int p1Score, int p2Score) {
@@ -139,6 +129,7 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     if (ballPos.x < left){
         p2Score +=1;
         ball.setPosition(0,0,0);
+        ball.velocity = ball.velocity *(-1);
     }
 
     //Check collision with the right wall
@@ -167,14 +158,16 @@ void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo
         ballPos.x + ballRadius > paddleOnePos.x &&
         ballPos.y - ballRadius < paddleOnePos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleOnePos.y - paddleHeight / 2 ) {
-        ball.velocity = ball.velocity * (-1.03);
+        ball.velocity.x = ball.velocity.x * (-1.03f);
+        ball.velocity.y = ball.velocity.y * (-1.2f);
     }
 
     else if (ballPos.x - ballRadius < paddleTwoPos.x &&
         ballPos.x + ballRadius > paddleTwoPos.x &&
         ballPos.y - ballRadius < paddleTwoPos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleTwoPos.y - paddleHeight / 2 ) {
-        ball.velocity = ball.velocity * (-1.03);
+        ball.velocity.x = ball.velocity.x * (-1.03f);
+        ball.velocity.y = ball.velocity.y * (-1.2f);
     }
 }
 

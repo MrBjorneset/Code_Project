@@ -39,23 +39,22 @@ namespace threepp {
             return this->_viewports.size();
         }
 
-        Frustum &getFrustum() {
+        Frustum& getFrustum() {
 
             return this->_frustum;
         }
 
-        void updateMatrices(Light *light) {
+        virtual void updateMatrices(Light* light) {
 
-            auto lightWithTarget = dynamic_cast<LightWithTarget *>(light);
-
-            const auto &shadowCamera = this->camera;
-            auto &shadowMatrix = this->matrix;
+            auto shadowCamera = this->camera;
+            auto& shadowMatrix = this->matrix;
 
             Vector3 _lightPositionWorld{};
             _lightPositionWorld.setFromMatrixPosition(*light->matrixWorld);
             shadowCamera->position.copy(_lightPositionWorld);
 
             Vector3 _lookTarget{};
+            auto lightWithTarget = dynamic_cast<LightWithTarget*>(light);
             _lookTarget.setFromMatrixPosition(*lightWithTarget->target->matrixWorld);
             shadowCamera->lookAt(_lookTarget);
             shadowCamera->updateMatrixWorld();
@@ -74,12 +73,12 @@ namespace threepp {
             shadowMatrix.multiply(shadowCamera->matrixWorldInverse);
         }
 
-        Vector4 &getViewport(int viewportIndex) {
+        Vector4& getViewport(size_t viewportIndex) {
 
             return this->_viewports[viewportIndex];
         }
 
-        Vector2 &getFrameExtents() {
+        Vector2& getFrameExtents() {
 
             return this->_frameExtents;
         }
@@ -105,7 +104,7 @@ namespace threepp {
 
     protected:
         Frustum _frustum{};
-        Vector2 _frameExtents{};
+        Vector2 _frameExtents{1, 1};
 
         std::vector<Vector4> _viewports{Vector4(0, 0, 1, 1)};
     };

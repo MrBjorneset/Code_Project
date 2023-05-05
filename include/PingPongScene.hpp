@@ -30,7 +30,7 @@ public:
         mesh_->position.set(x, y, z);
     }
 
-    std::shared_ptr<Mesh> getMesh() const {
+    [[nodiscard]] std::shared_ptr<Mesh> getMesh() const {
         return mesh_;
     }
     Vector3 velocity;
@@ -54,7 +54,7 @@ public:
     void move(float deltaX, float deltaY, float deltaZ){
         mesh_->position.add({deltaX, deltaY, deltaZ});
     }
-    std::shared_ptr<Mesh> getMesh() const {
+    [[nodiscard]] std::shared_ptr<Mesh> getMesh() const {
         return mesh_;
     }
 private:

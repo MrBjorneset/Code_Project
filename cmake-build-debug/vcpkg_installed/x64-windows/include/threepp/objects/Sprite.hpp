@@ -3,38 +3,31 @@
 #ifndef THREEPP_SPRITE_HPP
 #define THREEPP_SPRITE_HPP
 
+#include "threepp/core/BufferGeometry.hpp"
 #include "threepp/core/Object3D.hpp"
 #include "threepp/materials/SpriteMaterial.hpp"
-#include "threepp/core/BufferGeometry.hpp"
-#include "threepp/core/InterleavedBuffer.hpp"
 
 namespace threepp {
 
-    class Sprite : public Object3D {
+    class Sprite: public Object3D {
 
     public:
-
         Vector2 center{0.5f, 0.5f};
 
-        std::shared_ptr<BufferGeometry> _geometry;
         std::shared_ptr<SpriteMaterial> material;
 
-        void raycast(Raycaster &raycaster, std::vector<Intersection> &intersects) override;
+        [[nodiscard]] std::string type() const override;
 
-        BufferGeometry *geometry() override {
-            return _geometry.get();
-        }
+        void raycast(Raycaster& raycaster, std::vector<Intersection>& intersects) override;
 
-        static std::shared_ptr<Sprite> create(const std::shared_ptr<SpriteMaterial> &material = SpriteMaterial::create()) {
+        BufferGeometry* geometry() override;
 
-            return std::shared_ptr<Sprite>(new Sprite(material));
-        }
+        static std::shared_ptr<Sprite> create(const std::shared_ptr<SpriteMaterial>& material = SpriteMaterial::create());
 
     private:
+        std::shared_ptr<BufferGeometry> _geometry;
 
-        explicit Sprite(const std::shared_ptr<SpriteMaterial> &material);
-
-        friend class GLRenderer;
+        explicit Sprite(const std::shared_ptr<SpriteMaterial>& material);
     };
 
 }// namespace threepp

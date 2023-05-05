@@ -3,16 +3,17 @@
 #ifndef THREEPP_MATERIAL_HPP
 #define THREEPP_MATERIAL_HPP
 
-#include <threepp/constants.hpp>
-#include <threepp/core/EventDispatcher.hpp>
-#include <threepp/core/Uniform.hpp>
-#include <threepp/math/Plane.hpp>
+#include "threepp/constants.hpp"
+#include "threepp/core/EventDispatcher.hpp"
+#include "threepp/core/Uniform.hpp"
+#include "threepp/math/MathUtils.hpp"
+#include "threepp/math/Plane.hpp"
 
 #include <optional>
 
 namespace threepp {
 
-    class Material : public EventDispatcher {
+    class Material: public EventDispatcher, public std::enable_shared_from_this<Material> {
 
     public:
         const unsigned int id = materialId++;
@@ -83,8 +84,10 @@ namespace threepp {
         }
 
         void dispose() {
-
-            dispatchEvent("dispose", this);
+            if (!disposed_) {
+                disposed_ = true;
+                dispatchEvent("dispose", this);
+            }
         }
 
         void needsUpdate() {
@@ -95,23 +98,27 @@ namespace threepp {
         [[nodiscard]] virtual std::string type() const = 0;
 
         template<class T>
-        T *as() {
-
-            return dynamic_cast<T *>(this);
+        std::shared_ptr<T> as() {
+            auto m = shared_from_this();
+            return std::dynamic_pointer_cast<T>(m);
         }
 
         template<class T>
         bool is() {
 
-            return dynamic_cast<T *>(this) != nullptr;
+            return dynamic_cast<T*>(this) != nullptr;
         }
 
-        virtual ~Material() = default;
+        virtual std::shared_ptr<Material> clone() const { return nullptr; };
+
+        ~Material() override {
+            dispose();
+        }
 
     protected:
         Material() = default;
 
-        void copyInto(Material *m) const {
+        void copyInto(Material* m) const {
 
             m->name = name;
 
@@ -144,7 +151,7 @@ namespace threepp {
             m->stencilZPass = stencilZPass;
             m->stencilWrite = stencilWrite;
 
-            const auto &srcPlanes = clippingPlanes;
+            const auto& srcPlanes = clippingPlanes;
             std::vector<Plane> dstPlanes;
 
             if (!srcPlanes.empty()) {
@@ -182,10 +189,11 @@ namespace threepp {
         }
 
     private:
-        std::string uuid_ = utils::generateUUID();
+        bool disposed_ = false;
+        std::string uuid_ = math::generateUUID();
         inline static unsigned int materialId = 0;
-
     };
+
 
 }// namespace threepp
 

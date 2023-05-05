@@ -9,17 +9,17 @@ namespace threepp {
     class Face3 {
 
     public:
-        int a;
-        int b;
-        int c;
+        unsigned int a;
+        unsigned int b;
+        unsigned int c;
         Vector3 normal;
 
-        int materialIndex;
+        unsigned int materialIndex;
 
-        Face3(int a, int b, int c, const Vector3 &normal, int materialIndex)
+        Face3(unsigned int a, unsigned int b, unsigned int c, const Vector3& normal, unsigned int materialIndex)
             : a(a), b(b), c(c), normal(normal), materialIndex(materialIndex) {}
     };
 
-}
+}// namespace threepp
 
 #endif//THREEPP_FACE3_HPP

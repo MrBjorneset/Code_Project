@@ -6,90 +6,51 @@
 #include "threepp/core/BufferGeometry.hpp"
 #include "threepp/core/Object3D.hpp"
 #include "threepp/materials/Material.hpp"
-#include "threepp/materials/MeshBasicMaterial.hpp"
 
-#include <memory>
 
 namespace threepp {
 
-    class Mesh : public Object3D {
+    class Mesh: public Object3D {
 
     public:
-        std::shared_ptr<BufferGeometry> geometry_;
-        std::vector<std::shared_ptr<Material>> materials_;
+        [[nodiscard]] std::string type() const override;
 
-        BufferGeometry* geometry() override {
+        BufferGeometry* geometry() override;
 
-            return geometry_.get();
-        }
+        [[nodiscard]] const BufferGeometry* geometry() const;
 
-        [[nodiscard]] const BufferGeometry* geometry() const {
+        void setGeometry(const std::shared_ptr<BufferGeometry>& geometry);
 
-            return geometry_.get();
-        }
+        Material* material() override;
 
-        Material* material() override {
+        [[nodiscard]] std::vector<Material*> materials() override;
 
-            return materials_.front().get();
-        }
+        void setMaterial(const std::shared_ptr<Material>& material);
 
-        [[nodiscard]] const Material* material() const override {
+        void setMaterials(const std::vector<std::shared_ptr<Material>>& materials);
 
-            return materials_.front().get();
-        }
+        [[nodiscard]] size_t numMaterials() const;
 
-        template<class T>
-        T* material() {
+        void raycast(Raycaster& raycaster, std::vector<Intersection>& intersects) override;
 
-            return dynamic_cast<T*>(material());
-        }
-
-        template<class T>
-        const T* material() const {
-
-            return dynamic_cast<T*>(material());
-        }
-
-        [[nodiscard]] std::vector<Material*> materials() override {
-            std::vector<Material*> res(materials_.size());
-            std::transform(materials_.begin(), materials_.end(), res.begin(), [](auto& m) {return m.get();});
-            return res;
-        }
-
-        [[nodiscard]] size_t numMaterials() const {
-
-            return materials_.size();
-        }
-
-        void raycast(Raycaster &raycaster, std::vector<Intersection> &intersects) override;
-
-        std::shared_ptr<Mesh> clone(bool recursive = false);
+        std::shared_ptr<Object3D> clone(bool recursive = true) override;
 
         static std::shared_ptr<Mesh> create(
-                std::shared_ptr<BufferGeometry> geometry = BufferGeometry::create(),
-                std::shared_ptr<Material> material = MeshBasicMaterial::create()) {
-
-            return std::shared_ptr<Mesh>(new Mesh(std::move(geometry), std::move(material)));
-        }
+                std::shared_ptr<BufferGeometry> geometry = nullptr,
+                std::shared_ptr<Material> material = nullptr);
 
         static std::shared_ptr<Mesh> create(
                 std::shared_ptr<BufferGeometry> geometry,
-                std::vector<std::shared_ptr<Material>> materials) {
-
-            return std::shared_ptr<Mesh>(new Mesh(std::move(geometry), std::move(materials)));
-        }
+                std::vector<std::shared_ptr<Material>> materials);
 
         ~Mesh() override = default;
 
     protected:
+        std::shared_ptr<BufferGeometry> geometry_;
+        std::vector<std::shared_ptr<Material>> materials_;
 
-        Mesh(std::shared_ptr<BufferGeometry> geometry, std::shared_ptr<Material> material)
-            : geometry_(std::move(geometry)), materials_{std::move(material)} {
-        }
-
-        Mesh(std::shared_ptr<BufferGeometry> geometry, std::vector<std::shared_ptr<Material>> materials)
-            : geometry_(std::move(geometry)), materials_{std::move(materials)} {
-        }
+        Mesh(std::shared_ptr<BufferGeometry> geometry, std::shared_ptr<Material> material);
+        Mesh(std::shared_ptr<BufferGeometry> geometry, std::vector<std::shared_ptr<Material>> materials);
     };
 
 }// namespace threepp

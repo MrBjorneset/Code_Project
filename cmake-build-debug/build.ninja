@@ -65,10 +65,10 @@ build CMakeFiles\PingPong.dir\main.cpp.obj: CXX_COMPILER__PingPong_Debug C$:\Kod
 #############################################
 # Link the executable PingPong.exe
 
-build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.dir\main.cpp.obj | vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.dir\main.cpp.obj | vcpkg_installed\x64-windows\debug\lib\threepp.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\threepp.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\threepp.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\PingPong.dir
   POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/PingPong.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
@@ -76,6 +76,43 @@ build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.di
   TARGET_FILE = PingPong.exe
   TARGET_IMPLIB = PingPong.lib
   TARGET_PDB = PingPong.pdb
+
+# =============================================================================
+# Object build statements for EXECUTABLE target tests
+
+
+#############################################
+# Order-only phony target for tests
+
+build cmake_object_order_depends_target_tests: phony || CMakeFiles\tests.dir
+
+build CMakeFiles\tests.dir\tests\test_1.cpp.obj: CXX_COMPILER__tests_Debug C$:\Kode\GitHub\C++\Code_Project\tests\test_1.cpp || cmake_object_order_depends_target_tests
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
+  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\tests.dir\tests
+  TARGET_COMPILE_PDB = CMakeFiles\tests.dir\
+  TARGET_PDB = tests.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target tests
+
+
+#############################################
+# Link the executable tests.exe
+
+build tests.exe: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles\tests.dir\tests\test_1.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = CMakeFiles\tests.dir
+  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\tests.dir\
+  TARGET_FILE = tests.exe
+  TARGET_IMPLIB = tests.lib
+  TARGET_PDB = tests.pdb
 
 
 #############################################
@@ -106,41 +143,41 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
-# Object build statements for EXECUTABLE target GameTest
+# Object build statements for EXECUTABLE target test_1
 
 
 #############################################
-# Order-only phony target for GameTest
+# Order-only phony target for test_1
 
-build cmake_object_order_depends_target_GameTest: phony || tests\CMakeFiles\GameTest.dir
+build cmake_object_order_depends_target_test_1: phony || tests\CMakeFiles\test_1.dir
 
-build tests\CMakeFiles\GameTest.dir\GameTest.cpp.obj: CXX_COMPILER__GameTest_Debug C$:\Kode\GitHub\C++\Code_Project\tests\GameTest.cpp || cmake_object_order_depends_target_GameTest
+build tests\CMakeFiles\test_1.dir\test_1.cpp.obj: CXX_COMPILER__test_1_Debug C$:\Kode\GitHub\C++\Code_Project\tests\test_1.cpp || cmake_object_order_depends_target_test_1
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
-  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
-  OBJECT_DIR = tests\CMakeFiles\GameTest.dir
-  OBJECT_FILE_DIR = tests\CMakeFiles\GameTest.dir
-  TARGET_COMPILE_PDB = tests\CMakeFiles\GameTest.dir\
-  TARGET_PDB = tests\GameTest.pdb
+  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -IC:\Kode\GitHub\C++\Code_Project\tests -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
+  OBJECT_DIR = tests\CMakeFiles\test_1.dir
+  OBJECT_FILE_DIR = tests\CMakeFiles\test_1.dir
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_1.dir\
+  TARGET_PDB = tests\test_1.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target GameTest
+# Link build statements for EXECUTABLE target test_1
 
 
 #############################################
-# Link the executable tests\GameTest.exe
+# Link the executable tests\test_1.exe
 
-build tests\GameTest.exe: CXX_EXECUTABLE_LINKER__GameTest_Debug tests\CMakeFiles\GameTest.dir\GameTest.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+build tests\test_1.exe: CXX_EXECUTABLE_LINKER__test_1_Debug tests\CMakeFiles\test_1.dir\test_1.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = tests\CMakeFiles\GameTest.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/GameTest.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
+  OBJECT_DIR = tests\CMakeFiles\test_1.dir
+  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/test_1.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = tests\CMakeFiles\GameTest.dir\
-  TARGET_FILE = tests\GameTest.exe
-  TARGET_IMPLIB = tests\GameTest.lib
-  TARGET_PDB = tests\GameTest.pdb
+  TARGET_COMPILE_PDB = tests\CMakeFiles\test_1.dir\
+  TARGET_FILE = tests\test_1.exe
+  TARGET_IMPLIB = tests\test_1.lib
+  TARGET_PDB = tests\test_1.pdb
 
 
 #############################################
@@ -168,11 +205,13 @@ build tests\rebuild_cache: phony tests\CMakeFiles\rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build GameTest: phony tests\GameTest.exe
-
-build GameTest.exe: phony tests\GameTest.exe
-
 build PingPong: phony PingPong.exe
+
+build test_1: phony tests\test_1.exe
+
+build test_1.exe: phony tests\test_1.exe
+
+build tests: phony tests.exe
 
 # =============================================================================
 # Folder targets.
@@ -182,14 +221,14 @@ build PingPong: phony PingPong.exe
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug
 
-build all: phony PingPong.exe tests\all
+build all: phony PingPong.exe tests.exe tests\all
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests
 
-build tests\all: phony tests\GameTest.exe
+build tests\all: phony tests\test_1.exe
 
 # =============================================================================
 # Built-in targets

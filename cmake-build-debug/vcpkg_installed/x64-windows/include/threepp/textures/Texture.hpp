@@ -12,20 +12,21 @@
 
 #include "threepp/textures/Image.hpp"
 
+#include <functional>
 #include <memory>
 #include <optional>
 #include <utility>
 
 namespace threepp {
 
-    class Texture : public EventDispatcher {
+    class Texture: public EventDispatcher {
 
     public:
         inline static int DEFAULT_MAPPING = UVMapping;
 
         unsigned int id = textureId++;
 
-        std::string uuid = utils::generateUUID();
+        std::string uuid;
 
         std::string name;
 
@@ -64,30 +65,35 @@ namespace threepp {
         // update. You need to explicitly call Material.needsUpdate to trigger it to recompile.
         int encoding = LinearEncoding;
 
-        std::optional<std::function<void(Texture &)>> onUpdate;
+        Texture(const Texture&) = delete;
+        Texture operator=(const Texture&) = delete;
+
+        std::optional<std::function<void(Texture&)>> onUpdate;
 
         void updateMatrix();
 
         void dispose();
 
-        void transformUv(Vector2 &uv) const;
+        void transformUv(Vector2& uv) const;
 
         void needsUpdate();
 
         [[nodiscard]] unsigned int version() const;
 
-        Texture &copy(const Texture &source);
+        Texture& copy(const Texture& source);
 
-        static std::shared_ptr<Texture> create(std::optional<Image> image = std::nullopt) {
+        [[nodiscard]] std::shared_ptr<Texture> clone() const;
 
-            return std::shared_ptr<Texture>(new Texture(std::move(image)));
-        }
+        ~Texture() override;
+
+        static std::shared_ptr<Texture> create(std::optional<Image> image = std::nullopt);
 
     protected:
-        explicit Texture(std::optional<Image> image = std::nullopt)
-            : image(std::move(image)) {}
+        explicit Texture(std::optional<Image> image = std::nullopt);
 
     private:
+
+        bool disposed_ = false;
         unsigned int version_ = 0;
 
         inline static unsigned int textureId = 0;

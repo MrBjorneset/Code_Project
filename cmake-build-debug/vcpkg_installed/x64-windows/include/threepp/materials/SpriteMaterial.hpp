@@ -9,17 +9,34 @@
 
 namespace threepp {
 
-    class SpriteMaterial : public virtual Material,
-                           public MaterialWithColor,
-                           public MaterialWithRotation,
-                           public MaterialWithMap,
-                           public MaterialWithAlphaMap,
-                           public MaterialWithSize {
+    class SpriteMaterial: public virtual Material,
+                          public MaterialWithColor,
+                          public MaterialWithRotation,
+                          public MaterialWithMap,
+                          public MaterialWithAlphaMap,
+                          public MaterialWithSize {
 
     public:
         [[nodiscard]] std::string type() const override {
 
             return "SpriteMaterial";
+        }
+
+        std::shared_ptr<Material> clone() const override {
+            auto m = create();
+            copyInto(m.get());
+
+            m->color.copy(color);
+
+            m->map = map;
+
+            m->alphaMap = alphaMap;
+
+            m->rotation = rotation;
+
+            m->sizeAttenuation = sizeAttenuation;
+
+            return m;
         }
 
         static std::shared_ptr<SpriteMaterial> create() {

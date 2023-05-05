@@ -5,26 +5,44 @@
 
 #include "threepp/core/BufferGeometry.hpp"
 
-#include <cmath>
 
 namespace threepp {
 
-    class BoxGeometry : public BufferGeometry {
+    class BoxGeometry: public BufferGeometry {
 
     public:
+        struct Params {
+            float width;
+            float height;
+            float depth;
+
+            unsigned int widthSegments;
+            unsigned int heightSegments;
+            unsigned int depthSegments;
+
+            explicit Params(float width = 1, float height = 1, float depth = 1, unsigned int widthSegments = 1, unsigned int heightSegments = 1, unsigned int depthSegments = 1)
+                : width(width), height(height), depth(depth), widthSegments(widthSegments), heightSegments(heightSegments), depthSegments(depthSegments) {}
+        };
+
         const float width;
         const float height;
         const float depth;
-        const int widthSegments;
-        const int heightSegments;
-        const int depthSegments;
 
-        static std::shared_ptr<BoxGeometry> create(float width = 1, float height = 1, float depth = 1, int widthSegments = 1, int heightSegments = 1, int depthSegments = 1) {
-            return std::shared_ptr<BoxGeometry>(new BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments));
+        [[nodiscard]] std::string type() const override {
+
+            return "BoxGeometry";
+        }
+
+        static std::shared_ptr<BoxGeometry> create(const Params& params) {
+            return std::shared_ptr<BoxGeometry>(new BoxGeometry(params));
+        }
+
+        static std::shared_ptr<BoxGeometry> create(float width = 1, float height = 1, float depth = 1, unsigned int widthSegments = 1, unsigned int heightSegments = 1, unsigned int depthSegments = 1) {
+            return create(Params(width, height, depth, widthSegments, heightSegments, depthSegments));
         }
 
     protected:
-        explicit BoxGeometry(float width, float height, float depth, int widthSegments, int heightSegments, int depthSegments);
+        explicit BoxGeometry(const Params& params);
     };
 
 }// namespace threepp

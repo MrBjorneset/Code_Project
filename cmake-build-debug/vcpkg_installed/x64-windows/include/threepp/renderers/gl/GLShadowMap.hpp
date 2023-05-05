@@ -3,19 +3,19 @@
 #ifndef THREEPP_GLSHADOWMAP_HPP
 #define THREEPP_GLSHADOWMAP_HPP
 
-#include "GLObjects.hpp"
-
-#include "threepp/math/Frustum.hpp"
-
-#include "threepp/cameras/Camera.hpp"
-#include "threepp/lights/Light.hpp"
-#include "threepp/scenes/Scene.hpp"
+#include <vector>
+#include <memory>
 
 namespace threepp {
 
     class GLRenderer;
+    class Light;
+    class Scene;
+    class Camera;
 
     namespace gl {
+
+        class GLObjects;
 
         struct GLShadowMap {
 
@@ -26,30 +26,15 @@ namespace threepp {
 
             int type = PCFShadowMap;
 
-            explicit GLShadowMap(GLObjects &_objects);
+            explicit GLShadowMap(GLObjects& objects);
 
-            void render(GLRenderer &_renderer, const std::vector<Light *> &lights, Scene *scene, Camera *camera);
+            void render(GLRenderer& renderer, const std::vector<Light*>& lights, Scene* scene, Camera* camera);
+
+            ~GLShadowMap();
 
         private:
-            GLObjects &_objects;
-
-            Frustum _frustum;
-
-            Vector2 _shadowMapSize;
-            Vector2 _viewportSize;
-
-            Vector4 _viewport;
-
-            std::vector<Material *> _depthMaterials;
-            std::vector<Material *> _distanceMaterials;
-
-            std::unordered_map<std::string, std::string> _materialCache;
-
-            int _maxTextureSize;
-
-            std::shared_ptr<Mesh> fullScreenMesh;
-
-            void VSMPass(GLRenderer &_renderer, LightShadow *shadow, Camera *camera);
+            struct Impl;
+            std::unique_ptr<Impl> pimpl_;
 
         };
 

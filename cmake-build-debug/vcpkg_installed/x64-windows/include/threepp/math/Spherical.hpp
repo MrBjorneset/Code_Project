@@ -3,11 +3,10 @@
 #ifndef THREEPP_SPHERICAL_HPP
 #define THREEPP_SPHERICAL_HPP
 
-#include "threepp/math/Vector3.hpp"
-
-#include "threepp/math/MathUtils.hpp"
 
 namespace threepp {
+
+    class Vector3;
 
     class Spherical {
 
@@ -18,16 +17,16 @@ namespace threepp {
 
         explicit Spherical(float radius = 1, float phi = 0, float theta = 0);
 
-        Spherical &set(float radius, float phi, float theta);
+        Spherical& set(float radius, float phi, float theta);
 
-        Spherical &copy(const Spherical &other);
+        Spherical& copy(const Spherical& other);
 
         // restrict phi to be between EPS and PI-EPS
-        Spherical &makeSafe();
+        Spherical& makeSafe();
 
-        Spherical &setFromVector3(const Vector3 &v);
+        Spherical& setFromVector3(const Vector3& v);
 
-        Spherical &setFromCartesianCoords(float x, float y, float z);
+        Spherical& setFromCartesianCoords(float x, float y, float z);
     };
 
 }// namespace threepp

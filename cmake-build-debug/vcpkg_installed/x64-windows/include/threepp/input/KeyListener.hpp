@@ -2,8 +2,6 @@
 #ifndef THREEPP_KEYLISTENER_HPP
 #define THREEPP_KEYLISTENER_HPP
 
-#include "threepp/utils/uuid.hpp"
-
 #include <functional>
 #include <utility>
 
@@ -20,8 +18,6 @@ namespace threepp {
     };
 
     struct KeyListener {
-
-        const std::string uuid = utils::generateUUID();
 
         virtual void onKeyPressed(KeyEvent evt) {}
 
@@ -40,7 +36,7 @@ namespace threepp {
             KEY_REPEAT = 4
         };
 
-        KeyAdapter(const Mode &mode, std::function<void(KeyEvent)> f)
+        KeyAdapter(const Mode& mode, std::function<void(KeyEvent)> f)
             : mode_(mode), f_(std::move(f)) {}
 
         void onKeyPressed(KeyEvent evt) override {
@@ -58,12 +54,10 @@ namespace threepp {
     private:
         Mode mode_;
         std::function<void(KeyEvent)> f_;
-
     };
 
 
-    inline KeyAdapter::Mode operator|(KeyAdapter::Mode a, KeyAdapter::Mode b)
-    {
+    inline KeyAdapter::Mode operator|(KeyAdapter::Mode a, KeyAdapter::Mode b) {
         return static_cast<KeyAdapter::Mode>(static_cast<int>(a) | static_cast<int>(b));
     }
 

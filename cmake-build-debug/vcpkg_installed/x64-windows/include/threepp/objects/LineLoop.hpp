@@ -7,18 +7,17 @@
 
 namespace threepp {
 
-    class LineLoop : public Line {
+    class LineLoop: public Line {
 
     public:
+        [[nodiscard]] std::string type() const override;
 
-        static std::shared_ptr<LineLoop> create(std::shared_ptr<BufferGeometry> geometry, std::shared_ptr<Material> material) {
+        std::shared_ptr<Object3D> clone(bool recursive = true) override;
 
-            return std::shared_ptr<LineLoop>(new LineLoop(std::move(geometry), std::move((material))));
-        }
+        static std::shared_ptr<LineLoop> create(const std::shared_ptr<BufferGeometry>& geometry = nullptr, const std::shared_ptr<Material>& material = nullptr);
 
     protected:
-        LineLoop(std::shared_ptr<BufferGeometry> geometry, std::shared_ptr<Material> material)
-            : Line(std::move(geometry), std::move(material)) {}
+        LineLoop(const std::shared_ptr<BufferGeometry>& geometry, const std::shared_ptr<Material>& material);
     };
 
 }// namespace threepp

@@ -13,46 +13,58 @@
 
 namespace threepp {
 
-    inline btVector3 convert(const threepp::Vector3 &v) {
+    inline btVector3 convert(const threepp::Vector3& v) {
         return {v.x, v.y, v.z};
     }
 
-    inline btQuaternion convert(const threepp::Quaternion &q) {
+    inline btQuaternion convert(const threepp::Quaternion& q) {
         return {q.x(), q.y(), q.z(), q.w()};
     }
 
-    inline btTransform convert(const threepp::Matrix4 &m) {
+    inline btTransform convert(const threepp::Matrix4& m) {
         return btTransform{
                 convert(threepp::Quaternion().setFromRotationMatrix(m)),
                 convert(threepp::Vector3().setFromMatrixPosition(m))};
     }
 
-    std::unique_ptr<btCollisionShape> fromGeometry(const std::shared_ptr<BufferGeometry> &geometry) {
+    inline std::unique_ptr<btCollisionShape> fromGeometry(const BufferGeometry* geometry) {
 
         if (!geometry) {
             return std::make_unique<btEmptyShape>();
         }
 
-        if (std::dynamic_pointer_cast<const BoxGeometry>(geometry)) {
+        if (dynamic_cast<const BoxGeometry*>(geometry)) {
 
-            auto g = std::dynamic_pointer_cast<const BoxGeometry>(geometry);
+            auto g = dynamic_cast<const BoxGeometry*>(geometry);
             return std::make_unique<btBoxShape>(btVector3(g->width, g->height, g->depth) / 2);
 
-        } else if (std::dynamic_pointer_cast<const PlaneGeometry>(geometry)) {
+        } else if (dynamic_cast<const PlaneGeometry*>(geometry)) {
 
-            auto g = std::dynamic_pointer_cast<const PlaneGeometry>(geometry);
+            auto g = dynamic_cast<const PlaneGeometry*>(geometry);
             return std::make_unique<btBoxShape>(btVector3(g->width / 2, 0.1f, g->height / 2));
 
-        } else if (std::dynamic_pointer_cast<const SphereGeometry>(geometry)) {
+        } else if (dynamic_cast<const SphereGeometry*>(geometry)) {
 
-            auto g = std::dynamic_pointer_cast<const SphereGeometry>(geometry);
+            auto g = dynamic_cast<const SphereGeometry*>(geometry);
             return std::make_unique<btSphereShape>(g->radius);
 
-        } else if (std::dynamic_pointer_cast<const CylinderGeometry>(geometry)) {
+        } else if (dynamic_cast<const ConeGeometry*>(geometry)) {
 
-            auto g = std::dynamic_pointer_cast<const CylinderGeometry>(geometry);
+            auto g = dynamic_cast<const ConeGeometry*>(geometry);
+            return std::make_unique<btConeShape>(g->radiusBottom, g->height);
+
+        } else if (dynamic_cast<const CylinderGeometry*>(geometry)) {
+
+            auto g = dynamic_cast<const CylinderGeometry*>(geometry);
             return std::make_unique<btCylinderShape>(btVector3(g->radiusTop, g->height / 2, g->radiusTop));
+
+        } else if (dynamic_cast<const CapsuleGeometry*>(geometry)) {
+
+            auto g = dynamic_cast<const CapsuleGeometry*>(geometry);
+            return std::make_unique<btCapsuleShape>(g->radius, g->length);
+
         } else {
+
             return std::make_unique<btEmptyShape>();
         }
     }
@@ -63,12 +75,12 @@ namespace threepp {
         std::unique_ptr<btMotionState> state;
         std::unique_ptr<btRigidBody> body;
 
-        static std::shared_ptr<RbWrapper> create(const std::shared_ptr<BufferGeometry> &shape, float mass = 0) {
+        static std::shared_ptr<RbWrapper> create(const BufferGeometry* shape, float mass = 0) {
             return std::shared_ptr<RbWrapper>(new RbWrapper(shape, mass));
         }
 
     private:
-        RbWrapper(const std::shared_ptr<BufferGeometry> &shape, float mass)
+        RbWrapper(const BufferGeometry* shape, float mass)
             : shape(fromGeometry(shape)),
               state(std::make_unique<btDefaultMotionState>()) {
 
@@ -88,18 +100,20 @@ namespace threepp {
     class BulletWrapper {
 
     public:
-        explicit BulletWrapper(const Vector3 &gravity = {0, -9.81f, 0})
+        explicit BulletWrapper(const Vector3& gravity = {0, -9.81f, 0})
             : dispatcher{&collisionConfiguration},
-              world{&dispatcher, &broadphase, &solver, &collisionConfiguration} {
+              world{&dispatcher, &broadphase, &solver, &collisionConfiguration},
+              listener(std::make_shared<ObjectRemovedListener>(this)) {
+
             world.setGravity(convert(gravity));
         }
 
         void step(float dt, int maxSubSteps = 1, btScalar fixedTimeStep = btScalar(1.) / btScalar(60.)) {
             world.stepSimulation(dt, maxSubSteps, fixedTimeStep);
 
-            for (auto &[m, info] : bodies) {
-                auto &t = info->body->getWorldTransform();
-                auto &p = t.getOrigin();
+            for (auto& [m, info] : bodies) {
+                auto& t = info->body->getWorldTransform();
+                auto& p = t.getOrigin();
                 auto r = t.getRotation();
 
                 m->quaternion.set(r.x(), r.y(), r.z(), r.w());
@@ -107,29 +121,51 @@ namespace threepp {
             }
         }
 
-        BulletWrapper &setGravity(const Vector3 &g) {
+        BulletWrapper& setGravity(const Vector3& g) {
             world.setGravity(convert(g));
             return *this;
         }
 
-        BulletWrapper &addRigidbody(const std::shared_ptr<RbWrapper> &rb, const std::shared_ptr<Object3D> &obj) {
+        BulletWrapper& addRigidbody(const std::shared_ptr<RbWrapper>& rb, Object3D& obj) {
 
-            obj->updateMatrixWorld();
-            auto t = convert(*obj->matrixWorld);
+            obj.updateMatrixWorld();
+            auto t = convert(*obj.matrixWorld);
             rb->state->setWorldTransform(t);
             rb->body->setWorldTransform(t);
 
             world.addRigidBody(rb->body.get());
-            bodies[obj] = rb;
+            bodies[&obj] = rb;
+
+            obj.addEventListener("remove", listener);
+
             return *this;
         }
 
-        void addConstraint(btTypedConstraint *c, bool disableCollisionsBetweenLinkedBodies = false) {
+        void addConstraint(btTypedConstraint* c, bool disableCollisionsBetweenLinkedBodies = false) {
             world.addConstraint(c, disableCollisionsBetweenLinkedBodies);
         }
 
     private:
-        std::unordered_map<std::shared_ptr<threepp::Object3D>, std::shared_ptr<RbWrapper>> bodies{};
+        struct ObjectRemovedListener: EventListener {
+
+            explicit ObjectRemovedListener(BulletWrapper* scope): scope(scope) {}
+
+            void onEvent(Event& event) override {
+                if (event.type == "remove") {
+                    auto o = static_cast<Object3D*>(event.target);
+                    if (scope->bodies.count(o)) {
+                        auto& rb = scope->bodies.at(o);
+                        scope->world.removeRigidBody(rb->body.get());
+                        scope->bodies.erase(o);
+                    }
+                }
+            }
+
+        private:
+            BulletWrapper* scope;
+        };
+
+        std::unordered_map<threepp::Object3D*, std::shared_ptr<RbWrapper>> bodies{};
 
         btDbvtBroadphase broadphase{};
 
@@ -143,6 +179,8 @@ namespace threepp {
         btCollisionDispatcher dispatcher;
 
         btDiscreteDynamicsWorld world;
+
+        std::shared_ptr<ObjectRemovedListener> listener;
     };
 
 }// namespace threepp

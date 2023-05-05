@@ -8,10 +8,10 @@
 
 namespace threepp {
 
-    class ArrowHelper : public Object3D {
+    class ArrowHelper: public Object3D {
 
     public:
-        void setDirection(const Vector3 &dir);
+        void setDirection(const Vector3& dir);
 
         void setLength(float length, std::optional<float> headLength = std::nullopt, std::optional<float> headWidth = std::nullopt);
 
@@ -22,10 +22,7 @@ namespace threepp {
                                                    float length = 1,
                                                    int color = 0xffff00,
                                                    std::optional<float> headLength = std::nullopt,
-                                                   std::optional<float> headWidth = std::nullopt) {
-
-            return std::shared_ptr<ArrowHelper>(new ArrowHelper(dir, origin, length, color, headLength, headWidth));
-        }
+                                                   std::optional<float> headWidth = std::nullopt);
 
     protected:
         ArrowHelper(

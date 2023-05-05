@@ -6,15 +6,17 @@
 
 namespace threepp {
 
-    class Group : public Object3D {
+    class Group: public Object3D {
 
     public:
-        static std::shared_ptr<Group> create() {
-            return std::shared_ptr<Group>(new Group());
-        }
+        [[nodiscard]] std::string type() const override;
+
+        std::shared_ptr<Object3D> clone(bool recursive = true) override;
+
+        static std::shared_ptr<Group> create();
 
     protected:
-        Group() = default;
+        Group();
     };
 
 }// namespace threepp

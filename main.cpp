@@ -51,16 +51,14 @@ int main() {
                 game.trackBall(ball,paddleTwo);
                 paddleOne.move(0,game.p1PaddleSpeedY,0);
                 paddleTwo.move(0,game.p2PaddleSpeedY,0);
-                std::cout << ball.getMesh()->position << std::endl;
-                std::cout << game.p2PaddleSpeedY << std::endl;
-                std::cout << paddleTwo.getMesh()->position << std::endl;
             }
 
             else if (listener.multiPlayer){
                 ball.update(1);
                 game.checkWallCollision(ball,-70,70,70,-70,p1Score,p2Score);
                 game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
-                game.multiPlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown,listener.p2DirectionUp,listener.p2DirectionDown);
+                game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+                game.multiPlayerMovement(listener.p2DirectionUp,listener.p2DirectionDown);
                 paddleOne.move(0,game.p1PaddleSpeedY,0);
                 paddleTwo.move(0,game.p2PaddleSpeedY,0);
             }

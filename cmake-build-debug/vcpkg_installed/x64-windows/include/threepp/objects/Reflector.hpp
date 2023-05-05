@@ -10,22 +10,21 @@
 
 namespace threepp {
 
-    class Reflector : public Mesh {
+    class Reflector: public Mesh {
 
     public:
         struct Options {
 
-            std::optional<unsigned int> color;
+            std::optional<Color> color;
             std::optional<unsigned int> textureWidth;
             std::optional<unsigned int> textureHeight;
             std::optional<float> clipBias;
             std::optional<Shader> shader;
         };
 
-        static std::shared_ptr<Reflector> create(const std::shared_ptr<BufferGeometry> &geometry, Options options = Options()) {
+        [[nodiscard]] std::string type() const override;
 
-            return std::shared_ptr<Reflector>(new Reflector(geometry, std::move(options)));
-        }
+        static std::shared_ptr<Reflector> create(const std::shared_ptr<BufferGeometry>& geometry, Options options = Options());
 
         ~Reflector() override;
 
@@ -33,7 +32,7 @@ namespace threepp {
         struct Impl;
         std::unique_ptr<Impl> pimpl_;
 
-        Reflector(const std::shared_ptr<BufferGeometry> &geometry, Options options);
+        Reflector(const std::shared_ptr<BufferGeometry>& geometry, Options options);
     };
 
 }// namespace threepp

@@ -10,16 +10,32 @@
 
 namespace threepp {
 
-    class PointsMaterial : public virtual Material,
-                           public MaterialWithColor,
-                           public MaterialWithMap,
-                           public MaterialWithAlphaMap,
-                           public MaterialWithSize {
+    class PointsMaterial: public virtual Material,
+                          public MaterialWithColor,
+                          public MaterialWithMap,
+                          public MaterialWithAlphaMap,
+                          public MaterialWithSize {
 
     public:
         [[nodiscard]] std::string type() const override {
 
             return "PointsMaterial";
+        }
+
+        std::shared_ptr<Material> clone() const override {
+            auto m = create();
+            copyInto(m.get());
+
+            m->color.copy(color);
+
+            m->map = map;
+
+            m->alphaMap = alphaMap;
+
+            m->size = size;
+            m->sizeAttenuation = sizeAttenuation;
+
+            return m;
         }
 
         static std::shared_ptr<PointsMaterial> create() {
@@ -31,7 +47,6 @@ namespace threepp {
         PointsMaterial()
             : MaterialWithColor(0xffffff),
               MaterialWithSize(1, true) {}
-
     };
 
 }// namespace threepp

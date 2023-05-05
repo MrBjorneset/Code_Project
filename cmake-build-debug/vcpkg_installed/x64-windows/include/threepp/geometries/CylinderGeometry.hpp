@@ -5,30 +5,56 @@
 
 #include "threepp/core/BufferGeometry.hpp"
 
+#include "threepp/math/MathUtils.hpp"
+
 namespace threepp {
 
-    class CylinderGeometry : public BufferGeometry {
+    class CylinderGeometry: public BufferGeometry {
 
     public:
+        struct Params {
+            float radiusTop;
+            float radiusBottom;
+            float height;
+            unsigned int radialSegments;
+            unsigned int heightSegments;
+            bool openEnded;
+            float thetaStart;
+            float thetaLength;
+
+            explicit Params(float radiusTop = 1, float radiusBottom = 1, float height = 1, unsigned int radialSegments = 16, unsigned int heightSegments = 1, bool openEnded = false, float thetaStart = 0, float thetaLength = math::TWO_PI)
+                : radiusTop(radiusTop), radiusBottom(radiusBottom), height(height), radialSegments(radialSegments), heightSegments(heightSegments), openEnded(openEnded), thetaStart(thetaStart), thetaLength(thetaLength) {}
+        };
+
         const float radiusTop;
         const float radiusBottom;
         const float height;
+
+        [[nodiscard]] std::string type() const override {
+
+            return "CylinderGeometry";
+        }
+
+        static std::shared_ptr<CylinderGeometry> create(const Params& params) {
+
+            return std::shared_ptr<CylinderGeometry>(new CylinderGeometry(params));
+        }
 
         static std::shared_ptr<CylinderGeometry> create(
                 float radiusTop = 1,
                 float radiusBottom = 1,
                 float height = 1,
-                int radialSegments = 8,
-                int heightSegments = 1,
+                unsigned int radialSegments = 16,
+                unsigned int heightSegments = 1,
                 bool openEnded = false,
                 float thetaStart = 0,
-                float thetaLength = math::PI * 2) {
+                float thetaLength = math::TWO_PI) {
 
-            return std::shared_ptr<CylinderGeometry>(new CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength));
+            return create(Params(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength));
         }
 
     protected:
-        CylinderGeometry(float radiusTop, float radiusBottom, float height, int radialSegments, int heightSegments, bool openEnded, float thetaStart, float thetaLength);
+        CylinderGeometry(const Params& params);
     };
 
 }// namespace threepp

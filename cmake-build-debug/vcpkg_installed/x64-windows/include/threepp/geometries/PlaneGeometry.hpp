@@ -7,22 +7,48 @@
 
 namespace threepp {
 
-    class PlaneGeometry : public BufferGeometry {
+    class PlaneGeometry: public BufferGeometry {
 
     public:
+        struct Params {
+            float width;
+            float height;
+
+            unsigned int widthSegments;
+            unsigned int heightSegments;
+
+            explicit Params(float width = 1, float height = 1, unsigned int widthSegments = 1, unsigned int heightSegments = 1)
+                : width(width), height(height), widthSegments(widthSegments), heightSegments(heightSegments) {}
+        };
+
         const float width;
         const float height;
 
-        PlaneGeometry(const PlaneGeometry &) = delete;
+        PlaneGeometry(const PlaneGeometry&) = delete;
 
-        static std::shared_ptr<PlaneGeometry> create(float width = 1, float height = 1, int widthSegments = 1, int heightSegments = 1) {
-            return std::shared_ptr<PlaneGeometry>(new PlaneGeometry(width, height, widthSegments, heightSegments));
+        [[nodiscard]] std::string type() const override {
+
+            return "PlaneGeometry";
+        }
+
+        static std::shared_ptr<PlaneGeometry> create(const Params& params) {
+
+            return std::shared_ptr<PlaneGeometry>(new PlaneGeometry(params));
+        }
+
+        static std::shared_ptr<PlaneGeometry> create(
+                float width = 1,
+                float height = 1,
+                unsigned int widthSegments = 1,
+                unsigned int heightSegments = 1) {
+
+            return create(Params(width, height, widthSegments, heightSegments));
         }
 
     protected:
-        PlaneGeometry(float width, float height, int widthSegments, int heightSegments);
+        PlaneGeometry(const Params& params);
     };
 
 }// namespace threepp
 
-#endif //THREEPP_SPHEREGEOMETRY_HPP
+#endif//THREEPP_PLANEGEOMETRY_HPP

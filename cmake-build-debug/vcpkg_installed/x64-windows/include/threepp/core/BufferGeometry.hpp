@@ -3,93 +3,102 @@
 #ifndef THREEPP_BUFFERGEOMETRY_HPP
 #define THREEPP_BUFFERGEOMETRY_HPP
 
-#include "threepp/core/BufferAttribute.hpp"
-#include "threepp/core/misc.hpp"
 #include "threepp/math/Box3.hpp"
-#include "threepp/math/MathUtils.hpp"
-#include "threepp/math/Matrix3.hpp"
-#include "threepp/math/Matrix4.hpp"
 #include "threepp/math/Sphere.hpp"
 
-#include <iostream>
-#include <limits>
-#include <memory>
+#include "threepp/core/EventDispatcher.hpp"
+
+#include "threepp/core/BufferAttribute.hpp"
+
 #include <optional>
 #include <unordered_map>
-#include <utility>
-#include <vector>
 
 namespace threepp {
 
-    class BufferGeometry : public EventDispatcher {
+    class BufferGeometry: public EventDispatcher {
 
     public:
         const unsigned int id = ++_id;
 
-        const std::string uuid = utils::generateUUID();
+        const std::string uuid;
+
+        std::string name;
 
         std::vector<GeometryGroup> groups;
 
         std::optional<Box3> boundingBox;
         std::optional<Sphere> boundingSphere;
 
-        DrawRange drawRange = DrawRange{0, std::numeric_limits<int>::max() / 2};
+        DrawRange drawRange{0, std::numeric_limits<int>::max() / 2};
 
-        BufferGeometry() = default;
+        BufferGeometry();
+
+        [[nodiscard]] virtual std::string type() const {
+
+            return "BufferGeometry";
+        }
 
         [[nodiscard]] bool hasIndex() const;
 
-        IntBufferAttribute *getIndex();
+        IntBufferAttribute* getIndex();
 
-        const IntBufferAttribute *getIndex() const;
+        [[nodiscard]] const IntBufferAttribute* getIndex() const;
 
-        BufferGeometry &setIndex(std::vector<int> index);
+        template<class ArrayLike>
+        BufferGeometry& setIndex(const ArrayLike& index) {
 
-        BufferGeometry &setIndex(std::unique_ptr<IntBufferAttribute> index);
+            this->index_ = IntBufferAttribute::create(index, 1);
 
-        template<class T>
-        TypedBufferAttribute<T> *getAttribute(const std::string &name) {
-
-            if (!hasAttribute(name)) return nullptr;
-
-            return dynamic_cast<TypedBufferAttribute<T> *>(attributes_.at(name).get());
+            return *this;
         }
 
         template<class T>
-        const TypedBufferAttribute<T> *getAttribute(const std::string &name) const {
+        TypedBufferAttribute<T>* getAttribute(const std::string& name) {
 
             if (!hasAttribute(name)) return nullptr;
 
-            return dynamic_cast<TypedBufferAttribute<T> *>(attributes_.at(name).get());
+            return dynamic_cast<TypedBufferAttribute<T>*>(attributes_.at(name).get());
         }
 
-        [[nodiscard]] const std::unordered_map<std::string, std::unique_ptr<BufferAttribute>> &getAttributes() const;
+        template<class T>
+        const TypedBufferAttribute<T>* getAttribute(const std::string& name) const {
 
-        void setAttribute(const std::string &name, std::unique_ptr<BufferAttribute> attribute);
+            if (!hasAttribute(name)) return nullptr;
 
-        bool hasAttribute(const std::string &name) const;
+            return dynamic_cast<TypedBufferAttribute<T>*>(attributes_.at(name).get());
+        }
 
-        void addGroup(int start, int count, int materialIndex = 0);
+        [[nodiscard]] const std::unordered_map<std::string, std::unique_ptr<BufferAttribute>>& getAttributes() const;
+
+        void setAttribute(const std::string& name, std::unique_ptr<BufferAttribute> attribute);
+
+        [[nodiscard]] bool hasAttribute(const std::string& name) const;
+
+        void addGroup(int start, int count, unsigned int materialIndex = 0);
 
         void clearGroups();
 
-        BufferGeometry &setDrawRange(int start, int count);
+        BufferGeometry& setDrawRange(int start, int count);
 
-        BufferGeometry &applyMatrix4(const Matrix4 &matrix);
+        BufferGeometry& applyMatrix4(const Matrix4& matrix);
 
-        BufferGeometry &applyQuaternion(const Quaternion &q);
+        BufferGeometry& applyQuaternion(const Quaternion& q);
 
-        BufferGeometry &rotateX(float angle);
+        BufferGeometry& rotateX(float angle);
 
-        BufferGeometry &rotateY(float angle);
+        BufferGeometry& rotateY(float angle);
 
-        BufferGeometry &rotateZ(float angle);
+        BufferGeometry& rotateZ(float angle);
 
-        BufferGeometry &translate(float x, float y, float z);
+        BufferGeometry& translate(float x, float y, float z);
 
-        BufferGeometry &scale(float x, float y, float z);
+        BufferGeometry& scale(float x, float y, float z);
 
-        BufferGeometry &center();
+        BufferGeometry& center();
+
+        BufferGeometry& setFromPoints(const std::vector<Vector2>& points);
+
+        BufferGeometry& setFromPoints(const std::vector<Vector3>& points);
 
         void computeBoundingBox();
 
@@ -97,9 +106,13 @@ namespace threepp {
 
         void normalizeNormals();
 
+        [[nodiscard]] std::shared_ptr<BufferGeometry> toNonIndexed() const;
+
+        void computeVertexNormals();
+
         void dispose();
 
-        void copy(const BufferGeometry &source);
+        void copy(const BufferGeometry& source);
 
         [[nodiscard]] std::shared_ptr<BufferGeometry> clone() const {
             auto g = std::make_shared<BufferGeometry>();
@@ -112,9 +125,12 @@ namespace threepp {
             return std::make_shared<BufferGeometry>();
         }
 
-        virtual ~BufferGeometry() = default;
+        ~BufferGeometry() override {
+            dispose();
+        };
 
     private:
+        bool disposed_ = false;
         std::unique_ptr<IntBufferAttribute> index_;
         std::unordered_map<std::string, std::unique_ptr<BufferAttribute>> attributes_;
 

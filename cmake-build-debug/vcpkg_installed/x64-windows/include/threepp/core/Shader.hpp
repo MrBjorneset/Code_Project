@@ -5,7 +5,6 @@
 #include "threepp/core/Uniform.hpp"
 
 #include <string>
-#include <unordered_map>
 
 namespace threepp {
 
@@ -14,9 +13,8 @@ namespace threepp {
         UniformMap uniforms;
         std::string vertexShader;
         std::string fragmentShader;
-
     };
 
-}
+}// namespace threepp
 
 #endif//THREEPP_SHADER_HPP
