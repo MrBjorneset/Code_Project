@@ -14,18 +14,15 @@ int main() {
     GLRenderer renderer{canvas};
     renderer.setClearColor(Color::black);
     renderer.enableTextRendering();
-
-    //Creating the Objects from PingPongScene.hpp, making a local group and adding it to the scene
     auto scene = Scene::create();
 
+    //Creating the Objects from PingPongScene.hpp and adding it to the scene
     auto paddleOne = Paddle(0.5, 15, 0.2, -60,0,0);
     auto paddleTwo = Paddle(0.5, 15, 0.2, 60, 0, 0);
     auto ball = Ball(0.8,0,0,0);
-
     scene->add(ball.getMesh());
     scene->add(paddleOne.getMesh());
     scene->add(paddleTwo.getMesh());
-
 
     //Creating the Camera and setting the position
     auto camera = PerspectiveCamera::create();
@@ -45,6 +42,7 @@ int main() {
     canvas.onWindowResize([&](WindowSize size) {
         camera->updateProjectionMatrix();
         renderer.setSize(size);
+        //Updating the scoreboard position when resizing the canvas
         score.setPosition(canvas.getSize().width   * 1/2, 2);
         scoreP1.setPosition(canvas.getSize().width * 1/4, 2);
         scoreP2.setPosition(canvas.getSize().width * 3/4, 2);
@@ -52,9 +50,11 @@ int main() {
     });
 
     canvas.animate([&] {
+        //Writing the score values
+        scoreP1.setText(std::to_string(game.p1Score));
+        scoreP2.setText(std::to_string(game.p2Score));
 
-            scoreP1.setText(std::to_string(game.p1Score));
-            scoreP2.setText(std::to_string(game.p2Score));
+        //Activating the correct functions to play the game in single player mode
             if (listener.singelPlayer) {
                 ball.update(1);
                 game.checkWallCollision(ball,-70,70,70,-70);
@@ -65,6 +65,7 @@ int main() {
                 paddleTwo.move(0,game.p2PaddleSpeedY,0);
             }
 
+        //Activating the correct functions to play the game in multiplayer mode
             else if (listener.multiPlayer){
                 ball.update(1);
                 game.checkWallCollision(ball,-70,70,70,-70);
@@ -75,6 +76,7 @@ int main() {
                 paddleTwo.move(0,game.p2PaddleSpeedY,0);
             }
 
+        //Resting the position and score of all objects
             else if (listener.restart){
                 ball.setPosition(0,0,0);
                 paddleOne.setPosition(-60,0,0);
@@ -82,7 +84,6 @@ int main() {
                 game.p1Score = 0;
                 game.p2Score = 0;
             }
-
 
         renderer.render(scene, camera);
     });

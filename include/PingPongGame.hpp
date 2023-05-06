@@ -66,7 +66,6 @@ private:
 
 class Game{
 public:
-    Game(): velocity(0,0,0){};
     void singlePlayerMovement(bool up, bool down);
     void multiPlayerMovement(bool up, bool down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor);
@@ -74,12 +73,11 @@ public:
     void trackBall(Ball &ball, Paddle &paddleTwo);
     float p1PaddleSpeedY{};
     float p2PaddleSpeedY{};
-    int p1Score;
-    int p2Score;
+    int p1Score{};
+    int p2Score{};
 private:
     std::shared_ptr<Ball> Ball_;
     std::shared_ptr<Paddle> Paddle_;
-    Vector3 velocity;
 };
 
 //Function to move paddles in singleplayer mode
@@ -111,6 +109,7 @@ void Game::multiPlayerMovement(bool up, bool down) {
     }
 }
 
+//Function to track the ball object and control paddle 2 in single player
 void Game::trackBall(Ball &ball, Paddle &paddleTwo){
     auto ballPos = ball.getMesh()->position;
     auto paddlePos = paddleTwo.getMesh()->position;
@@ -124,6 +123,8 @@ void Game::trackBall(Ball &ball, Paddle &paddleTwo){
         p2PaddleSpeedY -= 0.5f;
     }
 }
+
+//Function for check ball collision with the "walls" of the canvas
 void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor) {
     auto ballPos = ball.getMesh()->position;
 
@@ -131,7 +132,7 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     if (ballPos.x < left){
         p2Score +=1;
         ball.setPosition(0,0,0);
-        Ball_->velocity.set(0.5,0.3,0);
+        ball.velocity.set(0.5,0.3,0);
     }
 
     //Check collision with the right wall
@@ -152,6 +153,7 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     }
 }
 
+//Function to check ball collision with the paddles
 void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo, float paddleHeight, float ballRadius) {
     auto ballPos = ball.getMesh()->position;
     auto paddleOnePos = paddleOne.getMesh()->position;
