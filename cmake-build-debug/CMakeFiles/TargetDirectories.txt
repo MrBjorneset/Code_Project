@@ -2,6 +2,3 @@ C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/PingPong.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/tests.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/CMakeFiles/test_1.dir
-C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/CMakeFiles/edit_cache.dir
-C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/CMakeFiles/rebuild_cache.dir

@@ -86,7 +86,7 @@ build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.di
 
 build cmake_object_order_depends_target_tests: phony || CMakeFiles\tests.dir
 
-build CMakeFiles\tests.dir\tests\test_1.cpp.obj: CXX_COMPILER__tests_Debug C$:\Kode\GitHub\C++\Code_Project\tests\test_1.cpp || cmake_object_order_depends_target_tests
+build CMakeFiles\tests.dir\tests\test.cpp.obj: CXX_COMPILER__tests_Debug C$:\Kode\GitHub\C++\Code_Project\tests\test.cpp || cmake_object_order_depends_target_tests
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
   OBJECT_DIR = CMakeFiles\tests.dir
@@ -102,10 +102,10 @@ build CMakeFiles\tests.dir\tests\test_1.cpp.obj: CXX_COMPILER__tests_Debug C$:\K
 #############################################
 # Link the executable tests.exe
 
-build tests.exe: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles\tests.dir\tests\test_1.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+build tests.exe: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles\tests.dir\tests\test.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib  vcpkg_installed\x64-windows\debug\lib\threepp.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\tests.dir
   POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
@@ -138,78 +138,9 @@ build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
 # =============================================================================
-# Write statements declared in CMakeLists.txt:
-# C:/Kode/GitHub/C++/Code_Project/CMakeLists.txt
-# =============================================================================
-
-# =============================================================================
-# Object build statements for EXECUTABLE target test_1
-
-
-#############################################
-# Order-only phony target for test_1
-
-build cmake_object_order_depends_target_test_1: phony || tests\CMakeFiles\test_1.dir
-
-build tests\CMakeFiles\test_1.dir\test_1.cpp.obj: CXX_COMPILER__test_1_Debug C$:\Kode\GitHub\C++\Code_Project\tests\test_1.cpp || cmake_object_order_depends_target_test_1
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
-  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -IC:\Kode\GitHub\C++\Code_Project\tests -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
-  OBJECT_DIR = tests\CMakeFiles\test_1.dir
-  OBJECT_FILE_DIR = tests\CMakeFiles\test_1.dir
-  TARGET_COMPILE_PDB = tests\CMakeFiles\test_1.dir\
-  TARGET_PDB = tests\test_1.pdb
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_1
-
-
-#############################################
-# Link the executable tests\test_1.exe
-
-build tests\test_1.exe: CXX_EXECUTABLE_LINKER__test_1_Debug tests\CMakeFiles\test_1.dir\test_1.cpp.obj | vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
-  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = tests\CMakeFiles\test_1.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests/test_1.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = tests\CMakeFiles\test_1.dir\
-  TARGET_FILE = tests\test_1.exe
-  TARGET_IMPLIB = tests\test_1.lib
-  TARGET_PDB = tests\test_1.pdb
-
-
-#############################################
-# Utility command for edit_cache
-
-build tests\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build tests\edit_cache: phony tests\CMakeFiles\edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build tests\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug\tests && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Kode\GitHub\C++\Code_Project -BC:\Kode\GitHub\C++\Code_Project\cmake-build-debug"
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build tests\rebuild_cache: phony tests\CMakeFiles\rebuild_cache.util
-
-# =============================================================================
 # Target aliases.
 
 build PingPong: phony PingPong.exe
-
-build test_1: phony tests\test_1.exe
-
-build test_1.exe: phony tests\test_1.exe
 
 build tests: phony tests.exe
 
@@ -221,14 +152,7 @@ build tests: phony tests.exe
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug
 
-build all: phony PingPong.exe tests.exe tests\all
-
-# =============================================================================
-
-#############################################
-# Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/tests
-
-build tests\all: phony tests\test_1.exe
+build all: phony PingPong.exe tests.exe
 
 # =============================================================================
 # Built-in targets
@@ -237,14 +161,14 @@ build tests\all: phony tests\test_1.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:\Kode\GitHub\C++\Code_Project\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\tests\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\vcpkg-configuration.json C$:\Kode\GitHub\C++\Code_Project\vcpkg.json C$:\Kode\vcpkg\scripts\buildsystems\vcpkg.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeFindDependencyMacro.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.24.2\CMakeCCompiler.cmake CMakeFiles\3.24.2\CMakeCXXCompiler.cmake CMakeFiles\3.24.2\CMakeRCCompiler.cmake CMakeFiles\3.24.2\CMakeSystem.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Config.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2ConfigVersion.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-debug.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-release.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets.cmake vcpkg_installed\x64-windows\share\glad\gladConfig.cmake vcpkg_installed\x64-windows\share\glad\gladConfigVersion.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-debug.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-release.cmake vcpkg_installed\x64-windows\share\glad\gladTargets.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Config.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-release.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config-version.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-debug.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-release.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets.cmake
+build build.ninja: RERUN_CMAKE | C$:\Kode\GitHub\C++\Code_Project\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\vcpkg-configuration.json C$:\Kode\GitHub\C++\Code_Project\vcpkg.json C$:\Kode\vcpkg\scripts\buildsystems\vcpkg.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeFindDependencyMacro.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.24.2\CMakeCCompiler.cmake CMakeFiles\3.24.2\CMakeCXXCompiler.cmake CMakeFiles\3.24.2\CMakeRCCompiler.cmake CMakeFiles\3.24.2\CMakeSystem.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Config.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2ConfigVersion.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-debug.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-release.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets.cmake vcpkg_installed\x64-windows\share\glad\gladConfig.cmake vcpkg_installed\x64-windows\share\glad\gladConfigVersion.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-debug.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-release.cmake vcpkg_installed\x64-windows\share\glad\gladTargets.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Config.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-release.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config-version.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-debug.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-release.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:\Kode\GitHub\C++\Code_Project\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\tests\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\vcpkg-configuration.json C$:\Kode\GitHub\C++\Code_Project\vcpkg.json C$:\Kode\vcpkg\scripts\buildsystems\vcpkg.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeFindDependencyMacro.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.24.2\CMakeCCompiler.cmake CMakeFiles\3.24.2\CMakeCXXCompiler.cmake CMakeFiles\3.24.2\CMakeRCCompiler.cmake CMakeFiles\3.24.2\CMakeSystem.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Config.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2ConfigVersion.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-debug.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-release.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets.cmake vcpkg_installed\x64-windows\share\glad\gladConfig.cmake vcpkg_installed\x64-windows\share\glad\gladConfigVersion.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-debug.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-release.cmake vcpkg_installed\x64-windows\share\glad\gladTargets.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Config.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-release.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config-version.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-debug.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-release.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets.cmake: phony
+build C$:\Kode\GitHub\C++\Code_Project\CMakeLists.txt C$:\Kode\GitHub\C++\Code_Project\vcpkg-configuration.json C$:\Kode\GitHub\C++\Code_Project\vcpkg.json C$:\Kode\vcpkg\scripts\buildsystems\vcpkg.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeDependentOption.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeFindDependencyMacro.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeRCInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Compiler\MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\Windows.cmake C$:\Program$ Files\JetBrains\CLion$ 2022.3.2\bin\cmake\win\x64\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.24.2\CMakeCCompiler.cmake CMakeFiles\3.24.2\CMakeCXXCompiler.cmake CMakeFiles\3.24.2\CMakeRCCompiler.cmake CMakeFiles\3.24.2\CMakeSystem.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Config.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2ConfigVersion.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-debug.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets-release.cmake vcpkg_installed\x64-windows\share\Catch2\Catch2Targets.cmake vcpkg_installed\x64-windows\share\glad\gladConfig.cmake vcpkg_installed\x64-windows\share\glad\gladConfigVersion.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-debug.cmake vcpkg_installed\x64-windows\share\glad\gladTargets-release.cmake vcpkg_installed\x64-windows\share\glad\gladTargets.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Config.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets-release.cmake vcpkg_installed\x64-windows\share\glfw3\glfw3Targets.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config-version.cmake vcpkg_installed\x64-windows\share\threepp\threepp-config.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-debug.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets-release.cmake vcpkg_installed\x64-windows\share\threepp\threepp-targets.cmake: phony
 
 
 #############################################
