@@ -66,7 +66,7 @@ private:
 
 class Game{
 public:
-    Game() : velocity(0.15,0.8,0){};
+    Game();
     void singlePlayerMovement(bool up, bool down);
     void multiPlayerMovement(bool up, bool down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor);
@@ -79,7 +79,6 @@ public:
 private:
     std::shared_ptr<Ball> Ball_;
     std::shared_ptr<Paddle> Paddle_;
-    Vector3 velocity;
 };
 
 //Function to move paddles in singleplayer mode
@@ -127,17 +126,18 @@ void Game::trackBall(Ball &ball, Paddle &paddleTwo){
 void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor) {
     auto ballPos = ball.getMesh()->position;
 
-    //Check collision with the left wall
+    //Check collision with the left walls
     if (ballPos.x < left){
         p2Score +=1;
         ball.setPosition(0,0,0);
-        ball.velocity = ball.velocity *(-1);
+        Ball_->velocity.set(0.5,-0.3,0);
     }
 
     //Check collision with the right wall
     if (ballPos.x  > right) {
         p1Score +=1;
         ball.setPosition(0,0,0);
+        ball.velocity.set(-0.5, -0.3,0);
     }
 
     //check collision with the roof
@@ -161,7 +161,6 @@ void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo
         ballPos.y - ballRadius < paddleOnePos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleOnePos.y - paddleHeight / 2 ) {
         ball.velocity.x = ball.velocity.x * (-1.03f);
-        ball.velocity.y = ball.velocity.y * (-1.2f);
     }
 
     else if (ballPos.x - ballRadius < paddleTwoPos.x &&
@@ -169,8 +168,8 @@ void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo
         ballPos.y - ballRadius < paddleTwoPos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleTwoPos.y - paddleHeight / 2 ) {
         ball.velocity.x = ball.velocity.x * (-1.03f);
-        ball.velocity.y = ball.velocity.y * (-1.2f);
     }
 }
+
 
 #endif //CODE_PROJECT_PingPongGame_HPP

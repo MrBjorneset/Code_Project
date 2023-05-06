@@ -34,25 +34,27 @@ int main() {
     //Creating the scoreboard
     game.p1Score = 0;
     game.p2Score = 0;
-    std::string p1Text = std::to_string(game.p1Score);
-    std::string p2Text = std::to_string(game.p2Score);
-    auto &scoreP1 = renderer.textHandle(p1Text);
-    auto &scoreP2 = renderer.textHandle(p2Text);
+    auto &scoreP1 = renderer.textHandle("");
+    auto &scoreP2 = renderer.textHandle("");
     auto &score = renderer.textHandle("Score");
     score.setPosition(canvas.getSize().width   * 1/2, 2);
     scoreP1.setPosition(canvas.getSize().width * 1/4, 2);
     scoreP2.setPosition(canvas.getSize().width * 3/4, 2);
 
-
     canvas.addKeyListener(&listener);
     canvas.onWindowResize([&](WindowSize size) {
         camera->updateProjectionMatrix();
         renderer.setSize(size);
+        score.setPosition(canvas.getSize().width   * 1/2, 2);
+        scoreP1.setPosition(canvas.getSize().width * 1/4, 2);
+        scoreP2.setPosition(canvas.getSize().width * 3/4, 2);
 
     });
 
     canvas.animate([&] {
 
+            scoreP1.setText(std::to_string(game.p1Score));
+            scoreP2.setText(std::to_string(game.p2Score));
             if (listener.singelPlayer) {
                 ball.update(1);
                 game.checkWallCollision(ball,-70,70,70,-70);
@@ -77,6 +79,8 @@ int main() {
                 ball.setPosition(0,0,0);
                 paddleOne.setPosition(-60,0,0);
                 paddleTwo.setPosition(60,0,0);
+                game.p1Score = 0;
+                game.p2Score = 0;
             }
 
 
