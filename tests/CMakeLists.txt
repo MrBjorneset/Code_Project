@@ -6,7 +6,7 @@ function(create_test name)
     add_test(NAME ${name} COMMAND ${name})
 endfunction()
 
-create_test(test_1)
+create_test(test)
 
 
 
