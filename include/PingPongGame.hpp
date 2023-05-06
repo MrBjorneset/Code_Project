@@ -69,11 +69,13 @@ public:
     Game() : velocity(0.15,0.8,0){};
     void singlePlayerMovement(bool up, bool down);
     void multiPlayerMovement(bool up, bool down);
-    void checkWallCollision(Ball& ball, float left, float right, float roof, float floor, int p1Score, int p2Score);
+    void checkWallCollision(Ball& ball, float left, float right, float roof, float floor);
     void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius);
     void trackBall(Ball &ball, Paddle &paddleTwo);
     float p1PaddleSpeedY{};
     float p2PaddleSpeedY{};
+    int p1Score;
+    int p2Score;
 private:
     std::shared_ptr<Ball> Ball_;
     std::shared_ptr<Paddle> Paddle_;
@@ -122,7 +124,7 @@ void Game::trackBall(Ball &ball, Paddle &paddleTwo){
         p2PaddleSpeedY -= 0.5f;
     }
 }
-void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor, int p1Score, int p2Score) {
+void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor) {
     auto ballPos = ball.getMesh()->position;
 
     //Check collision with the left wall
