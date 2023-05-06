@@ -66,7 +66,7 @@ private:
 
 class Game{
 public:
-    Game();
+    Game(): velocity(0,0,0){};
     void singlePlayerMovement(bool up, bool down);
     void multiPlayerMovement(bool up, bool down);
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor);
@@ -79,6 +79,7 @@ public:
 private:
     std::shared_ptr<Ball> Ball_;
     std::shared_ptr<Paddle> Paddle_;
+    Vector3 velocity;
 };
 
 //Function to move paddles in singleplayer mode
@@ -130,7 +131,7 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     if (ballPos.x < left){
         p2Score +=1;
         ball.setPosition(0,0,0);
-        Ball_->velocity.set(0.5,-0.3,0);
+        Ball_->velocity.set(0.5,0.3,0);
     }
 
     //Check collision with the right wall
