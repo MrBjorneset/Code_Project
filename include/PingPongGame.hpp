@@ -116,10 +116,10 @@ void Game::trackBall(Ball &ball, Paddle &paddleTwo){
     p2PaddleSpeedY = 0;
 
     //Move paddleTwo based on ball direction
-    if ((ballPos.y > paddlePos.y) && (ballPos.x > -20)){
+    if ((ballPos.y > paddlePos.y) && (ballPos.x > -10)){
         p2PaddleSpeedY += 0.5f;
     }
-    else if((ballPos.y < paddlePos.y) && (ballPos.x > -20)){
+    else if((ballPos.y < paddlePos.y) && (ballPos.x > -10)){
         p2PaddleSpeedY -= 0.5f;
     }
 }
