@@ -76,8 +76,6 @@ public:
     int p1Score{};
     int p2Score{};
 private:
-    std::shared_ptr<Ball> Ball_;
-    std::shared_ptr<Paddle> Paddle_;
 };
 
 //Function to move paddles in singleplayer mode
