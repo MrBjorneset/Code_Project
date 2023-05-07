@@ -1,6 +1,7 @@
 # ninja log v5
 0	1878	7051716409347697	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
 1880	2610	7051716413179075	PingPong.exe	22e23a63be8c9184
-2421	4212	7051954541104312	tests.exe	7f0b4924ccbf06b4
-0	1929	7051958363609505	CMakeFiles/tests.dir/tests/Objects.cpp.obj	f30cb68c10a5874
 1930	3167	7051958372285011	tests.exe	e686f8ee74f152f3
+2	1923	7051962443391653	CMakeFiles/Object_test.dir/tests/Objects.cpp.obj	dbe9fdc50ca42dd7
+1923	2513	7051962446116322	Object_test.exe	db1e3a8975059ed8
+0	2058	7051965281897523	CMakeFiles/GameLogic_test.dir/tests/GameLogic.cpp.obj	c08d8615b0e5d3b3
