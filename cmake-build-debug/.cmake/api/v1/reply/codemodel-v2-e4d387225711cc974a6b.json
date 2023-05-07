@@ -16,8 +16,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -33,8 +32,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -42,15 +40,8 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "GameLogic_test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-GameLogic_test-Debug-12a8b1ec22ccefc0c1e1.json",
-					"name" : "GameLogic_test",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
 					"id" : "Object_test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Object_test-Debug-155537e45aa54a339d0c.json",
+					"jsonFile" : "target-Object_test-Debug-aee629b510e086d8cd0b.json",
 					"name" : "Object_test",
 					"projectIndex" : 0
 				},

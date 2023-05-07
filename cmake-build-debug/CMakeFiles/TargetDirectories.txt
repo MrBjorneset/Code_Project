@@ -1,5 +1,4 @@
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/PingPong.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/Object_test.dir
-C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/GameLogic_test.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir

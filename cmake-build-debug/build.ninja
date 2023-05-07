@@ -114,43 +114,6 @@ build Object_test.exe: CXX_EXECUTABLE_LINKER__Object_test_Debug CMakeFiles\Objec
   TARGET_IMPLIB = Object_test.lib
   TARGET_PDB = Object_test.pdb
 
-# =============================================================================
-# Object build statements for EXECUTABLE target GameLogic_test
-
-
-#############################################
-# Order-only phony target for GameLogic_test
-
-build cmake_object_order_depends_target_GameLogic_test: phony || CMakeFiles\GameLogic_test.dir
-
-build CMakeFiles\GameLogic_test.dir\tests\GameLogic.cpp.obj: CXX_COMPILER__GameLogic_test_Debug C$:\Kode\GitHub\C++\Code_Project\tests\GameLogic.cpp || cmake_object_order_depends_target_GameLogic_test
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
-  INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
-  OBJECT_DIR = CMakeFiles\GameLogic_test.dir
-  OBJECT_FILE_DIR = CMakeFiles\GameLogic_test.dir\tests
-  TARGET_COMPILE_PDB = CMakeFiles\GameLogic_test.dir\
-  TARGET_PDB = GameLogic_test.pdb
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target GameLogic_test
-
-
-#############################################
-# Link the executable GameLogic_test.exe
-
-build GameLogic_test.exe: CXX_EXECUTABLE_LINKER__GameLogic_test_Debug CMakeFiles\GameLogic_test.dir\tests\GameLogic.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
-  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib  threepp:threepp.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = CMakeFiles\GameLogic_test.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Kode\GitHub\C++\Code_Project\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/Kode/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/GameLogic_test.exe -installedDir C:/Kode/GitHub/C++/Code_Project/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\GameLogic_test.dir\
-  TARGET_FILE = GameLogic_test.exe
-  TARGET_IMPLIB = GameLogic_test.lib
-  TARGET_PDB = GameLogic_test.pdb
-
 
 #############################################
 # Utility command for edit_cache
@@ -177,8 +140,6 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build GameLogic_test: phony GameLogic_test.exe
-
 build Object_test: phony Object_test.exe
 
 build PingPong: phony PingPong.exe
@@ -191,7 +152,7 @@ build PingPong: phony PingPong.exe
 #############################################
 # Folder: C:/Kode/GitHub/C++/Code_Project/cmake-build-debug
 
-build all: phony PingPong.exe Object_test.exe GameLogic_test.exe
+build all: phony PingPong.exe Object_test.exe
 
 # =============================================================================
 # Built-in targets

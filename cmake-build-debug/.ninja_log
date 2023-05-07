@@ -4,4 +4,5 @@
 1930	3167	7051958372285011	tests.exe	e686f8ee74f152f3
 2	1923	7051962443391653	CMakeFiles/Object_test.dir/tests/Objects.cpp.obj	dbe9fdc50ca42dd7
 1923	2513	7051962446116322	Object_test.exe	db1e3a8975059ed8
-0	2058	7051965281897523	CMakeFiles/GameLogic_test.dir/tests/GameLogic.cpp.obj	c08d8615b0e5d3b3
+1	2063	7051966102377744	CMakeFiles/GameLogic_test.dir/tests/GameLogic.cpp.obj	c08d8615b0e5d3b3
+0	2061	7051967224372974	CMakeFiles/Gamelogic_test.dir/tests/Gamelogic.cpp.obj	621ea972f5f927c2
