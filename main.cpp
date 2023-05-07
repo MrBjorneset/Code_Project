@@ -1,12 +1,10 @@
 
 #include "PingPongGame.hpp"
 
-
 using namespace threepp;
 
-
 int main() {
-    //Setting up the different classes from both headers
+    //Setting up the different classes from PingPongGame.hpp
     MyListener listener;
     Game game;
 

@@ -1,6 +1,3 @@
-//
-// Created by EmilB on 22/02/2023.
-//
 
 
 #ifndef THREEPP_VCPKG_TEST_PINGPONGSCENE_HPP

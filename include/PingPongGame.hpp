@@ -1,6 +1,3 @@
-//
-// Created by EmilB on 21/02/2023.
-//
 
 
 #ifndef CODE_PROJECT_PingPongGame_HPP

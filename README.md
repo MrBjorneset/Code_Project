@@ -6,7 +6,7 @@ be played in single or multiplayer mode.
 
 ## Dependencies
 This C++ program requires the Threepp library to be installed. It also uses the standard C++ libraries 
-and Catc2 for unit testing
+and Catch2 for unit testing
 
 ## How to Play
 The game can be played in single or multiplayer mode. 
@@ -47,6 +47,8 @@ In the PingPongGame.hpp file, we create a class game with lots of functions that
 We have functions that detect collision with the walls and paddles, functions to move the paddles, one 
 function to track the ball movement for single player mode. We also have four global variables, two of these variables 
 are for the score and the other two variables are to move the paddle on the Y-axis accordingly to inputs.
+
+We also have a class for KeyListener that reads user inputs that controls the paddles and can restart the game.
 
 ### main.cpp
 
