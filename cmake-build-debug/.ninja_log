@@ -1,0 +1,5 @@
+# ninja log v5
+0	1878	7051716409347697	CMakeFiles/PingPong.dir/main.cpp.obj	cd47fa39568d29be
+1880	2610	7051716413179075	PingPong.exe	22e23a63be8c9184
+1	2084	7051716904775195	CMakeFiles/tests.dir/tests/test.cpp.obj	e7798d1f2eeb7fd9
+2085	3433	7051716914733914	tests.exe	7f0b4924ccbf06b4

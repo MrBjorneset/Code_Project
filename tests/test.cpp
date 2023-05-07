@@ -18,9 +18,9 @@ TEST_CASE("Ball updates position correctly", "[Ball]") {
 
 
 TEST_CASE("Paddle Moves correctly", "[Paddle]"){
-    Paddle paddle(1,20,1,-60,0,0);
+    Paddle paddle(1,20,1,0,0,0);
     paddle.move(20,30,10);
-    REQUIRE(paddle.getMesh()->position.x == -40);
+    REQUIRE(paddle.getMesh()->position.x == 20);
     REQUIRE(paddle.getMesh()->position.y == 30);
     REQUIRE(paddle.getMesh()->position.z == 10);
 }
