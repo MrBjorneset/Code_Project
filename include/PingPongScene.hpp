@@ -17,7 +17,7 @@ public:
 
         mesh_ = Mesh::create(geometry,material);
         mesh_->position.set(x, y, z);
-        velocity.set(0.5,0.3,0);
+        velocity.set(0.5,0.15,0);
     }
 
     void update(float dt){

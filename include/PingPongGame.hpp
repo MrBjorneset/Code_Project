@@ -66,10 +66,10 @@ public:
     void singlePlayerMovement(bool up, bool down){
         //Move paddleOne based on user input, "w" and "s" keys
         if (up){
-            p1PaddleSpeedY = 0.5f;
+            p1PaddleSpeedY = 0.6f;
         }
         else if (down){
-            p1PaddleSpeedY = -0.5f;
+            p1PaddleSpeedY = -0.6f;
         }
         else {
             p1PaddleSpeedY = 0;
@@ -78,10 +78,10 @@ public:
     void multiPlayerMovement(bool up, bool down){
         //Move paddleTwo based on user input, arrow up and down keys
         if (up){
-            p2PaddleSpeedY = 0.5f;
+            p2PaddleSpeedY = 0.6f;
         }
         else if (down){
-            p2PaddleSpeedY = -0.5f;
+            p2PaddleSpeedY = -0.6f;
         }
         else {
             p2PaddleSpeedY = 0;
@@ -94,24 +94,24 @@ public:
     if (ballPos.x < left){
         p2Score +=1;
         ball.setPosition(0,0,0);
-        ball.velocity.set(0.5,0.3,0);
+        ball.velocity.set(0.5,0.15,0);
     }
 
     //Check collision with the right wall
     if (ballPos.x  > right) {
         p1Score +=1;
         ball.setPosition(0,0,0);
-        ball.velocity.set(-0.5, -0.3,0);
+        ball.velocity.set(-0.5, 0.15,0);
     }
 
     //check collision with the roof
     if (ballPos.y + ball.velocity.y > roof){
-        ball.velocity.y = -std::abs(ball.velocity.y);
+        ball.velocity.y = ball.velocity.y *(-1);
     }
 
     //check collision with the floor
     if (ballPos.y - ball.velocity.y < floor){
-        ball.velocity.y = std::abs(ball.velocity.y);
+        ball.velocity.y = ball.velocity.y * (-1);
     }
     };
     void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius){
@@ -123,7 +123,7 @@ public:
         ballPos.x + ballRadius > paddleOnePos.x &&
         ballPos.y - ballRadius < paddleOnePos.y + paddleHeight / 2 &&
         ballPos.y + ballRadius > paddleOnePos.y - paddleHeight / 2 ) {
-        ball.velocity.x = ball.velocity.x * (-1.03f);
+        ball.velocity.x = ball.velocity.x* (-1.03f);
     }
 
     else if (ballPos.x - ballRadius < paddleTwoPos.x &&
@@ -156,13 +156,29 @@ class initGame {
 public:
     initGame() = default;
     void singlePlayer(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
-
+        ball.update(1);
+        game.checkWallCollision(ball,-70,70,70,-70);
+        game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
+        game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+        game.trackBall(ball,paddleTwo);
+        paddleOne.move(0,game.p1PaddleSpeedY,0);
+        paddleTwo.move(0,game.p2PaddleSpeedY,0);
     };
     void multiPlayer(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
-
+        ball.update(1);
+        game.checkWallCollision(ball,-70,70,70,-70);
+        game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
+        game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+        game.multiPlayerMovement(listener.p2DirectionUp,listener.p2DirectionDown);
+        paddleOne.move(0,game.p1PaddleSpeedY,0);
+        paddleTwo.move(0,game.p2PaddleSpeedY,0);
     };
-    void resetGame(){
-
+    void resetGame(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo, Game &game){
+        ball.setPosition(0,0,0);
+        paddleOne.setPosition(-60,0,0);
+        paddleTwo.setPosition(60,0,0);
+        game.p1Score = 0;
+        game.p2Score = 0;
     };
 
 private:

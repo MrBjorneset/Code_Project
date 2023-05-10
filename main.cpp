@@ -7,6 +7,7 @@ int main() {
     //Setting up the different classes from PingPongGame.hpp
     MyListener listener;
     Game game;
+    initGame init;
 
     Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(16)};
     GLRenderer renderer{canvas};
@@ -54,33 +55,17 @@ int main() {
 
         //Activating the correct functions to play the game in single player mode
             if (listener.singelPlayer) {
-                ball.update(1);
-                game.checkWallCollision(ball,-70,70,70,-70);
-                game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
-                game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
-                game.trackBall(ball,paddleTwo);
-                paddleOne.move(0,game.p1PaddleSpeedY,0);
-                paddleTwo.move(0,game.p2PaddleSpeedY,0);
+                init.singlePlayer(ball,paddleOne,paddleTwo,listener,game);
             }
 
         //Activating the correct functions to play the game in multiplayer mode
             else if (listener.multiPlayer){
-                ball.update(1);
-                game.checkWallCollision(ball,-70,70,70,-70);
-                game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
-                game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
-                game.multiPlayerMovement(listener.p2DirectionUp,listener.p2DirectionDown);
-                paddleOne.move(0,game.p1PaddleSpeedY,0);
-                paddleTwo.move(0,game.p2PaddleSpeedY,0);
+                init.multiPlayer(ball,paddleOne,paddleTwo,listener,game);
             }
 
         //Resting the position and score of all objects
             else if (listener.restart){
-                ball.setPosition(0,0,0);
-                paddleOne.setPosition(-60,0,0);
-                paddleTwo.setPosition(60,0,0);
-                game.p1Score = 0;
-                game.p2Score = 0;
+                init.resetGame(ball,paddleOne,paddleTwo,game);
             }
 
         renderer.render(scene, camera);
