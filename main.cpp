@@ -53,17 +53,17 @@ int main() {
         scoreP1.setText(std::to_string(game.p1Score));
         scoreP2.setText(std::to_string(game.p2Score));
 
-        //Activating the correct functions to play the game in single player mode
+        //Calling a function to play the game in single player mode
             if (listener.singelPlayer) {
                 init.singlePlayer(ball,paddleOne,paddleTwo,listener,game);
             }
 
-        //Activating the correct functions to play the game in multiplayer mode
+        //Calling a function to play the game in multiplayer mode
             else if (listener.multiPlayer){
                 init.multiPlayer(ball,paddleOne,paddleTwo,listener,game);
             }
 
-        //Resting the position and score of all objects
+        //Calling a function to reset the position of alle objects, the velocity off the ball and the score
             else if (listener.restart){
                 init.resetGame(ball,paddleOne,paddleTwo,game);
             }
