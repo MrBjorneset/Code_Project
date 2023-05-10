@@ -67,7 +67,6 @@ int main() {
             else if (listener.restart){
                 init.resetGame(ball,paddleOne,paddleTwo,game);
             }
-
         renderer.render(scene, camera);
     });
 }

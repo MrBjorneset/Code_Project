@@ -13,8 +13,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # stuff for testing
 find_package(Catch2 CONFIG REQUIRED)
+add_executable(Objects_test tests/Objects_test.cpp)
+target_link_libraries(Objects_test PRIVATE Catch2::Catch2WithMain threepp::threepp)
+add_executable(Movement_test tests/Movement_test.cpp)
+target_link_libraries(Movement_test PRIVATE Catch2::Catch2WithMain threepp::threepp)
 
-add_executable(Object_test tests/Objects.cpp)
-target_link_libraries(Object_test PRIVATE Catch2::Catch2WithMain threepp::threepp)
 
 

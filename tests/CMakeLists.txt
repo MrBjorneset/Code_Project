@@ -6,7 +6,8 @@ function(create_test name)
     target_link_libraries(${name} PRIVATE Catch2::Catch2WithMain threepp::threepp)
 endfunction()
 
-create_test(Objects)
+create_test(Objects_test)
+create_test(Movement_test)
 
 
 

@@ -2,7 +2,7 @@
 
 #ifndef CODE_PROJECT_PingPongGame_HPP
 #define CODE_PROJECT_PingPongGame_HPP
-#include "PingPongScene.hpp"
+#include "PingPongObjects.hpp"
 
 using namespace threepp;
 class MyListener : public KeyListener{
@@ -105,12 +105,12 @@ public:
     }
 
     //check collision with the roof
-    if (ballPos.y + ball.velocity.y > roof){
+    if (ballPos.y > roof){
         ball.velocity.y = ball.velocity.y *(-1);
     }
 
     //check collision with the floor
-    if (ballPos.y - ball.velocity.y < floor){
+    if (ballPos.y < floor){
         ball.velocity.y = ball.velocity.y * (-1);
     }
     };
@@ -145,6 +145,7 @@ public:
         p2PaddleSpeedY -= 0.5f;
         }
     };
+
     float p1PaddleSpeedY{};
     float p2PaddleSpeedY{};
     int p1Score{};
