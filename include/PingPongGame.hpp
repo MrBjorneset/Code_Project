@@ -76,7 +76,16 @@ public:
         }
     };
     void multiPlayerMovement(bool up, bool down){
-
+        //Move paddleTwo based on user input, arrow up and down keys
+        if (up){
+            p2PaddleSpeedY = 0.5f;
+        }
+        else if (down){
+            p2PaddleSpeedY = -0.5f;
+        }
+        else {
+            p2PaddleSpeedY = 0;
+        }
     };
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor){
 
@@ -95,21 +104,6 @@ private:
 };
 
 
-
-//Function to move paddles in multiplayer mode
-void Game::multiPlayerMovement(bool up, bool down) {
-
-    //Move paddleTwo based on user input, arrow up and down keys
-    if (up){
-        p2PaddleSpeedY = 0.5f;
-    }
-    else if (down){
-        p2PaddleSpeedY = -0.5f;
-    }
-    else {
-        p2PaddleSpeedY = 0;
-    }
-}
 
 //Function to track the ball object and control paddle 2 in single player
 void Game::trackBall(Ball &ball, Paddle &paddleTwo){
