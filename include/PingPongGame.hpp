@@ -88,40 +88,6 @@ public:
         }
     };
     void checkWallCollision(Ball& ball, float left, float right, float roof, float floor){
-
-    };
-    void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius){
-
-    };
-    void trackBall(Ball &ball, Paddle &paddleTwo){
-
-    };
-    float p1PaddleSpeedY{};
-    float p2PaddleSpeedY{};
-    int p1Score{};
-    int p2Score{};
-private:
-};
-
-
-
-//Function to track the ball object and control paddle 2 in single player
-void Game::trackBall(Ball &ball, Paddle &paddleTwo){
-    auto ballPos = ball.getMesh()->position;
-    auto paddlePos = paddleTwo.getMesh()->position;
-    p2PaddleSpeedY = 0;
-
-    //Move paddleTwo based on ball direction
-    if ((ballPos.y > paddlePos.y) && (ballPos.x > -10)){
-        p2PaddleSpeedY += 0.5f;
-    }
-    else if((ballPos.y < paddlePos.y) && (ballPos.x > -10)){
-        p2PaddleSpeedY -= 0.5f;
-    }
-}
-
-//Function for check ball collision with the "walls" of the canvas
-void Game::checkWallCollision(Ball &ball, float left, float right, float roof, float floor) {
     auto ballPos = ball.getMesh()->position;
 
     //Check collision with the left walls
@@ -147,10 +113,8 @@ void Game::checkWallCollision(Ball &ball, float left, float right, float roof, f
     if (ballPos.y - ball.velocity.y < floor){
         ball.velocity.y = std::abs(ball.velocity.y);
     }
-}
-
-//Function to check ball collision with the paddles
-void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo, float paddleHeight, float ballRadius) {
+    };
+    void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius){
     auto ballPos = ball.getMesh()->position;
     auto paddleOnePos = paddleOne.getMesh()->position;
     auto paddleTwoPos = paddleTwo.getMesh()->position;
@@ -168,7 +132,41 @@ void Game::checkPaddleCollision(Ball &ball, Paddle &paddleOne, Paddle &paddleTwo
         ballPos.y + ballRadius > paddleTwoPos.y - paddleHeight / 2 ) {
         ball.velocity.x = ball.velocity.x * (-1.03f);
     }
-}
+    };
+    void trackBall(Ball &ball, Paddle &paddleTwo){
+    auto ballPos = ball.getMesh()->position;
+    auto paddlePos = paddleTwo.getMesh()->position;
+    p2PaddleSpeedY = 0;
+    //Move paddleTwo based on ball direction
+    if ((ballPos.y > paddlePos.y) && (ballPos.x > -10)){
+        p2PaddleSpeedY += 0.5f;
+        }
+    else if((ballPos.y < paddlePos.y) && (ballPos.x > -10)){
+        p2PaddleSpeedY -= 0.5f;
+        }
+    };
+    float p1PaddleSpeedY{};
+    float p2PaddleSpeedY{};
+    int p1Score{};
+    int p2Score{};
+private:
+};
 
+class initGame {
+public:
+    initGame() = default;
+    void singlePlayer(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
+
+    };
+    void multiPlayer(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
+
+    };
+    void resetGame(){
+
+    };
+
+private:
+
+};
 
 #endif //CODE_PROJECT_PingPongGame_HPP
