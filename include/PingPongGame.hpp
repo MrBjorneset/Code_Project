@@ -63,11 +63,30 @@ private:
 
 class Game{
 public:
-    void singlePlayerMovement(bool up, bool down);
-    void multiPlayerMovement(bool up, bool down);
-    void checkWallCollision(Ball& ball, float left, float right, float roof, float floor);
-    void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius);
-    void trackBall(Ball &ball, Paddle &paddleTwo);
+    void singlePlayerMovement(bool up, bool down){
+        //Move paddleOne based on user input, "w" and "s" keys
+        if (up){
+            p1PaddleSpeedY = 0.5f;
+        }
+        else if (down){
+            p1PaddleSpeedY = -0.5f;
+        }
+        else {
+            p1PaddleSpeedY = 0;
+        }
+    };
+    void multiPlayerMovement(bool up, bool down){
+
+    };
+    void checkWallCollision(Ball& ball, float left, float right, float roof, float floor){
+
+    };
+    void checkPaddleCollision(Ball& ball, Paddle& paddleOne, Paddle& paddleTwo, float paddleHeight, float ballRadius){
+
+    };
+    void trackBall(Ball &ball, Paddle &paddleTwo){
+
+    };
     float p1PaddleSpeedY{};
     float p2PaddleSpeedY{};
     int p1Score{};
@@ -75,19 +94,7 @@ public:
 private:
 };
 
-//Function to move paddles in singleplayer mode
-void Game::singlePlayerMovement(bool up, bool down){
-    //Move paddleOne based on user input, "w" and "s" keys
-    if (up){
-        p1PaddleSpeedY = 0.5f;
-    }
-    else if (down){
-        p1PaddleSpeedY = -0.5f;
-    }
-    else {
-        p1PaddleSpeedY = 0;
-    }
-}
+
 
 //Function to move paddles in multiplayer mode
 void Game::multiPlayerMovement(bool up, bool down) {
