@@ -1,9 +1,0 @@
-Package: catch2
-Version: 3.3.0
-Depends: vcpkg-cmake, vcpkg-cmake-config
-Architecture: x64-windows
-Multi-Arch: same
-Abi: acf6f52f5393cd4033744ea243a996bf31c6d6ae72dd3881403959beb56415b2
-Description: A modern, header-only test framework for unit testing.
-Type: Port
-Status: install ok half-installed
