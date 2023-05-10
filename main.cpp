@@ -13,7 +13,7 @@ int main() {
     GLRenderer renderer{canvas};
     renderer.setClearColor(Color::black);
     renderer.enableTextRendering();
-    auto scene = Scene::create();
+    std::shared_ptr<Scene> scene = Scene::create();
 
     //Creating the Objects from PingPongScene.hpp and adding it to the scene
     auto paddleOne = Paddle(0.5, 15, 0.2, -60,0,0);
@@ -24,7 +24,7 @@ int main() {
     scene->add(paddleTwo.getMesh());
 
     //Creating the Camera and setting the position
-    auto camera = PerspectiveCamera::create();
+    std::shared_ptr<PerspectiveCamera> camera = PerspectiveCamera::create();
     camera->position.z = 120;
 
     //Creating the scoreboard

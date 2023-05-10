@@ -86,7 +86,7 @@ build PingPong.exe: CXX_EXECUTABLE_LINKER__PingPong_Debug CMakeFiles\PingPong.di
 
 build cmake_object_order_depends_target_Objects_test: phony || CMakeFiles\Objects_test.dir
 
-build CMakeFiles\Objects_test.dir\tests\Objects_test.cpp.obj: CXX_COMPILER__Objects_test_Debug C$:\Kode\GitHub\C++\Code_Project\tests\Objects_test.cpp || cmake_object_order_depends_target_Objects_test
+build CMakeFiles\Objects_test.dir\tests\Objects.cpp.obj: CXX_COMPILER__Objects_test_Debug C$:\Kode\GitHub\C++\Code_Project\tests\Objects.cpp || cmake_object_order_depends_target_Objects_test
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
   OBJECT_DIR = CMakeFiles\Objects_test.dir
@@ -102,7 +102,7 @@ build CMakeFiles\Objects_test.dir\tests\Objects_test.cpp.obj: CXX_COMPILER__Obje
 #############################################
 # Link the executable Objects_test.exe
 
-build Objects_test.exe: CXX_EXECUTABLE_LINKER__Objects_test_Debug CMakeFiles\Objects_test.dir\tests\Objects_test.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+build Objects_test.exe: CXX_EXECUTABLE_LINKER__Objects_test_Debug CMakeFiles\Objects_test.dir\tests\Objects.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib  vcpkg_installed\x64-windows\debug\lib\threepp.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -123,7 +123,7 @@ build Objects_test.exe: CXX_EXECUTABLE_LINKER__Objects_test_Debug CMakeFiles\Obj
 
 build cmake_object_order_depends_target_Movement_test: phony || CMakeFiles\Movement_test.dir
 
-build CMakeFiles\Movement_test.dir\tests\Movement_test.cpp.obj: CXX_COMPILER__Movement_test_Debug C$:\Kode\GitHub\C++\Code_Project\tests\Movement_test.cpp || cmake_object_order_depends_target_Movement_test
+build CMakeFiles\Movement_test.dir\tests\Movement.cpp.obj: CXX_COMPILER__Movement_test_Debug C$:\Kode\GitHub\C++\Code_Project\tests\Movement.cpp || cmake_object_order_depends_target_Movement_test
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   INCLUDES = -IC:\Kode\GitHub\C++\Code_Project\include -external:IC:\Kode\GitHub\C++\Code_Project\cmake-build-debug\vcpkg_installed\x64-windows\include -external:W0
   OBJECT_DIR = CMakeFiles\Movement_test.dir
@@ -139,7 +139,7 @@ build CMakeFiles\Movement_test.dir\tests\Movement_test.cpp.obj: CXX_COMPILER__Mo
 #############################################
 # Link the executable Movement_test.exe
 
-build Movement_test.exe: CXX_EXECUTABLE_LINKER__Movement_test_Debug CMakeFiles\Movement_test.dir\tests\Movement_test.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
+build Movement_test.exe: CXX_EXECUTABLE_LINKER__Movement_test_Debug CMakeFiles\Movement_test.dir\tests\Movement.cpp.obj | vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib vcpkg_installed\x64-windows\debug\lib\threepp.lib vcpkg_installed\x64-windows\debug\lib\Catch2d.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = vcpkg_installed\x64-windows\debug\lib\manual-link\Catch2Maind.lib  vcpkg_installed\x64-windows\debug\lib\threepp.lib  vcpkg_installed\x64-windows\debug\lib\Catch2d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
