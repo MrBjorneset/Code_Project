@@ -1,5 +1,0 @@
-# ninja log v5
-0	2108	7054994279079755	tests/CMakeFiles/Objects_test.dir/Objects.cpp.obj	f8dc59447174ac9c
-2110	3662	7054994290658877	tests/Objects_test.exe	acd6d6de649adcdc
-1	2188	7054994378274451	tests/CMakeFiles/Movement_test.dir/Movement.cpp.obj	ad8e0f7c16280a0a
-2189	4216	7054994391463266	tests/Movement_test.exe	323cc174b478e22e
