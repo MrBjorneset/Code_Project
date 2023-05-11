@@ -13,7 +13,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 # stuff for testing
 find_package(Catch2 CONFIG REQUIRED)
 
-
 enable_testing()
 add_subdirectory(tests)
 
