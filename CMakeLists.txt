@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(Code_Project)
+project(PingPong_Game)
 
 set(CMAKE_CXX_STANDARD 17)
 

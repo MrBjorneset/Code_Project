@@ -35,10 +35,10 @@ include folder) and one main.cpp.
 
 ### PingPongScene.hpp
 In the PingPongScene.hpp file, we create two classes one for the "Ball" and one for the "paddle".
-In the Ball class we have different functions that we use in both main.cpp and PingPongGame.hpp.
+In the Ball class we have different functions that we use in PingPongGame.hpp.
 We have one function to update the ball`s location, one function to alter the velocity of the ball, 
 one function to set the position of the ball and one function to retrieve the ball object.
-In the Paddle Class we have different functions that we use in both main.cpp and PingPongGame.hpp. 
+In the Paddle Class we have different functions that we use in PingPongGame.hpp. 
 We have one function to move the ball, one function to set the position of the paddle and one function to 
 retrieve the paddle object.
 
@@ -50,7 +50,20 @@ are for the score and the other two variables are to move the paddle on the Y-ax
 
 We also have a class for KeyListener that reads user inputs that controls the paddles and can restart the game.
 
+In addition, we create a class for initializing the PingPong game. In this class we have one function for single player 
+mode, on for multiplayer mode and one last function to reset the game. We call these function in the canvas animate loop
+in main.cpp
+
 ### main.cpp
+
+In the main.cpp file, we set up the canvas, renderer, camera and set the desired parameters for these classes. 
+We also create the 3D-Objects using the classes in the header-files, and create som score variables for keeping the score
+In the animate function in the canvas class, we set som arguments for separating the difference between single player, 
+multiplayer and reset. Which alle are part of the class initGame and can be found in PingPongGame.hpp.
+
+## Tests
+
+In this project we have Continuous integration(CI) and unit testing. For the unit tests we are using the Catch framework.
 
 
 

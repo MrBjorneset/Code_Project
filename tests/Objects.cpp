@@ -13,7 +13,7 @@ TEST_CASE("Ball updates position correctly", "[Ball update]") {
     REQUIRE(ball.getMesh()->position.z == (0.3f));
 }
 
-TEST_CASE("Ball moves correctly", "[Ball move]"){
+TEST_CASE("Ball moves correctly", "[Ball set]"){
     Ball ball(1,0,0,0);
     ball.setPosition(10,20,30);
     REQUIRE(ball.getMesh()->position.x == 10);
