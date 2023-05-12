@@ -1,8 +1,0 @@
-{
-  "https://github.com/Ecos-platform/vcpkg-registry": {
-    "HEAD": "5bac934d30d0b589ef9c8ed10096e621f4875785"
-  },
-  "https://github.com/Microsoft/vcpkg": {
-    "HEAD": "ed8fb07a8bd19568c8594c6f1a04955242f82d35"
-  }
-}
