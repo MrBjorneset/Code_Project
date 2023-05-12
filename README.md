@@ -3,7 +3,7 @@ Kandidatnr: 10041
 
 This is a simple implementation of the classic PingPong Game using the THREEPP library. The game can 
 be played in single or multiplayer mode.
-![img.png](img.png)
+![img.png](img/img.png)
 
 
 ## Dependencies
@@ -69,7 +69,7 @@ In this project we have Continuous integration(CI) and unit testing. For the uni
 
 
 ## UML
-![uml.png](uml.png)
+![uml.png](img/uml.png)
 
 ---
 Disclaimer: This program is not necessarily completed and may have errors or omissions
