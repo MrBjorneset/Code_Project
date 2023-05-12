@@ -68,6 +68,8 @@ multiplayer and reset. Which alle are part of the class initGame and can be foun
 In this project we have Continuous integration(CI) and unit testing. For the unit tests we are using the Catch framework.
 
 
+## UML
+![uml.png](uml.png)
 
 ---
 Disclaimer: This program is not necessarily completed and may have errors or omissions
