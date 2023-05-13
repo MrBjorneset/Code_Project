@@ -50,7 +50,9 @@ int main() {
         score.setPosition(canvas.getSize().width   * 1/2, 2);
         scoreP1.setPosition(canvas.getSize().width * 1/4, 2);
         scoreP2.setPosition(canvas.getSize().width * 3/4, 2);
-
+        instructionSingle.setPosition(canvas.getSize().width * 1/4, 250);
+        instructionMulti.setPosition(canvas.getSize().width * 1/4, 300);
+        instructionReset.setPosition(canvas.getSize().width * 1/4, 350);
     });
 
     canvas.animate([&] {
@@ -68,22 +70,7 @@ int main() {
             instructionReset.setText("Press R for Restart");
         }
         InitGame(ball, paddleOne, paddleTwo, listener, game);
-/*
-        //Calling a function to play the game in single player mode
-            if (listener.singelPlayer) {
-                init.singlePlayer(ball,paddleOne,paddleTwo,listener,game);
-            }
 
-        //Calling a function to play the game in multiplayer mode
-            else if (listener.multiPlayer){
-                init.multiPlayer(ball,paddleOne,paddleTwo,listener,game);
-            }
-
-        //Calling a function to reset the position of alle objects, the velocity off the ball and the score
-            else if (listener.restart){
-                init.resetGame(ball,paddleOne,paddleTwo,game);
-            }
-            */
         renderer.render(scene, camera);
     });
 }
