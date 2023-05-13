@@ -23,8 +23,8 @@ In multiplayer mode, there are two human players, each controlling their own pad
 : S: move the paddle down
 
 - Player two(Right Paddle):
-: Up Arrow Key: move the paddle up
-: Down Arrow Key: move the paddle down
+: ↑ : move the paddle up
+: ↓ : move the paddle down
 
 To switch between single player and multiplayer mode, press 1 for single player and 2 for multiplayer.
 
