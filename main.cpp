@@ -7,7 +7,6 @@ int main() {
     //Setting up the different classes from PingPongGame.hpp
     MyListener listener;
     Game game;
-    initGame init;
 
     Canvas canvas{Canvas::Parameters().size({1280, 700}).antialiasing(16)};
     GLRenderer renderer{canvas};
@@ -33,9 +32,15 @@ int main() {
     auto &scoreP1 = renderer.textHandle("");
     auto &scoreP2 = renderer.textHandle("");
     auto &score = renderer.textHandle("Score");
+    auto &instructionSingle = renderer.textHandle("Press 1 for singlePlayer Mode");
+    auto &instructionMulti = renderer.textHandle("Press 2 for multiPlayer Mode");
+    auto &instructionReset = renderer.textHandle("Press R for reset");
     score.setPosition(canvas.getSize().width   * 1/2, 2);
     scoreP1.setPosition(canvas.getSize().width * 1/4, 2);
     scoreP2.setPosition(canvas.getSize().width * 3/4, 2);
+    instructionSingle.setPosition(canvas.getSize().width * 1/4, 250);
+    instructionMulti.setPosition(canvas.getSize().width * 1/4, 300);
+    instructionReset.setPosition(canvas.getSize().width * 1/4, 350);
 
     canvas.addKeyListener(&listener);
     canvas.onWindowResize([&](WindowSize size) {
@@ -52,7 +57,18 @@ int main() {
         //Writing the score values
         scoreP1.setText(std::to_string(game.p1Score));
         scoreP2.setText(std::to_string(game.p2Score));
-
+        if(listener.singlePlayer || listener.multiPlayer || listener.restart){
+            instructionSingle.setText("");
+            instructionMulti.setText("");
+            instructionReset.setText("");
+        }
+        else{
+            instructionSingle.setText("Press 1 for singlePlayer Mode");
+            instructionMulti.setText("Press 2 for multiPlayer Mode");
+            instructionReset.setText("Press R for Restart");
+        }
+        InitGame(ball, paddleOne, paddleTwo, listener, game);
+/*
         //Calling a function to play the game in single player mode
             if (listener.singelPlayer) {
                 init.singlePlayer(ball,paddleOne,paddleTwo,listener,game);
@@ -67,6 +83,7 @@ int main() {
             else if (listener.restart){
                 init.resetGame(ball,paddleOne,paddleTwo,game);
             }
+            */
         renderer.render(scene, camera);
     });
 }

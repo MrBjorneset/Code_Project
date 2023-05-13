@@ -11,7 +11,7 @@ public:
     bool p1DirectionDown = false;
     bool p2DirectionUp = false;
     bool p2DirectionDown = false;
-    bool singelPlayer = false;
+    bool singlePlayer = false;
     bool multiPlayer = false;
     bool restart = false;
 
@@ -29,14 +29,14 @@ public:
             p2DirectionDown = true;
         }
         if (evt.key == 49 ){       //"1" key
-            singelPlayer = true;
+            singlePlayer = true;
         }
         if (evt.key == 50 ){       //"2" key
             multiPlayer = true;
         }
         if (evt.key == 82){        //"r" key
             restart = true;
-            singelPlayer = false;
+            singlePlayer = false;
             multiPlayer = false;
         }
     }
@@ -153,9 +153,37 @@ public:
 private:
 };
 
-class initGame {
+class InitGame {
 public:
-    initGame() = default;
+    InitGame(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
+        if(listener.singlePlayer && !listener.multiPlayer){
+            ball.update(1);
+            game.checkWallCollision(ball,-70,70,70,-70);
+            game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
+            game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+            game.trackBall(ball,paddleTwo);
+            paddleOne.move(0,game.p1PaddleSpeedY,0);
+            paddleTwo.move(0,game.p2PaddleSpeedY,0);
+        }
+        if(listener.multiPlayer && !listener.singlePlayer){
+            ball.update(1);
+            game.checkWallCollision(ball,-70,70,70,-70);
+            game.checkPaddleCollision(ball,paddleOne,paddleTwo,15,0.8);
+            game.singlePlayerMovement(listener.p1DirectionUp,listener.p1DirectionDown);
+            game.multiPlayerMovement(listener.p2DirectionUp,listener.p2DirectionDown);
+            paddleOne.move(0,game.p1PaddleSpeedY,0);
+            paddleTwo.move(0,game.p2PaddleSpeedY,0);
+        }
+        if(listener.restart){
+            ball.setPosition(0,0,0);
+            paddleOne.setPosition(-60,0,0);
+            paddleTwo.setPosition(60,0,0);
+            game.p1Score = 0;
+            game.p2Score = 0;
+        }
+    } ;
+
+    /*
     void singlePlayer(Ball &ball, Paddle & paddleOne, Paddle &paddleTwo, MyListener &listener, Game &game){
         ball.update(1);
         game.checkWallCollision(ball,-70,70,70,-70);
@@ -181,7 +209,7 @@ public:
         game.p1Score = 0;
         game.p2Score = 0;
     };
-
+*/
 private:
 
 };
